@@ -1,8 +1,16 @@
+import { Route, Routes } from "react-router-dom";
+import LoginPage from "./pages/auth/Login";
+import MainContainer from "./containers/MainContainer";
+import { useEffect } from "react";
 function App() {
+  useEffect(() => {
+    document.title = "Innovibe";
+  }, []);
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </>
+    <Routes>
+      <Route path="login" element={<LoginPage />} />
+      <Route path="/*" element={<MainContainer />} />
+    </Routes>
   );
 }
 
