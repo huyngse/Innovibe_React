@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/auth/Login";
 import MainContainer from "./containers/MainContainer";
 import { useEffect } from "react";
+import AdminContainer from "./containers/AdminContainer";
 function App() {
   useEffect(() => {
     document.title = "Innovibe";
@@ -9,6 +10,7 @@ function App() {
   return (
     <Routes>
       <Route path="login" element={<LoginPage />} />
+      <Route path="/admin/*" element={<AdminContainer />} />
       <Route path="/*" element={<MainContainer />} />
     </Routes>
   );
