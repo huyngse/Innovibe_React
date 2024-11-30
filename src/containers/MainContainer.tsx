@@ -3,6 +3,7 @@ import HomePage from "../pages/main/Home";
 import Navbar from "../components/shared/Navbar";
 import Header from "../components/shared/Header";
 import Footer from "../components/shared/Footer";
+import NotFound from "@/components/shared/NotFound";
 
 const MainContainer = () => {
   return (
@@ -12,6 +13,7 @@ const MainContainer = () => {
       <div className="flex-1">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
       <Footer />
