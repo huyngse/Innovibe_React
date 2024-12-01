@@ -8,12 +8,14 @@ const ProductCard = ({
   productName,
   status,
   price,
+  salesPrice,
   image,
 }: {
   productId: number;
   productName: string;
   status: string;
   price: number;
+  salesPrice?: number;
   image: string;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -33,7 +35,12 @@ const ProductCard = ({
           <p className="font-semibold my-3">{productName}</p>
         </Link>
         <p className="text-xs font-bold text-green-500">{status}</p>
-        <p className="font-bold">{formatCurrencyVND(price)}</p>
+        <p className="font-bold">
+          {salesPrice
+            ? formatCurrencyVND(salesPrice)
+            : formatCurrencyVND(price)}
+        </p>
+        <p className="text-xs line-through decoration-red-500 decoration-1 font-semibold">{salesPrice && formatCurrencyVND(price)}</p>
       </div>
       <div className="text-center absolute top-40 z-10 left-1/2 w-full -translate-x-1/2">
         <button

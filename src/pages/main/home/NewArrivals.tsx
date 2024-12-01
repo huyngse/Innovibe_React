@@ -16,7 +16,7 @@ const data = [
     image: guitarImage1,
   },
   {
-    id: 1,
+    id: 2,
     productName:
       "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
     status: "Available",
@@ -24,7 +24,7 @@ const data = [
     image: guitarImage2,
   },
   {
-    id: 1,
+    id: 3,
     productName:
       "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
     status: "Available",
@@ -32,7 +32,7 @@ const data = [
     image: guitarImage3,
   },
   {
-    id: 1,
+    id: 4,
     productName:
       "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
     status: "Available",
@@ -40,7 +40,7 @@ const data = [
     image: guitarImage4,
   },
   {
-    id: 1,
+    id: 5,
     productName:
       "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
     status: "Available",
@@ -48,7 +48,7 @@ const data = [
     image: guitarImage5,
   },
   {
-    id: 1,
+    id: 6,
     productName:
       "Ibanez Prestige AZ2204N Electric Guitar Prussian Blue Metallic",
     status: "Available",
@@ -69,12 +69,12 @@ const NewArrivals = () => {
   };
   return (
     <div className="my-5">
-      <h2 className="text-center font-extrabold text-3xl">New Arrivals</h2>
+      <h2 className="text-center font-extrabold text-3xl my-5">New Arrivals</h2>
       <div className="slider-container mt-5">
         <Slider {...settings} arrows={true}>
-          {data.map((product: any) => {
+          {data.map((product: any, index: number) => {
             return (
-              <div key={`new-arrival-${product.id}`} className="px-3">
+              <div key={`new-arrival-${index}`} className="px-3">
                 <ProductCard
                   productId={product.id}
                   productName={product.productName}
