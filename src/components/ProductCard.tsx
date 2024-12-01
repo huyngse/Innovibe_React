@@ -45,7 +45,7 @@ const ProductCard = ({
       <div className="text-center absolute top-40 z-10 left-1/2 w-full -translate-x-1/2">
         <button
           className={cn(
-            "bg-zinc-700 hover:bg-zinc-600 active:bg-zinc-500 text-sm text-white uppercase font-semibold px-4 py-2 rounded-full transition-all duration-300",
+            "bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 text-sm text-white uppercase font-semibold px-4 py-2 rounded-full transition-all duration-100",
             isHovered ? "opacity-100" : "opacity-0"
           )}
         >

@@ -68,7 +68,7 @@ const NewArrivals = () => {
     pauseOnHover: true,
   };
   return (
-    <div className="my-5">
+    <div className="my-16">
       <h2 className="text-center font-extrabold text-3xl my-5">New Arrivals</h2>
       <div className="slider-container mt-5">
         <Slider {...settings} arrows={true}>

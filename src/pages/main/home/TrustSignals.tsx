@@ -4,7 +4,7 @@ import TrustSignal3 from "@/assets/imgs/Magnetic Card.png";
 import TrustSignal4 from "@/assets/imgs/Transaction.png";
 const TrustSignals = () => {
   return (
-    <div className="my-5 grid grid-cols-12 gap-5">
+    <div className="my-16 grid grid-cols-12 gap-5">
       <div className="col-span-3 flex justify-center items-center flex-col gap-1">
         <img src={TrustSignal1} alt="" />
         <h3 className="text-orange-600 text-lg uppercase font-bold">
