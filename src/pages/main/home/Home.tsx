@@ -3,6 +3,7 @@ import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
 import Hero1 from "@/assets/imgs/hero_1.png";
 import Hero2 from "@/assets/imgs/hero_2.png";
 import TrustSignals from "./TrustSignals";
+import NewArrivals from "./NewArrivals";
 const HomePage = () => {
   return (
     <MaxWidthWrapper>
@@ -22,6 +23,7 @@ const HomePage = () => {
         />
       </div>
       <TrustSignals />
+      <NewArrivals/>
     </MaxWidthWrapper>
   );
 };
