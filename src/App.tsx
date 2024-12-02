@@ -9,7 +9,7 @@ function App() {
   }, []);
   return (
     <Routes>
-      <Route path="login" element={<LoginPage />} />
+      <Route path="log-in" element={<LoginPage />} />
       <Route path="/admin/*" element={<AdminContainer />} />
       <Route path="/*" element={<MainContainer />} />
     </Routes>

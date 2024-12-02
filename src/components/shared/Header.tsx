@@ -48,7 +48,7 @@ const Header = () => {
               SIGN UP
             </Link>
             /
-            <Link to={"/login-in"} className="text-sm">
+            <Link to={"/log-in"} className="text-sm">
               LOG IN
             </Link>
           </div>
