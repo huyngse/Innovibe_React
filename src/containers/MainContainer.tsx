@@ -5,10 +5,12 @@ import Header from "../components/shared/Header";
 import Footer from "../components/shared/Footer";
 import NotFound from "@/components/shared/NotFound";
 import ScrollToTop from "@/components/ScrollToTop";
+import ScrollToTopButton from "react-scroll-to-top";
+import { IoIosArrowUp } from "react-icons/io";
 
 const MainContainer = () => {
   return (
-    <>
+    <div>
       <ScrollToTop />
       <div className="flex flex-col">
         <Header />
@@ -21,7 +23,13 @@ const MainContainer = () => {
         </div>
         <Footer />
       </div>
-    </>
+      <ScrollToTopButton
+        smooth
+        className="flex justify-center items-center bg-orange-600"
+        style={{ borderRadius: "100%", backgroundColor: "#ea580c" }}
+        component={<IoIosArrowUp className="text-white"/>}
+      />
+    </div>
   );
 };
 
