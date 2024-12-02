@@ -7,6 +7,7 @@ import NewArrivals from "./NewArrivals";
 import SpecialOffer from "./SpecialOffer";
 import Hero from "./Hero";
 import Blogs from "./Blogs";
+import Features from "./Features";
 const HomePage = () => {
   return (
     <MaxWidthWrapper>
@@ -30,6 +31,7 @@ const HomePage = () => {
       <SpecialOffer />
       <Hero />
       <Blogs />
+      <Features />
     </MaxWidthWrapper>
   );
 };
