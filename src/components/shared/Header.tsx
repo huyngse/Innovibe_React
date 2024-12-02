@@ -4,9 +4,26 @@ import { Link } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 const Header = () => {
+  const [isSticky, setIsSticky] = useState(false);
+
+  const handleScroll = () => {
+      if (window.scrollY > 60) {
+          setIsSticky(true);
+      } else {
+          setIsSticky(false);
+      }
+  };
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+    };
+}, []);
   return (
-    <div className="bg-gray-900 text-white">
+    <header className={cn("bg-gray-900 text-white transition-all duration-300 z-50 -top-10 backdrop-blur-md", isSticky && "sticky top-0 shadow bg-gray-900/70")}>
       <MaxWidthWrapper className="flex justify-between p-4 items-center">
         <div>
           <div className="bg-white rounded-md flex items-center py-1 px-2 gap-2">
@@ -45,7 +62,7 @@ const Header = () => {
           </div>
         </div>
       </MaxWidthWrapper>
-    </div>
+    </header>
   );
 };
 

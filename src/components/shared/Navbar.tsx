@@ -3,7 +3,7 @@ import MaxWidthWrapper from "./MaxWidthWrapper";
 
 const Navbar = () => {
   return (
-    <div className="bg-orange-600">
+    <div className="bg-orange-600 transition-all duration-300">
       <MaxWidthWrapper className="p-3 flex justify-evenly gap-5 items-center">
         <Link to={"/search"} className="uppercase font-bold text-white">
           Shop by category
