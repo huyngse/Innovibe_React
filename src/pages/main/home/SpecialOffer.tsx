@@ -45,7 +45,7 @@ const data = [
 const SpecialOffer = () => {
   return (
     <div className="my-16">
-      <h2 className="text-center font-extrabold text-3xl my-5">Special Offer</h2>
+      <h2 className="text-center font-extrabold text-3xl my-5 uppercase">Special Offer</h2>
       <div className="grid grid-cols-12">
         {data.map((product: any, index: number) => {
           return (

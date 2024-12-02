@@ -6,6 +6,7 @@ import TrustSignals from "./TrustSignals";
 import NewArrivals from "./NewArrivals";
 import SpecialOffer from "./SpecialOffer";
 import Hero from "./Hero";
+import Blogs from "./Blogs";
 const HomePage = () => {
   return (
     <MaxWidthWrapper>
@@ -28,6 +29,7 @@ const HomePage = () => {
       <NewArrivals />
       <SpecialOffer />
       <Hero />
+      <Blogs />
     </MaxWidthWrapper>
   );
 };
