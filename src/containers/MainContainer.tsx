@@ -7,6 +7,7 @@ import NotFound from "@/components/shared/NotFound";
 import ScrollToTop from "@/components/ScrollToTop";
 import ScrollToTopButton from "react-scroll-to-top";
 import { IoIosArrowUp } from "react-icons/io";
+import TunnerPage from "@/pages/main/tunner/Tunner";
 
 const MainContainer = () => {
   return (
@@ -17,6 +18,7 @@ const MainContainer = () => {
         <Navbar />
         <div className="flex-1">
           <Routes>
+            <Route path="/tuner" element={<TunnerPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
