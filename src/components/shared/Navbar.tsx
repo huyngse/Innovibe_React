@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import {
   NavigationMenu,
@@ -149,73 +148,51 @@ const Navbar = () => {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link to="/second-hand">
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "bg-transparent text-white hover:text-white hover:bg-white/20 rounded-none uppercase font-bold"
-                  )}
-                >
-                  Second hand
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink
+                href="/second-hand"
+                className={cn(
+                  navigationMenuTriggerStyle(),
+                  "bg-transparent text-white hover:text-white hover:bg-white/20 rounded-none uppercase font-bold"
+                )}
+              >
+                Second hand
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link to="/course">
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "bg-transparent text-white hover:text-white hover:bg-white/20 rounded-none uppercase font-bold"
-                  )}
-                >
-                  Guitar courses
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink
+                href="/course"
+                className={cn(
+                  navigationMenuTriggerStyle(),
+                  "bg-transparent text-white hover:text-white hover:bg-white/20 rounded-none uppercase font-bold"
+                )}
+              >
+                Guitar courses
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link to="/tuner">
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "bg-transparent text-white hover:text-white hover:bg-white/20 rounded-none uppercase font-bold"
-                  )}
-                >
-                  Online tuner
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink
+                href="/tuner"
+                className={cn(
+                  navigationMenuTriggerStyle(),
+                  "bg-transparent text-white hover:text-white hover:bg-white/20 rounded-none uppercase font-bold"
+                )}
+              >
+                Online tuner
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link to="/tuner">
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "bg-transparent text-white hover:text-white hover:bg-white/20 rounded-none uppercase font-bold"
-                  )}
-                >
-                  Blog posts
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink
+                href="/blog"
+                className={cn(
+                  navigationMenuTriggerStyle(),
+                  "bg-transparent text-white hover:text-white hover:bg-white/20 rounded-none uppercase font-bold"
+                )}
+              >
+                Blog posts
+              </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        {/* <Link to={"/search"} className="uppercase font-bold text-white">
-          Shop by category
-        </Link>
-        <Link to={"/search"} className="uppercase font-bold text-white">
-          Shop by branch
-        </Link>
-        <Link to={"/search"} className="uppercase font-bold text-white">
-          Second hand
-        </Link>
-        <Link to={"/course"} className="uppercase font-bold text-white">
-          Guitar courses
-        </Link>
-        <Link to={"/tuner"} className="uppercase font-bold text-white">
-          Guitar tuner
-        </Link>
-        <Link to={"/blog"} className="uppercase font-bold text-white">
-          Blog posts
-        </Link> */}
       </MaxWidthWrapper>
     </div>
   );
