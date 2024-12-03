@@ -4,7 +4,7 @@ import GettingStarted from "./GettingStarted";
 import PlayLessons from "./PlayLessons";
 import Breadcrumb from "@/components/shared/Breadcrumb";
 
-const Tunner = () => {
+const TunnerPage = () => {
   return (
     <div>
       <Breadcrumb
@@ -24,4 +24,4 @@ const Tunner = () => {
   );
 };
 
-export default Tunner;
+export default TunnerPage;

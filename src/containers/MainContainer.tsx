@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import HomePage from "../pages/main/home/Home";
 import Navbar from "../components/shared/Navbar";
 import Header from "../components/shared/Header";
 import Footer from "../components/shared/Footer";
@@ -7,7 +6,8 @@ import NotFound from "@/components/shared/NotFound";
 import ScrollToTop from "@/components/ScrollToTop";
 import ScrollToTopButton from "react-scroll-to-top";
 import { IoIosArrowUp } from "react-icons/io";
-import TunnerPage from "@/pages/main/tunner/Tunner";
+import TunnerPage from "@/pages/main/tunner/TunnerPage";
+import HomePage from "@/pages/main/home/HomePage";
 
 const MainContainer = () => {
   return (
