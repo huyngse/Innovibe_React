@@ -8,6 +8,7 @@ import ScrollToTopButton from "react-scroll-to-top";
 import { IoIosArrowUp } from "react-icons/io";
 import TunnerPage from "@/pages/main/tunner/TunnerPage";
 import HomePage from "@/pages/main/home/HomePage";
+import BlogsPage from "@/pages/main/blogs/BlogsPage";
 
 const MainContainer = () => {
   return (
@@ -19,6 +20,7 @@ const MainContainer = () => {
         <div className="flex-1">
           <Routes>
             <Route path="/tuner" element={<TunnerPage />} />
+            <Route path="/blog" element={<BlogsPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { AspectRatio } from "./ui/aspect-ratio";
 
 function formatDate(date: Date): string {
   const options: Intl.DateTimeFormatOptions = {
@@ -24,7 +25,9 @@ const BlogCard = ({
 }) => {
   return (
     <div>
-      <img src={thumbnail} alt={title} />
+      <AspectRatio ratio={16 / 10}>
+        <img src={thumbnail} alt={title} className="w-full h-full object-cover object-center" />
+      </AspectRatio>
       <p className="my-2 text-sm">{formatDate(new Date(createdAt))}</p>
       <Link to={`/blog/${blogId}`}>
         <h3 className="font-bold my-2">{title}</h3>
