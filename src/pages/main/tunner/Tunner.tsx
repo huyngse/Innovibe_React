@@ -1,13 +1,18 @@
 import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
-import Breadcrumb from "./Breadcrumb";
 import OnlineGuitarTuner from "./OnlineGuitarTuner";
 import GettingStarted from "./GettingStarted";
 import PlayLessons from "./PlayLessons";
+import Breadcrumb from "@/components/shared/Breadcrumb";
 
 const Tunner = () => {
   return (
     <div>
-      <Breadcrumb />
+      <Breadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Online Tuner", href: "/tuner" },
+        ]}
+      />
       <MaxWidthWrapper>
         <OnlineGuitarTuner />
         <hr className="border-black my-5" />

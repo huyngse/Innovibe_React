@@ -82,9 +82,17 @@ const Footer = () => {
           </div>
           <div className="col-span-6 flex justify-center">
             <div>
-              <p className="text-3xl uppercase font-extrabold">Let's be in touch</p>
-              <p className="text-xs text-center my-5">Keep up with our latest news, offers and events</p>
-              <Input placeholder="Enter Your Email Address" className="bg-white text-center text-gray-900"></Input>
+              <p className="text-3xl uppercase font-extrabold">
+                Let's be in touch
+              </p>
+              <p className="text-xs text-center my-5">
+                Keep up with our latest news, offers and events
+              </p>
+              <Input
+                placeholder="Enter Your Email Address"
+                className="bg-white placeholder:text-center text-gray-900"
+                type="email"
+              ></Input>
             </div>
           </div>
         </div>
