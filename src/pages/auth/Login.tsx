@@ -9,6 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
@@ -67,9 +68,8 @@ const LoginPage = () => {
               render={({ field }) => (
                 <FormItem className="mt-5">
                   <FormLabel className="hidden">Password</FormLabel>
-                  <Input
+                  <PasswordInput
                     placeholder="Password"
-                    type="password"
                     className="py-6"
                     {...field}
                   />
