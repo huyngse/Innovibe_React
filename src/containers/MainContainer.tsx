@@ -10,6 +10,7 @@ import TunnerPage from "@/pages/main/tunner/TunnerPage";
 import HomePage from "@/pages/main/home/HomePage";
 import BlogsPage from "@/pages/main/blogs/BlogsPage";
 import SearchPage from "@/pages/main/search/SearchPage";
+import ComingSoon from "@/components/shared/ComingSoon";
 
 const MainContainer = () => {
   return (
@@ -23,6 +24,8 @@ const MainContainer = () => {
             <Route path="/tuner" element={<TunnerPage />} />
             <Route path="/blog" element={<BlogsPage />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/course" element={<ComingSoon />} />
+            <Route path="/second-hand" element={<ComingSoon />} />
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
