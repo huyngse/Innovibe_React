@@ -9,6 +9,14 @@ import {
 import brandData from "@/mock-data/brands.json";
 import categoriesData from "@/mock-data/categories.json";
 import { Link } from "react-router-dom";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { IoIosArrowDown } from "react-icons/io";
+
 const SearchPage = () => {
   return (
     <div>
@@ -100,6 +108,43 @@ const SearchPage = () => {
             Search Products
           </h1>
           <hr className="border-black mb-3" />
+          <div className="flex gap-5">
+            <p className="font-semibold p-1">Page 1 | 1-50 of 500</p>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="p-1 flex items-center gap-1 font-semibold">
+                Most Relevant <IoIosArrowDown />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <Link to={"/search?sortBy=Most Relevant"}>
+                  <DropdownMenuItem>Most Relevant</DropdownMenuItem>
+                </Link>
+                <Link to={"/search?sortBy=Featured"}>
+                  <DropdownMenuItem>Featured</DropdownMenuItem>
+                </Link>
+                <Link to={"/search?sortBy=Best Selling"}>
+                  <DropdownMenuItem>Best Selling</DropdownMenuItem>
+                </Link>
+                <Link to={"/search?sortBy=Alphabetically"}>
+                  <DropdownMenuItem>Alphabetically, A-Z</DropdownMenuItem>
+                </Link>
+                <Link to={"/search?sortBy=Alphabetically Desc"}>
+                  <DropdownMenuItem>Alphabetically, Z-A</DropdownMenuItem>
+                </Link>
+                <Link to={"/search?sortBy=Price"}>
+                  <DropdownMenuItem>Price, Low to High</DropdownMenuItem>
+                </Link>
+                <Link to={"/search?sortBy=Price Desc"}>
+                  <DropdownMenuItem>Price, High to Low</DropdownMenuItem>
+                </Link>
+                <Link to={"/search?sortBy=Date"}>
+                  <DropdownMenuItem>Date, Old To New</DropdownMenuItem>
+                </Link>
+                <Link to={"/search?sortBy=Date Desc"}>
+                  <DropdownMenuItem>Date, New To Old</DropdownMenuItem>
+                </Link>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       </MaxWidthWrapper>
     </div>
