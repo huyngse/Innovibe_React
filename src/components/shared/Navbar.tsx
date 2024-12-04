@@ -11,7 +11,7 @@ import {
 import electricGuitarImage from "@/assets/imgs/electric-guitar.png";
 import React from "react";
 import { cn } from "@/lib/utils";
-import brandData from "@/mock-data/Brands.json";
+import brandData from "@/mock-data/brands.json";
 const Navbar = () => {
   const brands: { title: string; href: string; description?: string }[] =
     brandData.map((brand: any) => ({
