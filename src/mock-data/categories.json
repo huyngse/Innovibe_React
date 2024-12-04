@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "categoryName": "Electric Guitars"
+  },
+  {
+    "id": 2,
+    "categoryName": "Bass Guitars"
+  },
+  {
+    "id": 3,
+    "categoryName": "Acoustic Guitars"
+  },
+  {
+    "id": 4,
+    "categoryName": "Classic Guitars"
+  },
+  {
+    "id": 5,
+    "categoryName": "Amplifer"
+  },
+  {
+    "id": 6,
+    "categoryName": "Cabinet"
+  },
+  {
+    "id": 7,
+    "categoryName": "Effect & Pedals"
+  },
+  {
+    "id": 8,
+    "categoryName": "Accessories"
+  },
+  {
+    "id": 8,
+    "categoryName": "Audio & Recording"
+  }
+]

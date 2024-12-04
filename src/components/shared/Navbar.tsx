@@ -11,70 +11,13 @@ import {
 import electricGuitarImage from "@/assets/imgs/electric-guitar.png";
 import React from "react";
 import { cn } from "@/lib/utils";
-
+import brandData from "@/mock-data/Brands.json";
 const Navbar = () => {
-  const components: { title: string; href: string; description?: string }[] = [
-    {
-      title: "Fender",
-      href: "/search?brand=Fender",
-    },
-    {
-      title: "Gibson",
-      href: "/search?brand=Gibson",
-    },
-    {
-      title: "Ibanez",
-      href: "/search?brand=Ibanez",
-    },
-    {
-      title: "Martin",
-      href: "/search?brand=Martin",
-    },
-    {
-      title: "Taylor",
-      href: "/search?brand=Taylor",
-    },
-    {
-      title: "PRS (Paul Reed Smith)",
-      href: "/search?brand=PRS",
-    },
-    {
-      title: "Yamaha",
-      href: "/search?brand=Yamaha",
-    },
-    {
-      title: "Gretsch",
-      href: "/search?brand=Gretsch",
-    },
-    {
-      title: "Rickenbacker",
-      href: "/search?brand=Rickenbacker",
-    },
-    {
-      title: "Schecter",
-      href: "/search?brand=Schecter",
-    },
-    {
-      title: "Epiphone",
-      href: "/search?brand=Epiphone",
-    },
-    {
-      title: "Jackson",
-      href: "/search?brand=Jackson",
-    },
-    {
-      title: "Larrivée",
-      href: "/search?brand=Larrivée",
-    },
-    {
-      title: "Godin",
-      href: "/search?brand=Godin",
-    },
-    {
-      title: "D'Angelico",
-      href: "/search?brand=D'Angelico",
-    },
-  ];
+  const brands: { title: string; href: string; description?: string }[] =
+    brandData.map((brand: any) => ({
+      title: brand.brandName,
+      href: `/search?brand=${brand.id}`
+    }));
 
   return (
     <div className="bg-orange-600 transition-all duration-300">
@@ -135,13 +78,13 @@ const Navbar = () => {
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-3 lg:w-[600px] ">
-                  {components.map((component) => (
+                  {brands.map((brand) => (
                     <ListItem
-                      key={component.title}
-                      title={component.title}
-                      href={component.href}
+                      key={brand.title}
+                      title={brand.title}
+                      href={brand.href}
                     >
-                      {component.description}
+                      {brand.description}
                     </ListItem>
                   ))}
                 </ul>
