@@ -11,6 +11,7 @@ import HomePage from "@/pages/main/home/HomePage";
 import BlogsPage from "@/pages/main/blogs/BlogsPage";
 import SearchPage from "@/pages/main/search/SearchPage";
 import ComingSoon from "@/components/shared/ComingSoon";
+import ChatButton from "@/components/ChatButton";
 
 const MainContainer = () => {
   return (
@@ -36,8 +37,9 @@ const MainContainer = () => {
         smooth
         className="flex justify-center items-center bg-orange-600"
         style={{ borderRadius: "100%", backgroundColor: "#ea580c" }}
-        component={<IoIosArrowUp className="text-white"/>}
+        component={<IoIosArrowUp className="text-white" />}
       />
+      <ChatButton />
     </div>
   );
 };
