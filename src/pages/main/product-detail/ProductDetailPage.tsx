@@ -9,7 +9,7 @@ import { useState } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import { Rating } from "@smastrom/react-rating";
+// import { Rating } from "@smastrom/react-rating";
 import { formatCurrencyVND } from "@/lib/currency";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -88,7 +88,9 @@ const ProductDetailPage = () => {
           <div className="p-5">
             <h2 className="text-2xl font-semibold">{data.productName}</h2>
             <div className="w-[100px] py-3">
-              <Rating value={5} />
+              {/* 
+            <Rating value={5} />
+              */}
             </div>
             <p className="text-sm font-semibold text-green-500">
               {data.status}
