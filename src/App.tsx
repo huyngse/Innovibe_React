@@ -3,7 +3,7 @@ import LoginPage from "./pages/auth/Login";
 import MainContainer from "./containers/MainContainer";
 import { useEffect } from "react";
 import AdminContainer from "./containers/AdminContainer";
-// import '@smastrom/react-rating/style.css'
+import '@smastrom/react-rating/style.css'
 function App() {
   useEffect(() => {
     document.title = "Innovibe";
