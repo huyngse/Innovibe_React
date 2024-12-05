@@ -7,10 +7,15 @@ import detailImage4 from "@/assets/imgs/detail_4.png";
 import detailImage1 from "@/assets/imgs/detail_5.png";
 import { useState } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { Rating } from "@smastrom/react-rating";
 import { formatCurrencyVND } from "@/lib/currency";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { FaRegHeart, FaShareAlt } from "react-icons/fa";
+import { GrCompare } from "react-icons/gr";
+import RecentlyViewed from "@/components/RecentlyViewed";
 const data = {
   id: 1,
   productName:
@@ -96,7 +101,60 @@ const ProductDetailPage = () => {
             <p className="text-xs line-through decoration-red-500 decoration-1 font-semibold">
               {data.salesPrice && formatCurrencyVND(data.price)}
             </p>
+            <div className="grid grid-cols-5 py-3 gap-10">
+              <div className="col-span-2">
+                <Input
+                  type="number"
+                  className="w-full h-auto py-3 self-center border-black"
+                  style={{ fontSize: 18 }}
+                  defaultValue={1}
+                ></Input>
+              </div>
+              <Button className="uppercase col-span-3 text-lg py-6 self-center">
+                Add to Cart
+              </Button>
+            </div>
+            <hr className="border-black my-3" />
+            <div className="flex justify-between">
+              <Button
+                variant={"outline"}
+                className="py-5 px-6 flex items-center gap-3 shadow-none border-none"
+              >
+                <FaRegHeart style={{ width: 20, height: 20 }} />
+                List
+              </Button>
+              <Button
+                variant={"outline"}
+                className="py-5 px-6 flex items-center gap-3 shadow-none border-none"
+              >
+                <GrCompare style={{ width: 20, height: 20 }} />
+                Compare
+              </Button>
+              <Button
+                variant={"outline"}
+                className="py-5 px-6 flex items-center gap-3 shadow-none border-none"
+              >
+                <FaShareAlt style={{ width: 20, height: 20 }} />
+                Share
+              </Button>
+            </div>
+            <hr className="border-black my-3" />
+            <p>
+              <span className="font-semibold ">Style: </span> Stealth Black
+            </p>
+            <ScrollArea className="">
+              <div className="flex py-5 gap-5">
+                <div className="w-16 h-16 rounded-lg bg-[#5E1212]"></div>
+                <div className="w-16 h-16 rounded-lg bg-[#E66432]"></div>
+                <div className="w-16 h-16 rounded-lg bg-[#908B8B]"></div>
+              </div>
+              <ScrollBar orientation="horizontal" />
+            </ScrollArea>
+            <hr className="border-black my-3" />
           </div>
+        </div>
+        <div className="py-10">
+          <RecentlyViewed />
         </div>
       </MaxWidthWrapper>
     </div>
