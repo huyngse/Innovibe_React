@@ -12,6 +12,7 @@ import BlogsPage from "@/pages/main/blogs/BlogsPage";
 import SearchPage from "@/pages/main/search/SearchPage";
 import ComingSoon from "@/components/shared/ComingSoon";
 import ChatButton from "@/components/ChatButton";
+import ProductDetailPage from "@/pages/main/product-detail/ProductDetailPage";
 
 const MainContainer = () => {
   return (
@@ -27,6 +28,7 @@ const MainContainer = () => {
             <Route path="/search" element={<SearchPage />} />
             <Route path="/course" element={<ComingSoon />} />
             <Route path="/second-hand" element={<ComingSoon />} />
+            <Route path="/product/:productId" element={<ProductDetailPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
