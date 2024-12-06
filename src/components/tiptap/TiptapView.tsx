@@ -14,6 +14,7 @@ const TiptapView = ({
       <EditorProvider
         extensions={extensions}
         content={value}
+        editable={false}
         editorProps={{
           attributes: {
             class: cn(
