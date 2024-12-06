@@ -5,7 +5,6 @@ import detailImage2 from "@/assets/imgs/detail_2.png";
 import detailImage3 from "@/assets/imgs/detail_3.png";
 import detailImage4 from "@/assets/imgs/detail_4.png";
 import detailImage1 from "@/assets/imgs/detail_5.png";
-import { useState } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
@@ -17,6 +16,7 @@ import { FaRegHeart, FaShareAlt } from "react-icons/fa";
 import { GrCompare } from "react-icons/gr";
 import RecentlyViewed from "@/components/RecentlyViewed";
 import TiptapView from "@/components/tiptap/TiptapView";
+import imagePlaceholder from "@/assets/imgs/image-placeholder.webp";
 import {
   Accordion,
   AccordionContent,
@@ -35,29 +35,37 @@ const data = {
     {
       id: 1,
       imageUrl: detailImage1,
+      isPrimary: true,
     },
     {
       id: 2,
       imageUrl: detailImage2,
+      isPrimary: false,
     },
     {
       id: 3,
       imageUrl: detailImage3,
+      isPrimary: false,
     },
     {
       id: 4,
       imageUrl: detailImage4,
+      isPrimary: false,
     },
     {
       id: 5,
       imageUrl: detailImage5,
+      isPrimary: false,
     },
   ],
   status: "Available",
   salesPrice: null,
 };
 const ProductDetailPage = () => {
-  const [selectedImage, setselectedImage] = useState<any>(data.images[0]);
+  // const [selectedImage, setselectedImage] = useState<any>(data.images[0]);
+  const primaryImage = data.images.find(
+    (image: any) => image.isPrimary == true
+  );
   return (
     <div>
       <Breadcrumb
@@ -71,26 +79,32 @@ const ProductDetailPage = () => {
           <div className="grid grid-cols-4 p-5">
             <ScrollArea className="h-[500px]">
               <div className="flex flex-col gap-3 p-3">
-                {data.images.map((image: any, index: number) => {
-                  return (
-                    <AspectRatio ratio={1 / 1} key={index}>
-                      <button
-                        className={cn(
-                          "overflow-hidden rounded-lg h-full w-full",
-                          selectedImage.id == image.id &&
-                            "border-2 border-orange-600"
-                        )}
-                        onMouseEnter={() => setselectedImage(image)}
-                      >
-                        <img src={image.imageUrl} alt="" />
-                      </button>
-                    </AspectRatio>
-                  );
-                })}
+                {data.images
+                  .filter((image) => image.isPrimary == false)
+                  .map((image: any, index: number) => {
+                    return (
+                      <AspectRatio ratio={1 / 1} key={index}>
+                        <button
+                          className={cn(
+                            "overflow-hidden rounded-lg h-full w-full",
+                            // selectedImage.id == image.id &&
+                            "hover:border-2 hover:border-orange-600"
+                          )}
+                          // onMouseEnter={() => setselectedImage(image)}
+                        >
+                          <img src={image.imageUrl} alt="" />
+                        </button>
+                      </AspectRatio>
+                    );
+                  })}
               </div>
             </ScrollArea>
             <button className="col-span-3 p-3 h-[500px] flex justify-center items-center">
-              <img src={selectedImage.imageUrl} alt="" className="w-full" />
+              <img
+                src={primaryImage?.imageUrl ?? imagePlaceholder}
+                alt=""
+                className="w-full"
+              />
             </button>
           </div>
           <div className="p-5">
