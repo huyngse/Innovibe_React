@@ -121,7 +121,7 @@ const MenuBar = () => {
         <Input
           type="color"
           className="w-10 p-1 rounded-sm"
-          value={editor.getAttributes('textStyle').color}
+          value={editor.getAttributes('textStyle').color ?? "#000000"}
           onChange={(e) =>
             editor.chain().focus().setColor(e.target.value).run()
           }

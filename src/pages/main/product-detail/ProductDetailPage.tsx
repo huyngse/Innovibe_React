@@ -51,6 +51,7 @@ const data = {
 };
 const ProductDetailPage = () => {
   const [selectedImage, setselectedImage] = useState<any>(data.images[0]);
+  const [description, setDescription] = useState("");
   return (
     <div>
       <Breadcrumb
@@ -156,7 +157,13 @@ const ProductDetailPage = () => {
         </div>
         <div className="grid grid-cols-12">
           <div className="col-span-8">
-            <Tiptap />
+            <Tiptap
+              value={description}
+              onChange={(value) => {
+                setDescription(value);
+              }}
+            />
+            <Button onClick={() => {console.log(description)}}>Log result</Button>
           </div>
         </div>
         <div className="py-10">

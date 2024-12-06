@@ -4,11 +4,15 @@ import TextStyle, { TextStyleOptions } from '@tiptap/extension-text-style';
 import StarterKit from '@tiptap/starter-kit';
 import Youtube from '@tiptap/extension-youtube';
 import Typography from '@tiptap/extension-typography';
-import HorizontalRule from '@tiptap/extension-horizontal-rule';
 export const extensions = [
     Color.configure({ types: [TextStyle.name, ListItem.name] }),
     TextStyle.configure({ types: [ListItem.name] } as Partial<TextStyleOptions> | undefined),
     StarterKit.configure({
+        horizontalRule: {
+            HTMLAttributes: {
+                class: 'border-black my-5',
+            },
+        },
         bulletList: {
             keepMarks: true,
             keepAttributes: false,
@@ -24,10 +28,5 @@ export const extensions = [
             class: 'w-full aspect-video',
         },
     }),
-    Typography,
-    HorizontalRule.configure({
-        HTMLAttributes: {
-            class: 'border-black my-5',
-        },
-    }),
+    Typography
 ];
