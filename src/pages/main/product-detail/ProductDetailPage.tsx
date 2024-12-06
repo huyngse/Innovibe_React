@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { FaRegHeart, FaShareAlt } from "react-icons/fa";
 import { GrCompare } from "react-icons/gr";
 import RecentlyViewed from "@/components/RecentlyViewed";
+import Tiptap from "@/components/tiptap/Tiptap";
 const data = {
   id: 1,
   productName:
@@ -151,6 +152,11 @@ const ProductDetailPage = () => {
               <ScrollBar orientation="horizontal" />
             </ScrollArea>
             <hr className="border-black my-3" />
+          </div>
+        </div>
+        <div className="grid grid-cols-12">
+          <div className="col-span-8">
+            <Tiptap />
           </div>
         </div>
         <div className="py-10">
