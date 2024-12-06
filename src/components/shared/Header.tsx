@@ -2,11 +2,11 @@ import LogoImg from "@/assets/imgs/logo.png";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
-import { FaShoppingCart } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Input } from "../ui/input";
+import ShoppingCartButton from "./ShoppingCartButton";
 
 const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -69,9 +69,7 @@ const Header = () => {
             <button className="flex items-center">
               <IoMdPerson className="h-5 w-5" />
             </button>
-            <button className="flex items-center">
-              <FaShoppingCart className="h-5 w-5" />
-            </button>
+            <ShoppingCartButton />
           </div>
         </div>
       </MaxWidthWrapper>
