@@ -5,6 +5,8 @@ import guitarImage2 from "@/assets/imgs/guitar_2.png";
 import CartItem from "./CartItem";
 import React from "react";
 import RecentlyViewed from "@/components/RecentlyViewed";
+import OrderSummary from "./OrderSummary";
+
 const items = [
   {
     id: 1,
@@ -28,6 +30,9 @@ const items = [
   },
 ];
 const ViewCartPage = () => {
+  const subtotal = items.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue.price;
+  }, 0);
   return (
     <div>
       <Breadcrumb
@@ -37,7 +42,7 @@ const ViewCartPage = () => {
         ]}
       />
       <MaxWidthWrapper className="pb-10">
-        <div className="grid grid-cols-12 py-10">
+        <div className="grid grid-cols-12 py-10 gap-10">
           <div className="col-span-8">
             <h1 className="text-4xl uppercase font-extrabold ">
               Shopping Cart
@@ -62,8 +67,11 @@ const ViewCartPage = () => {
               })}
             </div>
           </div>
+          <div className="col-span-4">
+            <OrderSummary subtotal={subtotal}/>
+          </div>
         </div>
-          <RecentlyViewed />
+        <RecentlyViewed />
       </MaxWidthWrapper>
     </div>
   );
