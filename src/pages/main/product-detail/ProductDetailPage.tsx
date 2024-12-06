@@ -16,14 +16,21 @@ import { Button } from "@/components/ui/button";
 import { FaRegHeart, FaShareAlt } from "react-icons/fa";
 import { GrCompare } from "react-icons/gr";
 import RecentlyViewed from "@/components/RecentlyViewed";
-import Tiptap from "@/components/tiptap/Tiptap";
+import TiptapView from "@/components/tiptap/TiptapView";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
 const data = {
   id: 1,
   productName:
     "Sterling by Music Man JP60 John Petrucci Signature Electric Guitar - Stealth Black",
   averateRating: 10,
   price: 18_700_000,
-  description: "",
+  description: `<p><span>The Sterling by Music Man JP60 John Petrucci Signature Electric Guitar in Stealth Black is designed with the modern guitarist in mind, blending exceptional playability with high-end features inspired by John Petrucci’s iconic instrument. Created for versatility, precision, and style, the JP60 brings many of Petrucci’s signature elements into a more accessible, yet highly refined, format.</span></p><hr class="border-black my-5"><h2><span>Key Features:</span></h2><ul><li><p><span><strong>Body</strong>: Crafted from basswood, the body is lightweight and offers a balanced tonal response that’s perfect for high-gain and clean settings alike. The sleek Stealth Black finish gives it a dark, modern look.</span></p></li><li><p><span><strong>Neck &amp; Fingerboard</strong>: Featuring a maple neck and rosewood fingerboard with a 16" radius, the JP60 offers effortless playability across all frets, making it ideal for complex solos and intricate chord work. The 24 medium jumbo frets and John Petrucci’s custom inlays add to its professional touch.</span></p></li><li><p><span><strong>Pickups</strong>: Equipped with high-output humbucking pickups, this guitar delivers a powerful sound with excellent clarity and sustain, capturing everything from subtle nuances to aggressive riffs. The 3-way selector switch allows for a range of tones, making it adaptable for various music styles.</span></p></li><li><p><span><strong>Bridge</strong>: The JP60 features a Sterling Modern Tremolo bridge, allowing for expressive pitch bending while retaining tuning stability. This floating tremolo design is built to handle even the most intense performances.</span></p></li><li><p><span><strong>Ergonomic Contouring</strong>: Modeled after the contours of John Petrucci’s original Music Man guitar, the JP60 is designed for comfortable, extended play with its sleek design, forearm scoop, and easy access to higher frets.</span></p></li></ul><hr class="border-black my-5"><h2><span>Additional Specifications:</span></h2><ul><li><p><span><strong>Scale Length</strong>: 25.5 inches</span></p></li><li><p><span><strong>Nut Width</strong>: 42mm (1.65 inches)</span></p></li><li><p><span><strong>Controls</strong>: Volume, Tone, 3-way pickup selector switch</span></p></li><li><p><span><strong>Finish</strong>: Stealth Black</span></p></li></ul>`,
   images: [
     {
       id: 1,
@@ -51,7 +58,6 @@ const data = {
 };
 const ProductDetailPage = () => {
   const [selectedImage, setselectedImage] = useState<any>(data.images[0]);
-  const [description, setDescription] = useState("");
   return (
     <div>
       <Breadcrumb
@@ -155,15 +161,28 @@ const ProductDetailPage = () => {
             <hr className="border-black my-3" />
           </div>
         </div>
-        <div className="grid grid-cols-12">
+        <div className="grid grid-cols-12 py-5">
           <div className="col-span-8">
-            <Tiptap
-              value={description}
-              onChange={(value) => {
-                setDescription(value);
-              }}
-            />
-            <Button onClick={() => {console.log(description)}}>Log result</Button>
+            <Accordion
+              type="single"
+              collapsible
+              defaultValue="product-description"
+            >
+              <AccordionItem
+                value="product-description"
+                className="border-black"
+              >
+                <AccordionTrigger>
+                  <h2 className="text-3xl font-extrabold">
+                    Product Description
+                  </h2>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <hr className="border-black my-2" />
+                  <TiptapView value={data.description} />
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
         <div className="py-10">

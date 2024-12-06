@@ -1,4 +1,3 @@
-// src/Tiptap.tsx
 import { EditorProvider, useCurrentEditor } from "@tiptap/react";
 import { Button } from "../ui/button";
 import {
@@ -120,11 +119,16 @@ const MenuBar = () => {
         </Button>
         <Input
           type="color"
-          className="w-10 p-1 rounded-sm"
-          value={editor.getAttributes('textStyle').color ?? "#000000"}
-          onChange={(e) =>
-            editor.chain().focus().setColor(e.target.value).run()
+          onInput={(event) =>
+            editor
+              .chain()
+              .focus()
+              .setColor((event.target as HTMLInputElement).value)
+              .run()
           }
+          value={editor.getAttributes("textStyle").color ?? "#000000"}
+          data-testid="setColor"
+          className="w-10 p-1"
         />
         <Button
           onClick={() => editor.chain().focus().setParagraph().run()}
@@ -241,7 +245,7 @@ const MenuBar = () => {
           onClick={() => editor.chain().focus().setHorizontalRule().run()}
           variant={"outline"}
         >
-          <MinusIcon className="w-4 h-4"/>
+          <MinusIcon className="w-4 h-4" />
         </Button>
         <Button
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
