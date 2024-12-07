@@ -68,7 +68,7 @@ const ViewCartPage = () => {
             </div>
           </div>
           <div className="col-span-4">
-            <OrderSummary subtotal={subtotal}/>
+            <OrderSummary subtotal={subtotal} />
           </div>
         </div>
         <RecentlyViewed />

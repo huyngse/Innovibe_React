@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { formatCurrencyVND } from "@/lib/currency";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const CartItem = ({
   id,
@@ -30,7 +31,9 @@ const CartItem = ({
       <div className="col-span-4 items-start flex flex-col">
         <div className="grid grid-cols-12">
           <div className="col-span-9">
-            <h5 className="font-semibold text-xl">{productName}</h5>
+            <Link to={`/product/${id}`}>
+              <h5 className="font-semibold text-xl">{productName}</h5>
+            </Link>
             <p className="text-sm text-gray-500 pb-3">Model #: {model}</p>
             <p className="font-bold text-green-500 uppercase">{status}</p>
             <p className="text-sm text-gray-500 pb-3">Available To Ship</p>
