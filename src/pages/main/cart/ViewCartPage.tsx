@@ -8,6 +8,7 @@ import RecentlyViewed from "@/components/RecentlyViewed";
 import OrderSummary from "./OrderSummary";
 import CouponCodeForm from "./CouponCodeForm";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const items = [
   {
@@ -71,8 +72,9 @@ const ViewCartPage = () => {
           </div>
           <div className="col-span-4">
             <OrderSummary subtotal={subtotal} />
-            <Button className="w-full my-5">Check Out</Button>
-
+            <Link to={"/check-out"}>
+              <Button className="w-full my-5">Check Out</Button>
+            </Link>
             <CouponCodeForm />
           </div>
         </div>

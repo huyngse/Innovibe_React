@@ -14,12 +14,13 @@ import ComingSoon from "@/components/shared/ComingSoon";
 import ChatButton from "@/components/ChatButton";
 import ProductDetailPage from "@/pages/main/product-detail/ProductDetailPage";
 import ViewCartPage from "@/pages/main/cart/ViewCartPage";
+import CheckOutPage from "@/pages/main/check-out/CheckOutPage";
 
 const MainContainer = () => {
   return (
     <div>
       <ScrollToTop />
-      <div className="flex flex-col">
+      <div className="flex flex-col min-h-screen">
         <Header />
         <Navbar />
         <div className="flex-1">
@@ -30,6 +31,7 @@ const MainContainer = () => {
             <Route path="/course" element={<ComingSoon />} />
             <Route path="/second-hand" element={<ComingSoon />} />
             <Route path="/cart" element={<ViewCartPage />} />
+            <Route path="/check-out" element={<CheckOutPage />} />
             <Route path="/product/:productId" element={<ProductDetailPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<NotFound />} />
