@@ -6,6 +6,8 @@ import CartItem from "./CartItem";
 import React from "react";
 import RecentlyViewed from "@/components/RecentlyViewed";
 import OrderSummary from "./OrderSummary";
+import CouponCodeForm from "./CouponCodeForm";
+import { Button } from "@/components/ui/button";
 
 const items = [
   {
@@ -69,6 +71,9 @@ const ViewCartPage = () => {
           </div>
           <div className="col-span-4">
             <OrderSummary subtotal={subtotal} />
+            <Button className="w-full my-5">Check Out</Button>
+
+            <CouponCodeForm />
           </div>
         </div>
         <RecentlyViewed />
