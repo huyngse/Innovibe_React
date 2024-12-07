@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/tooltip";
 const OrderSummary = ({ subtotal }: { subtotal: number }) => {
   return (
-    <div className="p-3 bg-zinc-100 rounded-lg">
+    <div className="p-3 bg-zinc-50 rounded-lg">
       <h1 className="text-2xl uppercase font-extrabold pb-5">Order Summary</h1>
       <div className="flex flex-col gap-1">
         <div className="flex justify-between">
