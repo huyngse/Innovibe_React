@@ -24,6 +24,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Label } from "@/components/ui/label";
 const formSchema = z.object({
   email: z.string().email("Địa chỉ email không hợp lệ"),
   phone: z
@@ -138,7 +139,12 @@ const CheckOutForm = () => {
               <FormItem className="col-span-4">
                 <FormLabel>Thành phố/Tỉnh</FormLabel>
                 <Select
-                  onValueChange={field.onChange}
+                  onValueChange={(value) => {
+                    field.onChange();
+                    form.resetField("district");
+                    form.resetField("ward");
+                    provinceStore.fetchDistricts(parseInt(value));
+                  }}
                   defaultValue={field.value}
                 >
                   <FormControl>
@@ -149,7 +155,7 @@ const CheckOutForm = () => {
                   <SelectContent>
                     {provinceStore.provinces.map((province, index: number) => {
                       return (
-                        <SelectItem value={province.name} key={index}>
+                        <SelectItem value={province.code + ""} key={index}>
                           {province.name}
                         </SelectItem>
                       );
@@ -160,8 +166,68 @@ const CheckOutForm = () => {
               </FormItem>
             )}
           />
-          <Input placeholder="Huyện" className="py-6 col-span-4"></Input>
-          <Input placeholder="Phường/Xã" className="py-6 col-span-4"></Input>
+          <FormField
+            control={form.control}
+            name="district"
+            render={({ field }) => (
+              <FormItem className="col-span-4">
+                <FormLabel>Quận/Huyện</FormLabel>
+                <Select
+                  onValueChange={(value) => {
+                    field.onChange();
+                    form.resetField("ward");
+                    provinceStore.fetchWards(parseInt(value));
+                  }}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger className="py-6">
+                      <SelectValue placeholder="Chọn Quận/Huyện" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {provinceStore.districts.map((district, index: number) => {
+                      return (
+                        <SelectItem value={district.code + ""} key={index}>
+                          {district.name}
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="ward"
+            render={({ field }) => (
+              <FormItem className="col-span-4">
+                <FormLabel>Phường/Xã</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger className="py-6">
+                      <SelectValue placeholder="Chọn Phường/Xã" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {provinceStore.wards.map((ward, index: number) => {
+                      return (
+                        <SelectItem value={ward.name} key={index}>
+                          {ward.name}
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name="street"
@@ -194,9 +260,9 @@ const CheckOutForm = () => {
           name="shippingMethod"
           render={({ field }) => (
             <FormItem className="py-2">
-              <FormLabel className="font-bold text-lg my-3">
+              <Label className="font-bold text-lg my-3">
                 Phương Thức Vận Chuyển
-              </FormLabel>
+              </Label>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
@@ -236,9 +302,9 @@ const CheckOutForm = () => {
           name="paymentMethod"
           render={({ field }) => (
             <FormItem className="py-2">
-              <FormLabel className="font-bold text-lg my-3">
+              <Label className="font-bold text-lg my-3">
                 Phương Thức Thanh Toán
-              </FormLabel>
+              </Label>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
@@ -278,9 +344,9 @@ const CheckOutForm = () => {
           name="billingAddress"
           render={({ field }) => (
             <FormItem className="py-2">
-              <FormLabel className="font-bold text-lg my-3">
+              <Label className="font-bold text-lg my-3">
                 Địa chỉ thanh toán
-              </FormLabel>
+              </Label>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
