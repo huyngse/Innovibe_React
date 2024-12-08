@@ -16,7 +16,7 @@ const Navbar = () => {
   const brands: { title: string; href: string; description?: string }[] =
     brandData.map((brand: any) => ({
       title: brand.brandName,
-      href: `/search?brand=${brand.id}`
+      href: `/search?brand=${brand.id}`,
     }));
 
   return (
@@ -26,7 +26,7 @@ const Navbar = () => {
           <NavigationMenuList>
             <NavigationMenuItem>
               <NavigationMenuTrigger className="bg-transparent text-white hover:text-white hover:bg-white/20 rounded-none uppercase font-bold">
-                Categories
+                Danh mục
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
@@ -42,12 +42,12 @@ const Navbar = () => {
                           className="mb-5"
                         />
                         <div className="mb-2 mt-4 text-lg font-medium">
-                          Electric Guitars
+                          Guitar Điện
                         </div>
                         <p className="text-xs leading-tight text-muted-foreground">
-                          Use electric pickups to convert string vibrations into
-                          electrical signals, making them suitable for a wide
-                          range of music styles.
+                          Sử dụng bộ phận thu điện để chuyển đổi độ rung của dây
+                          đàn thành tín hiệu điện, phù hợp với nhiều phong cách
+                          âm nhạc khác nhau.
                         </p>
                       </a>
                     </NavigationMenuLink>
@@ -56,25 +56,28 @@ const Navbar = () => {
                     href="/search?category=Acoustic Guitars"
                     title="Acoustic Guitars"
                   >
-                    Produce sound acoustically through the vibration of strings
-                    and the guitar body.
+                    Tạo ra âm thanh thông qua sự rung động của dây đàn và thân
+                    đàn guitar.
                   </ListItem>
                   <ListItem
                     href="/search?category=Bass Guitars"
                     title="Bass Guitars"
                   >
-                    Provide the low-end sound essential for rhythm and harmony
-                    in music.
+                    Cung cấp âm thanh tần số thấp cần thiết cho nhịp điệu và sự
+                    hòa âm trong âm nhạc.
                   </ListItem>
-                  <ListItem href="/search?category=Tools" title="Tools">
-                    Enhance your guitar playing experience
+                  <ListItem
+                    href="/search?category=Accessories"
+                    title="Phụ kiện"
+                  >
+                    Nâng cao trải nghiệm chơi guitar của bạn
                   </ListItem>
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuTrigger className="bg-transparent text-white hover:text-white hover:bg-white/20 rounded-none uppercase font-bold">
-                Brands
+                Thương hiệu
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-3 lg:w-[600px] ">
@@ -98,7 +101,7 @@ const Navbar = () => {
                   "bg-transparent text-white hover:text-white hover:bg-white/20 rounded-none uppercase font-bold"
                 )}
               >
-                Second hand
+                Hàng cũ
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
@@ -109,7 +112,7 @@ const Navbar = () => {
                   "bg-transparent text-white hover:text-white hover:bg-white/20 rounded-none uppercase font-bold"
                 )}
               >
-                Guitar courses
+                Khóa học guitar
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
@@ -131,7 +134,7 @@ const Navbar = () => {
                   "bg-transparent text-white hover:text-white hover:bg-white/20 rounded-none uppercase font-bold"
                 )}
               >
-                Blog posts
+                Bài đăng
               </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>

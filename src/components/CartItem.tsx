@@ -17,7 +17,7 @@ const CartItem = ({
 }) => {
   const [currentQuantity, setCurrentQuantity] = useState(quantity);
   return (
-    <div className="grid grid-cols-3 gap-5">
+    <div className="grid grid-cols-3 gap-5 pe-3">
       <img src={imageUrl} alt={id + "-" + productName} />
       <div className="col-span-2 flex flex-col gap-3 items-start">
         <h5 className="font-semibold">{productName}</h5>
@@ -30,7 +30,7 @@ const CartItem = ({
           ></Input>
           <span className="font-bold">{formatCurrencyVND(price)}</span>
         </div>
-        <button className="uppercase text-orange-600 underline">Remove</button>
+        <button className="uppercase text-orange-600 underline">Xóa</button>
       </div>
     </div>
   );

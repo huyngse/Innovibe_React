@@ -45,9 +45,9 @@ const ShoppingCartButton = () => {
       <SheetContent className="min-w-[450px] flex flex-col">
         <SheetHeader>
           <SheetTitle className="text-3xl uppercase font-extrabold">
-            Shopping Cart
+            Giỏ Hàng
           </SheetTitle>
-          <SheetDescription>2 Items</SheetDescription>
+          <SheetDescription>2 sản phẩm</SheetDescription>
         </SheetHeader>
         <ScrollArea className="flex-1">
           <div className="flex flex-col gap-5 py-5">
@@ -67,14 +67,16 @@ const ShoppingCartButton = () => {
         </ScrollArea>
         <div>
           <div className="flex justify-between items-center">
-            <h5 className="font-bold text-2xl">Cart Subtotal</h5>
+            <h5 className="font-bold text-2xl">Tổng cộng giỏ hàng</h5>
             <p className="font-bold">{formatCurrencyVND(totalValue)}</p>
           </div>
-          <p className="text-gray-500 text-sm">Excludes taxes and delivery</p>
+          <p className="text-gray-500 text-sm">
+            Không bao gồm thuế và giao hàng
+          </p>
           <Link to={"/cart"}>
             <SheetClose asChild>
               <Button className="uppercase font-bold w-full mt-5 rounded-xl">
-                View Cart
+                Xem giỏ hàng
               </Button>
             </SheetClose>
           </Link>

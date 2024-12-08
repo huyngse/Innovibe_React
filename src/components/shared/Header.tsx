@@ -42,7 +42,7 @@ const Header = () => {
         >
           <Input
             type="text"
-            placeholder="SEARCH..."
+            placeholder="TÌM KIẾM..."
             className="bg-white pe-8 text-black text-sm placeholder:text-xs"
             ref={searchInputRef}
           />
@@ -57,12 +57,12 @@ const Header = () => {
         </div>
         <div className="flex items-center gap-5">
           <div>
-            <Link to={"/sign-up"} className="text-sm">
-              SIGN UP
+            <Link to={"/sign-up"} className="text-sm uppercase">
+              Đăng Ký
             </Link>
             /
-            <Link to={"/log-in"} className="text-sm">
-              LOG IN
+            <Link to={"/log-in"} className="text-sm uppercase">
+              Đăng Nhập
             </Link>
           </div>
           <div className="flex gap-4">
