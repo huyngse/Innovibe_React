@@ -11,7 +11,17 @@ import {
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
+import useProvinceStore from "@/stores/useProvinceStore";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 const formSchema = z.object({
@@ -38,6 +48,12 @@ const CheckOutForm = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
   }
+
+  const provinceStore = useProvinceStore((state) => state);
+  useEffect(() => {
+    provinceStore.fetchProvinces();
+  }, []);
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -115,10 +131,35 @@ const CheckOutForm = () => {
           placeholder="Căn hộ, phòng, v.v. (Không bắt buộc)"
           className="py-6 col-span-12"
         ></Input> */}
-          <Input
-            placeholder="Thành phố/Tỉnh"
-            className="py-6 col-span-4"
-          ></Input>
+          <FormField
+            control={form.control}
+            name="province"
+            render={({ field }) => (
+              <FormItem className="col-span-4">
+                <FormLabel>Thành phố/Tỉnh</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger className="py-6">
+                      <SelectValue placeholder="Chọn Thành phố/Tỉnh" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {provinceStore.provinces.map((province, index: number) => {
+                      return (
+                        <SelectItem value={province.name} key={index}>
+                          {province.name}
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <Input placeholder="Huyện" className="py-6 col-span-4"></Input>
           <Input placeholder="Phường/Xã" className="py-6 col-span-4"></Input>
           <FormField

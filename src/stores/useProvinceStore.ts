@@ -3,14 +3,15 @@ import axios from 'axios';
 import { District, Province, Ward } from '@/types/vietnam-provinces';
 const api = axios.create({
     baseURL: 'https://provinces.open-api.vn/api' // Replace with your base URL
-  });
-  
+});
+
 type ProvinceState = {
     provinces: Province[],
     districts: District[],
     wards: Ward[],
     loading: boolean,
     error: string | null;
+    fetchProvinces: () => void;
 }
 const useProvinceStore = create<ProvinceState>((set) => ({
     provinces: [],
@@ -23,10 +24,8 @@ const useProvinceStore = create<ProvinceState>((set) => ({
         set({ loading: true, error: null });
         try {
             const response = await api.get("/p");
-            console.log("reponse: ", response)
-            const data = response.data;
             set({
-                provinces: data.provinces || [],
+                provinces: response.data || [],
             });
         } catch (error) {
             let message = 'Unknown Error'
