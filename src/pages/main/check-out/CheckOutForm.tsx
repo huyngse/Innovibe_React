@@ -9,8 +9,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -148,73 +148,133 @@ const CheckOutForm = () => {
             Lưu thông tin này cho lần sau
           </label>
         </div>
-        <div>
-          <h2 className="font-bold text-lg my-3">Phương Thức Vận Chuyển</h2>
-          <RadioGroup
-            defaultValue="shipping-method-1"
-            className="border rounded-lg overflow-hidden gap-0"
-          >
-            <div className="flex items-center space-x-2 px-5 py-4 border">
-              <RadioGroupItem
-                value="shipping-method-1"
-                id="shipping-method-1"
-              />
-              <Label htmlFor="shipping-method-1">Vận chuyển tiêu chuẩn</Label>
-            </div>
-            <div className="flex items-center space-x-2 px-5 py-4 border">
-              <RadioGroupItem
-                value="shipping-method-2"
-                id="shipping-method-2"
-              />
-              <Label htmlFor="shipping-method-2">
-                Vận chuyển đàn guitar và bass
-              </Label>
-            </div>
-          </RadioGroup>
-        </div>
-        <div>
-          <h2 className="font-bold text-lg my-3">Thanh Toán</h2>
-          <RadioGroup
-            defaultValue="payment-1"
-            className="border rounded-lg overflow-hidden gap-0"
-          >
-            <div className="flex items-center space-x-2 px-5 py-4 border">
-              <RadioGroupItem value="payment-1" id="payment-1" />
-              <Label htmlFor="payment-1">Thanh toán khi nhận hàng (COD)</Label>
-            </div>
-            <div className="flex items-center space-x-2 px-5 py-4 border">
-              <RadioGroupItem value="payment-2" id="payment-2" />
-              <Label htmlFor="payment-2">Giao hàng trả trước (PPD)</Label>
-            </div>
-          </RadioGroup>
-        </div>
-        <div>
-          <h2 className="font-bold text-lg my-3">Địa chỉ thanh toán</h2>
-          <RadioGroup
-            defaultValue="billing-address-1"
-            className="border rounded-lg overflow-hidden gap-0"
-          >
-            <div className="flex items-center space-x-2 px-5 py-4 border">
-              <RadioGroupItem
-                value="billing-address-1"
-                id="billing-address-1"
-              />
-              <Label htmlFor="billing-address-1">
-                Giống như địa chỉ giao hàng
-              </Label>
-            </div>
-            <div className="flex items-center space-x-2 px-5 py-4 border">
-              <RadioGroupItem
-                value="billing-address-2"
-                id="billing-address-2"
-              />
-              <Label htmlFor="billing-address-2">
-                Sử dụng địa chỉ thanh toán khác
-              </Label>
-            </div>
-          </RadioGroup>
-        </div>
-        <Button className="my-5 w-full py-5" type="submit">
+        <FormField
+          control={form.control}
+          name="shippingMethod"
+          render={({ field }) => (
+            <FormItem className="py-2">
+              <FormLabel className="font-bold text-lg my-3">
+                Phương Thức Vận Chuyển
+              </FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  className="border rounded-lg overflow-hidden gap-0"
+                >
+                  <FormItem
+                    className={cn(
+                      "flex items-center space-x-2 px-5 py-4 border space-y-0",
+                      field.value == "shipping-method-1" && "bg-orange-100"
+                    )}
+                  >
+                    <FormControl>
+                      <RadioGroupItem value="shipping-method-1" />
+                    </FormControl>
+                    <FormLabel>Vận chuyển tiêu chuẩn</FormLabel>
+                  </FormItem>
+                  <FormItem
+                    className={cn(
+                      "flex items-center space-x-2 px-5 py-4 border space-y-0",
+                      field.value == "shipping-method-2" && "bg-orange-100"
+                    )}
+                  >
+                    <FormControl>
+                      <RadioGroupItem value="shipping-method-2" />
+                    </FormControl>
+                    <FormLabel>Vận chuyển đàn guitar và bass</FormLabel>
+                  </FormItem>
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="paymentMethod"
+          render={({ field }) => (
+            <FormItem className="py-2">
+              <FormLabel className="font-bold text-lg my-3">
+                Phương Thức Thanh Toán
+              </FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  className="border rounded-lg overflow-hidden gap-0"
+                >
+                  <FormItem
+                    className={cn(
+                      "flex items-center space-x-2 px-5 py-4 border space-y-0",
+                      field.value == "payment-1" && "bg-orange-100"
+                    )}
+                  >
+                    <FormControl>
+                      <RadioGroupItem value="payment-1" />
+                    </FormControl>
+                    <FormLabel>Thanh toán khi nhận hàng (COD)</FormLabel>
+                  </FormItem>
+                  <FormItem
+                    className={cn(
+                      "flex items-center space-x-2 px-5 py-4 border space-y-0",
+                      field.value == "payment-2" && "bg-orange-100"
+                    )}
+                  >
+                    <FormControl>
+                      <RadioGroupItem value="payment-2" />
+                    </FormControl>
+                    <FormLabel>Giao hàng trả trước (PPD)</FormLabel>
+                  </FormItem>
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="billingAddress"
+          render={({ field }) => (
+            <FormItem className="py-2">
+              <FormLabel className="font-bold text-lg my-3">
+                Địa chỉ thanh toán
+              </FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  className="border rounded-lg overflow-hidden gap-0"
+                >
+                  <FormItem
+                    className={cn(
+                      "flex items-center space-x-2 px-5 py-4 border space-y-0",
+                      field.value == "billing-address-1" && "bg-orange-100"
+                    )}
+                  >
+                    <FormControl>
+                      <RadioGroupItem value="billing-address-1" />
+                    </FormControl>
+                    <FormLabel>Giống như địa chỉ giao hàng</FormLabel>
+                  </FormItem>
+                  <FormItem
+                    className={cn(
+                      "flex items-center space-x-2 px-5 py-4 border space-y-0",
+                      field.value == "billing-address-2" && "bg-orange-100"
+                    )}
+                  >
+                    <FormControl>
+                      <RadioGroupItem value="billing-address-2" />
+                    </FormControl>
+                    <FormLabel>Sử dụng địa chỉ thanh toán khác</FormLabel>
+                  </FormItem>
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button className="my-5 w-full py-6" type="submit">
           Hoàn tất đơn hàng
         </Button>
       </form>
