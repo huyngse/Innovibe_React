@@ -43,9 +43,9 @@ const CheckOutPage = () => {
           <div className="py-5">
             <div className="flex justify-between">
               <p className="text-lg font-bold">
-                Your Cart{" "}
+                Giỏ hàng của bạn{" "}
                 <span className="text-sm font-normal text-gray-500">
-                  (2 items)
+                  (2 mặt hàng)
                 </span>
               </p>
             </div>

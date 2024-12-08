@@ -31,10 +31,10 @@ const CartItem = ({
         </Link>
         <div className="flex justify-between w-full">
           <p className="text-sm text-gray-500">Model #: {model}</p>
-          <p className="text-sm text-orange-500 underline">Qty: {quantity}</p>
+          <p className="text-sm text-orange-500 underline">Số lượng: {quantity}</p>
         </div>
         <div className="flex justify-between w-full">
-          <p className="font-bold text-green-500 uppercase">{status}</p>
+          <p className="font-bold text-green-500 uppercase">{status == "In Stock" ? "Còn hàng" : "Hết hàng"}</p>
           <div className="flex justify-between font-bold">
             {formatCurrencyVND(price)}
           </div>

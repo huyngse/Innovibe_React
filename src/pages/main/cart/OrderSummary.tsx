@@ -9,21 +9,23 @@ import {
 const OrderSummary = ({ subtotal }: { subtotal: number }) => {
   return (
     <div className="p-3 bg-zinc-50 rounded-lg">
-      <h1 className="text-2xl uppercase font-extrabold pb-5">Order Summary</h1>
+      <h1 className="text-2xl uppercase font-extrabold pb-5">
+        Tóm tắt đơn hàng
+      </h1>
       <div className="flex flex-col gap-1">
         <div className="flex justify-between">
-          <p>Subtotal:</p>
+          <p>Tổng cộng:</p>
           <p className="font-bold text-lg">{formatCurrencyVND(subtotal)}</p>
         </div>
         <div className="flex justify-between">
-          <p>Shipping:</p>
-          <p className="font-bold text-lg text-orange-500">Free</p>
+          <p>Vận chuyển:</p>
+          <p className="font-bold text-lg text-orange-500">Miễn phí</p>
         </div>
         <div className="flex justify-between">
           <TooltipProvider>
             <Tooltip>
               <div className="flex items-baseline gap-1">
-                Tax{" "}
+                Thuế
                 <TooltipTrigger>
                   <FaCircleInfo className="w-3 h-3" />
                 </TooltipTrigger>
@@ -38,7 +40,7 @@ const OrderSummary = ({ subtotal }: { subtotal: number }) => {
       </div>
       <hr className="border-black my-3" />
       <div className="flex justify-between">
-        <p className="font-bold">Estimated Total:</p>
+        <p className="font-bold">Tổng chi phí ước tính:</p>
         <p className="font-bold text-lg">{formatCurrencyVND(subtotal)}</p>
       </div>
     </div>
