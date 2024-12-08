@@ -46,7 +46,7 @@ const Blogs = () => {
   return (
     <div className="my-16">
       <h2 className="text-center font-extrabold text-3xl my-5 uppercase">
-        Blog posts
+        Bài đăng
       </h2>
       <div className="grid grid-cols-12 gap-5">
         {data.map((blog: any, index: number) => {
@@ -64,7 +64,7 @@ const Blogs = () => {
         })}
       </div>
       <div className="text-center my-10">
-        <Button className="uppercase rounded-xl px-5">View more</Button>
+        <Button className="uppercase rounded-xl px-5">Xem thêm</Button>
       </div>
     </div>
   );

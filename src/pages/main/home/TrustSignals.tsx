@@ -7,35 +7,37 @@ const TrustSignals = () => {
     <div className="my-16 grid grid-cols-12 gap-5">
       <div className="col-span-3 flex justify-center items-center flex-col gap-1">
         <img src={TrustSignal1} alt="" />
-        <h3 className="text-orange-600 text-lg uppercase font-bold">
-          Free inner-city shipping
+        <h3 className="text-orange-600 text-sm uppercase font-bold text-center">
+          Giao hàng miễn phí nội thành
         </h3>
         <p className="text-sm text-center">
-          <span className="font-bold">Free shipping</span> within the city,
-          nationwide for orders over a certain amount.
+          <span className="font-bold">Miễn phí vận chuyển</span> trong thành
+          phố, trên toàn quốc cho các đơn hàng trên một số tiền nhất định.
         </p>
       </div>
       <div className="col-span-3 flex justify-center items-center flex-col gap-1">
         <img src={TrustSignal2} alt="" />
         <h3 className="text-orange-600 text-lg uppercase font-bold">
-          Free click & collect
+          Nhấp & nhận miễn phí
         </h3>
-        <p className="text-sm text-center">Just 10% deposit required.</p>
+        <p className="text-sm text-center">Chỉ cần đặt cọc 10%.</p>
       </div>
       <div className="col-span-3 flex justify-center items-center flex-col gap-1">
         <img src={TrustSignal3} alt="" />
         <h3 className="text-orange-600 text-lg uppercase font-bold">
-          Guarantee payment
+          Bảo đảm thanh toán
         </h3>
-        <p className="text-sm text-center">Online shopping easy and fast</p>
+        <p className="text-sm text-center">
+          Mua sắm trực tuyến dễ dàng và nhanh chóng
+        </p>
       </div>
       <div className="col-span-3 flex justify-center items-center flex-col gap-1">
         <img src={TrustSignal4} alt="" />
         <h3 className="text-orange-600 text-lg uppercase font-bold">
-          14 days return
+          14 ngày hoàn trả
         </h3>
         <p className="text-sm text-center">
-          Enjoy flexible polices when you change your mind
+          Tận hưởng chính sách linh hoạt khi bạn thay đổi quyết định
         </p>
       </div>
     </div>

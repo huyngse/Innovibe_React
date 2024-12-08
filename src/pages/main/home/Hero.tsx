@@ -4,15 +4,16 @@ const Hero = () => {
   return (
     <div className="my-16 grid grid-cols-12 gap-5">
       <div className="col-span-6">
-        <h2 className="font-extrabold text-3xl uppercase">Who are we</h2>
+        <h2 className="font-extrabold text-3xl uppercase">Chúng tôi là ai</h2>
         <p className="pe-5 my-5 font-semibold">
-          We’re not just sellers of instruments—we’re the fire behind the music,
-          the force that fuels your rebellion. We are the ones who push
-          boundaries, break the rules, and make noise. We are the outlaws of
-          sound, the demons of rhythm, and we stand with those who dare to be
-          different. You don’t play music. You live it.
+          Chúng tôi không chỉ là người bán nhạc cụ—chúng tôi là ngọn lửa đằng
+          sau âm nhạc, là sức mạnh thúc đẩy sự nổi loạn của bạn. Chúng tôi là
+          những người phá vỡ ranh giới, phá vỡ các quy tắc và tạo ra tiếng ồn.
+          Chúng tôi là những kẻ ngoài vòng pháp luật của âm thanh, là những con
+          quỷ của nhịp điệu và chúng tôi sát cánh cùng những người dám khác
+          biệt. Bạn không chơi nhạc. Bạn sống với âm nhạc.
         </p>
-        <Button className="uppercase rounded-xl px-5">Read more</Button>
+        <Button className="uppercase rounded-xl px-5">Đọc thêm</Button>
       </div>
       <img src={HeroBanner} alt="" className="col-span-6" />
     </div>

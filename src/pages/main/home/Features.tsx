@@ -10,10 +10,10 @@ const Features = () => {
         </div>
         <hr className="border-orange-600 my-2" />
         <h5 className="uppercase text-orange-600 font-extrabold text-lg">
-          Free shipping
+          Miễn phí vận chuyển
         </h5>
         <p className="font-semibold">
-          Nationwide free delivery for maximum convenience.
+          Giao hàng miễn phí trên toàn quốc để mang lại sự tiện lợi tối đa.
         </p>
       </div>
       <div className="col-span-4 text-center">
@@ -22,10 +22,10 @@ const Features = () => {
         </div>
         <hr className="border-orange-600 my-2" />
         <h5 className="uppercase text-orange-600 font-extrabold text-lg">
-          Secure Online Shopping
+          Mua sắm trực tuyến an toàn
         </h5>
         <p className="font-semibold">
-          A secure payment system ensures peace of mind when shopping online.
+          Hệ thống thanh toán an toàn đảm bảo sự an tâm khi mua sắm trực tuyến.
         </p>
       </div>
       <div className="col-span-4 text-center">
@@ -34,11 +34,11 @@ const Features = () => {
         </div>
         <hr className="border-orange-600 my-2" />
         <h5 className="uppercase text-orange-600 font-extrabold text-lg">
-          Dedicated Customer Support
+          Hỗ trợ khách hàng tận tâm
         </h5>
         <p className="font-semibold">
-          A professional team is always ready to assist, whether shopping online
-          or in-store.
+          Đội ngũ chuyên nghiệp luôn sẵn sàng hỗ trợ, dù bạn mua sắm trực tuyến
+          hay tại cửa hàng.
         </p>
       </div>
     </div>
