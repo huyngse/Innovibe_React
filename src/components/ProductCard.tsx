@@ -40,7 +40,9 @@ const ProductCard = ({
             ? formatCurrencyVND(salesPrice)
             : formatCurrencyVND(price)}
         </p>
-        <p className="text-xs line-through decoration-red-500 decoration-1 font-semibold">{salesPrice && formatCurrencyVND(price)}</p>
+        <p className="text-xs line-through decoration-red-500 decoration-1 font-semibold">
+          {salesPrice && formatCurrencyVND(price)}
+        </p>
       </div>
       <div className="text-center absolute top-40 z-10 left-1/2 w-full -translate-x-1/2">
         <button
@@ -49,7 +51,7 @@ const ProductCard = ({
             isHovered ? "opacity-100" : "opacity-0"
           )}
         >
-          Add to Cart
+          Thêm vào giỏ
         </button>
       </div>
     </div>
