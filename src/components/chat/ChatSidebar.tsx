@@ -60,10 +60,10 @@ export function ChatSidebar({
         <SidebarGroup>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild className="bg-zinc-100 py-5">
+              <SidebarMenuButton asChild className="bg-zinc-100 py-5" tooltip={"Trò chuyện mới"}>
                 <a href={"#"}>
                   <Plus />
-                  <span>New Chat</span>
+                  <span>Trò chuyện mới</span>
                 </a>
               </SidebarMenuButton>
             </SidebarMenuItem>
