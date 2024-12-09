@@ -3,7 +3,8 @@ import LoginPage from "./pages/auth/Login";
 import MainContainer from "./containers/MainContainer";
 import { useEffect } from "react";
 import AdminContainer from "./containers/AdminContainer";
-import '@smastrom/react-rating/style.css'
+import "@smastrom/react-rating/style.css";
+import ChatContainer from "./containers/ChatContainer";
 function App() {
   useEffect(() => {
     document.title = "Innovibe";
@@ -12,6 +13,7 @@ function App() {
     <Routes>
       <Route path="log-in" element={<LoginPage />} />
       <Route path="/admin/*" element={<AdminContainer />} />
+      <Route path="/chat/*" element={<ChatContainer />} />
       <Route path="/*" element={<MainContainer />} />
     </Routes>
   );
