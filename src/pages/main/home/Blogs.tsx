@@ -4,6 +4,7 @@ import BlogImage3 from "@/assets/imgs/blog_3.png";
 import BlogImage4 from "@/assets/imgs/blog_4.png";
 import BlogCard from "@/components/BlogCard";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 const data = [
   {
     id: 1,
@@ -64,7 +65,9 @@ const Blogs = () => {
         })}
       </div>
       <div className="text-center my-10">
-        <Button className="uppercase rounded-xl px-5">Xem thêm</Button>
+        <Link to={"/blog"}>
+          <Button className="uppercase rounded-xl px-5">Xem thêm</Button>
+        </Link>
       </div>
     </div>
   );

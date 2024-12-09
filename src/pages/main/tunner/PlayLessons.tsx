@@ -8,39 +8,39 @@ const PlayLessons = () => {
     <section className="py-5">
       <div className="text-center">
         <h1 className="text-3xl font-extrabold uppercase">
-          Perfect Your Tuning
+          Hoàn thiện việc lên dây của bạn
         </h1>
         <p className="my-2 text-lg font-semibold">
-          Check out these free Innovibe Play lessons.
+          Hãy xem những bài học miễn phí của Innovibe Play.
         </p>
       </div>
       <div className="grid grid-cols-3 gap-10 py-5">
         <div>
           <img src={lessonImage1} alt="" className="rounded-lg" />
-          <h3 className="font-bold text-center py-2">Hold the Note</h3>
+          <h3 className="font-bold text-center py-2">Giữ nốt nhạc</h3>
           <p className="text-sm min-h-16">
-            Don't be too plucky. For precise tuning, focus on sustaining the
-            note.
+            Đừng quá liều lĩnh. Để lên dây chính xác, hãy tập trung vào việc duy
+            trì nốt nhạc.
           </p>
           <div className="flex justify-center py-3">
             <Link to="https://www.youtube.com/watch?v=Nl5XiKBxrZ0">
               <Button className="bg-orange-600 hover:bg-orange-500 uppercase font-bold">
-                Watch Now
+                Xem ngay
               </Button>
             </Link>
           </div>
         </div>
         <div>
           <img src={lessonImage2} alt="" className="rounded-lg" />
-          <h3 className="font-bold text-center py-2">Alternative Tunings</h3>
+          <h3 className="font-bold text-center py-2">Lên dây thay thế</h3>
           <p className="text-sm min-h-16">
-            Expand beyond standard tuning (EADGBE). Discover open, half-step,
-            and drop tunings to create new sounds.
+            Mở rộng hơn cả cách lên dây chuẩn (EADGBE). Khám phá cách lên dây
+            mở, nửa bước và thả để tạo ra âm thanh mới.
           </p>
           <div className="flex justify-center py-3">
             <Link to="https://www.youtube.com/watch?v=5jTsSvkBv60">
               <Button className="bg-orange-600 hover:bg-orange-500 uppercase font-bold">
-                Watch Now
+                Xem ngay
               </Button>
             </Link>
           </div>
@@ -48,16 +48,16 @@ const PlayLessons = () => {
         <div>
           <img src={lessonImage3} alt="" className="rounded-lg" />
           <h3 className="font-bold text-center py-2">
-            Maintain Your Tune Longer
+            Duy trì giai điệu của bạn lâu hơn
           </h3>
           <p className="text-sm min-h-16">
-            How you turn the tuning pegs is important. Discover the best
-            techniques for lasting tuning in this video.
+            Cách bạn xoay chốt lên dây đàn rất quan trọng. Khám phá các kỹ thuật
+            tốt nhất để lên dây đàn lâu dài trong video này.
           </p>
           <div className="flex justify-center py-3">
             <Link to="https://www.youtube.com/watch?v=fK7FYTZnN5c">
               <Button className="bg-orange-600 hover:bg-orange-500 uppercase font-bold">
-                Watch Now
+                Xem ngay
               </Button>
             </Link>
           </div>

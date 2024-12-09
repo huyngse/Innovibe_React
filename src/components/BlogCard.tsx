@@ -7,7 +7,7 @@ function formatDate(date: Date): string {
     month: "long",
     day: "numeric",
   };
-  return date.toLocaleDateString("en-US", options);
+  return date.toLocaleDateString("vi-VN", options);
 }
 
 const BlogCard = ({
@@ -26,7 +26,11 @@ const BlogCard = ({
   return (
     <div>
       <AspectRatio ratio={16 / 10}>
-        <img src={thumbnail} alt={title} className="w-full h-full object-cover object-center" />
+        <img
+          src={thumbnail}
+          alt={title}
+          className="w-full h-full object-cover object-center"
+        />
       </AspectRatio>
       <p className="my-2 text-sm">{formatDate(new Date(createdAt))}</p>
       <Link to={`/blog/${blogId}`}>
@@ -37,7 +41,7 @@ const BlogCard = ({
         to={`/blog/${blogId}`}
         className="my-3 text-sm font-semibold underline"
       >
-        Read more
+        Xem thêm
       </Link>
     </div>
   );
