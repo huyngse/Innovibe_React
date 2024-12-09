@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import runChat from "@/config/gemini";
 import {
   Guitar,
   HandMetal,
@@ -9,6 +10,7 @@ import {
   Music,
   SendHorizontal,
 } from "lucide-react";
+import { useState } from "react";
 const suggestedQuestions = [
   {
     id: 1,
@@ -32,6 +34,7 @@ const suggestedQuestions = [
   },
 ];
 const NewChatPage = () => {
+  const [chatPrompt, setChatPrompt] = useState("");
   return (
     <div className="p-10 relative flex-1">
       <h2 className="font-bold text-5xl mt-10">Xin chào bạn.</h2>
@@ -58,6 +61,10 @@ const NewChatPage = () => {
           <Textarea
             className="py-3 px-10 w-full rounded-lg"
             placeholder="Nhập trò chuyện ở đây"
+            value={chatPrompt}
+            onChange={(e) => {
+              setChatPrompt(e.target.value);
+            }}
           />
           <div className="absolute bottom-3 right-3">
             <div className="flex gap-3">
@@ -67,7 +74,12 @@ const NewChatPage = () => {
               <Button className="rounded-full" variant={"outline"}>
                 <Mic className="w-5 h-5" />
               </Button>
-              <Button className="rounded-full">
+              <Button
+                className="rounded-full"
+                onClick={() => {
+                  runChat(chatPrompt);
+                }}
+              >
                 <SendHorizontal className="w-5 h-5" />
               </Button>
             </div>

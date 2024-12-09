@@ -35,7 +35,7 @@ export function NavRecents({
 
   return (
     <SidebarGroup >
-      <SidebarGroupLabel>Recent</SidebarGroupLabel>
+      <SidebarGroupLabel>Gần đây</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.name}>
