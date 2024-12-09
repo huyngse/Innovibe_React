@@ -13,7 +13,6 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { NavUser } from "./nav-user";
 import { NavRecents } from "./nav-recents";
 
 const data = {
@@ -49,7 +48,9 @@ export function ChatSidebar({
             <SidebarMenuButton asChild>
               <a href={"/"}>
                 <img src="./electric-guitar.png" alt="" width={20} />
-                <span className="font-extrabold text-xl">Innovibe</span>
+                <span className="font-extrabold text-3xl font-['Brush_Script_MT']">
+                  Innovibe
+                </span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

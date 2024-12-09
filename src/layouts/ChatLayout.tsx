@@ -13,7 +13,8 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-const ChatLayout = () => {
+import { ReactNode } from "react";
+const ChatLayout = ({ children }: { children: ReactNode }) => {
   return (
     <SidebarProvider>
       <ChatSidebar />
@@ -25,9 +26,7 @@ const ChatLayout = () => {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="/">
-                    Innovibe
-                  </BreadcrumbLink>
+                  <BreadcrumbLink href="/">Innovibe</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
@@ -37,14 +36,7 @@ const ChatLayout = () => {
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-          </div>
-          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
-        </div>
+        {children}
       </SidebarInset>
     </SidebarProvider>
   );
