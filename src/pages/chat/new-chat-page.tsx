@@ -13,15 +13,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Guitar,
   HandMetal,
-  ImagePlus,
   ListMusic,
-  Loader,
-  Mic,
   Music,
   SendHorizontal,
 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 
 const formSchema = z.object({
   inputPrompt: z
@@ -66,14 +66,51 @@ const NewChatPage = () => {
     form.reset();
   }
   return (
-    <div className="px-10 pb-24 flex-1 overflow-auto">
+    <div className="px-10 mb-28 pb-5 flex-1 overflow-auto rounded-scrollbar">
       {chatbotStore.showResult ? (
         <div>
-          {chatbotStore.isLoading ? (
-            <Loader className="animate-spin" />
-          ) : (
-            <ReactMarkdown>{chatbotStore.resultData}</ReactMarkdown>
-          )}
+          <div className="flex flex-col gap-5">
+            <div className="flex justify-end">
+              <div className="bg-orange-600 text-white p-3 w-3/4 rounded-lg">
+                <ReactMarkdown>{chatbotStore.currentPrompt}</ReactMarkdown>
+              </div>
+            </div>
+
+            <div>
+              <div className="flex gap-3 items-center mb-2">
+                <Avatar className="w-8 h-8">
+                  <AvatarImage src="./electric-guitar.png" alt="" />
+                  <AvatarFallback>TL</AvatarFallback>
+                </Avatar>
+                <p className="font-semibold">
+                  Trợ lí{" "}
+                  <Badge
+                    variant="default"
+                    className="ms-1 bg-orange-100 hover:bg-orange-50 text-orange-500 border-orange-500"
+                  >
+                    Gemini
+                  </Badge>
+                </p>
+              </div>
+              <div className="flex justify-start">
+                <div className="bg-zinc-50 p-3 rounded-lg">
+                  {chatbotStore.isLoading ? (
+                    <div className="flex flex-col gap-5">
+                      <Skeleton className="w-full h-[20px] rounded-full" />
+                      <Skeleton className="w-full h-[20px] rounded-full" />
+                      <Skeleton className="w-full h-[20px] rounded-full" />
+                      <Skeleton className="w-full h-[20px] rounded-full" />
+                      <Skeleton className="w-[100px] h-[20px] rounded-full" />
+                    </div>
+                  ) : (
+                    <ReactMarkdown className={"whitespace-pre-wrap"}>
+                      {chatbotStore.resultData}
+                    </ReactMarkdown>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       ) : (
         <div>
@@ -122,7 +159,7 @@ const NewChatPage = () => {
             />
             <div className="absolute bottom-3 right-3">
               <div className="flex gap-3">
-                <Button
+                {/* <Button
                   className="rounded-full"
                   variant={"outline"}
                   type="button"
@@ -135,7 +172,7 @@ const NewChatPage = () => {
                   type="button"
                 >
                   <Mic className="w-5 h-5" />
-                </Button>
+                </Button> */}
                 <Button className="rounded-full" type="submit">
                   <SendHorizontal className="w-5 h-5" />
                 </Button>
