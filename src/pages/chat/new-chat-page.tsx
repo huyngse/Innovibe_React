@@ -93,7 +93,7 @@ const NewChatPage = () => {
                 </p>
               </div>
               <div className="flex justify-start">
-                <div className="bg-zinc-50 p-3 rounded-lg">
+                <div className="bg-zinc-50 p-3 rounded-lg w-full">
                   {chatbotStore.isLoading ? (
                     <div className="flex flex-col gap-5">
                       <Skeleton className="w-full h-[20px] rounded-full" />
