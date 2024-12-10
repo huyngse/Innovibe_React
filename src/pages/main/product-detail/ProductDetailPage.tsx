@@ -66,7 +66,7 @@ const ProductDetailPage = () => {
       <Breadcrumb
         items={[
           { label: "Home", href: "/" },
-          { label: "View Product", href: "/search" },
+          { label: "Xem sản phẩm", href: "/search" },
         ]}
       />
       <MaxWidthWrapper>
@@ -98,7 +98,7 @@ const ProductDetailPage = () => {
                 ></Input>
               </div>
               <Button className="uppercase col-span-3 text-lg py-6 self-center">
-                Add to Cart
+                Thêm vào giỏ hàng
               </Button>
             </div>
             <hr className="border-black my-3" />
@@ -108,21 +108,21 @@ const ProductDetailPage = () => {
                 className="py-5 px-6 flex items-center gap-3 shadow-none border-none"
               >
                 <FaRegHeart style={{ width: 20, height: 20 }} />
-                List
+                Lưu
               </Button>
               <Button
                 variant={"outline"}
                 className="py-5 px-6 flex items-center gap-3 shadow-none border-none"
               >
                 <GrCompare style={{ width: 20, height: 20 }} />
-                Compare
+                So sánh
               </Button>
               <Button
                 variant={"outline"}
                 className="py-5 px-6 flex items-center gap-3 shadow-none border-none"
               >
                 <FaShareAlt style={{ width: 20, height: 20 }} />
-                Share
+                Chia sẻ
               </Button>
             </div>
             <hr className="border-black my-3" />
@@ -152,9 +152,7 @@ const ProductDetailPage = () => {
                 className="border-black"
               >
                 <AccordionTrigger>
-                  <h2 className="text-3xl font-extrabold">
-                    Product Description
-                  </h2>
+                  <h2 className="text-3xl font-extrabold">Mô tả sản phẩm</h2>
                 </AccordionTrigger>
                 <AccordionContent>
                   <hr className="border-black my-2" />

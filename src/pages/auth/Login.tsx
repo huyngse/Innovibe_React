@@ -39,10 +39,12 @@ const LoginPage = () => {
         />
       </div>
       <div className="col-span-12 md:col-span-8 lg:col-span-6 flex flex-col items-center gap-5 max-h-[100vh] overflow-auto py-20 lg:px-40 px-20">
-        <img src={logo2} alt="" />
+        <Link to={"/"}>
+          <img src={logo2} alt="" />
+        </Link>
         <div className="text-center">
-          <h2 className="text-4xl font-extrabold uppercase">Welcome</h2>
-          <p>Get the most from Innovibe</p>
+          <h2 className="text-4xl font-extrabold uppercase">Chào mừng</h2>
+          <p>Khai thác tối đa từ Innovibe</p>
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSubmit)} className="w-full">
@@ -69,7 +71,7 @@ const LoginPage = () => {
                 <FormItem className="mt-5">
                   <FormLabel className="hidden">Password</FormLabel>
                   <PasswordInput
-                    placeholder="Password"
+                    placeholder="Mật khẩu"
                     className="py-6"
                     {...field}
                   />
@@ -81,10 +83,10 @@ const LoginPage = () => {
               to="/recover-password"
               className="text-gray-500 text-xs flex justify-center my-3 text-center w-full"
             >
-              Forgot password?
+              Quên mật khẩu?
             </Link>
             <Button className="rounded-full w-full px-5 py-6" type="submit">
-              Sign In
+              Đăng nhập
             </Button>
           </form>
         </Form>
@@ -99,7 +101,12 @@ const LoginPage = () => {
             <FaApple />
           </Button>
         </div>
-        <p className="text-xs">Don’t have a Innovibe account? <Link to={"/sign-up"} className="underline">Sign up</Link></p>
+        <p className="text-xs">
+          Bạn chưa có tài khoản Innovibe?{" "}
+          <Link to={"/sign-up"} className="underline">
+            Đăng ký
+          </Link>
+        </p>
       </div>
     </div>
   );
