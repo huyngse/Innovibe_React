@@ -44,13 +44,13 @@ const data = [
     status: "Available",
     price: 10_000_000,
     image: toolImage9,
-  }
+  },
 ];
 const RecentlyViewed = () => {
   return (
     <div className="py-5">
       <h1 className="text-3xl font-extrabold uppercase text-center py-3">
-        Recently Viewed
+        Đã xem gần đây
       </h1>
       <div className="grid grid-cols-5">
         {data.map((product: any, index: number) => {

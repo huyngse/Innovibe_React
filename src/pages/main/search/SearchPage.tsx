@@ -34,7 +34,7 @@ const SearchPage = () => {
       <Breadcrumb
         items={[
           { label: "Home", href: "/" },
-          { label: "Search", href: "/search" },
+          { label: "Tìm kiếm", href: "/search" },
         ]}
       />
       <MaxWidthWrapper className="pb-10">
@@ -43,7 +43,7 @@ const SearchPage = () => {
             <Accordion type="single" collapsible defaultValue="category">
               <AccordionItem value="category" className="border-none">
                 <AccordionTrigger className="uppercase font-semibold">
-                  Categories
+                  Danh mục
                 </AccordionTrigger>
                 {categoriesData.map((category: any, index: number) => {
                   return (
@@ -58,7 +58,7 @@ const SearchPage = () => {
               <hr className="border-black" />
               <AccordionItem value="brand" className="border-none">
                 <AccordionTrigger className="uppercase font-semibold">
-                  Brands
+                  Thương hiệu
                 </AccordionTrigger>
                 {brandData.map((brand: any, index: number) => {
                   return (
@@ -73,22 +73,22 @@ const SearchPage = () => {
               <hr className="border-black" />
               <AccordionItem value="condition" className="border-none">
                 <AccordionTrigger className="uppercase font-semibold">
-                  Condition
+                  Tình trạng
                 </AccordionTrigger>
                 <AccordionContent>
-                  <Link to={`/search?condition=Very Good`}>Very Good</Link>
+                  <Link to={`/search?condition=Very Good`}>Rất tốt</Link>
                 </AccordionContent>
                 <AccordionContent>
-                  <Link to={`/search?condition=Excellent`}>Excellent</Link>
+                  <Link to={`/search?condition=Excellent`}>Tuyệt vời</Link>
                 </AccordionContent>
                 <AccordionContent>
-                  <Link to={`/search?condition=Brand New`}>Brand New</Link>
+                  <Link to={`/search?condition=Brand New`}>Hàng mới</Link>
                 </AccordionContent>
               </AccordionItem>
               <hr className="border-black" />
               <AccordionItem value="price" className="border-none">
                 <AccordionTrigger className="uppercase font-semibold">
-                  Price
+                  Giá
                 </AccordionTrigger>
                 <AccordionContent>
                   <Link to="/search?maxPrice=1000000">&lt; 1,000,000₫</Link>
@@ -121,38 +121,42 @@ const SearchPage = () => {
             </h1>
             <hr className="border-black mb-3" />
             <div className="flex gap-5">
-              <p className="font-semibold p-1">Page 1 | 1-50 of 500</p>
+              <p className="font-semibold p-1">Trang 1 | 1-50 trong 500</p>
               <DropdownMenu>
                 <DropdownMenuTrigger className="p-1 flex items-center gap-1 font-semibold">
-                  Most Relevant <IoIosArrowDown />
+                  Liên quan nhất <IoIosArrowDown />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <Link to={"/search?sortBy=Most Relevant"}>
-                    <DropdownMenuItem>Most Relevant</DropdownMenuItem>
+                    <DropdownMenuItem>Liên quan nhất</DropdownMenuItem>
                   </Link>
                   <Link to={"/search?sortBy=Featured"}>
-                    <DropdownMenuItem>Featured</DropdownMenuItem>
+                    <DropdownMenuItem>Nổi bật</DropdownMenuItem>
                   </Link>
                   <Link to={"/search?sortBy=Best Selling"}>
-                    <DropdownMenuItem>Best Selling</DropdownMenuItem>
+                    <DropdownMenuItem>Bán chạy nhất</DropdownMenuItem>
                   </Link>
                   <Link to={"/search?sortBy=Alphabetically"}>
-                    <DropdownMenuItem>Alphabetically, A-Z</DropdownMenuItem>
+                    <DropdownMenuItem>
+                      Thứ tự chữ cái, A-Z
+                    </DropdownMenuItem>
                   </Link>
                   <Link to={"/search?sortBy=Alphabetically Desc"}>
-                    <DropdownMenuItem>Alphabetically, Z-A</DropdownMenuItem>
+                    <DropdownMenuItem>
+                      Thứ tự chữ cái, Z-A
+                    </DropdownMenuItem>
                   </Link>
                   <Link to={"/search?sortBy=Price"}>
-                    <DropdownMenuItem>Price, Low to High</DropdownMenuItem>
+                    <DropdownMenuItem>Giá, thấp đến cao</DropdownMenuItem>
                   </Link>
                   <Link to={"/search?sortBy=Price Desc"}>
-                    <DropdownMenuItem>Price, High to Low</DropdownMenuItem>
+                    <DropdownMenuItem>Giá, Cao đến Thấp</DropdownMenuItem>
                   </Link>
                   <Link to={"/search?sortBy=Date"}>
-                    <DropdownMenuItem>Date, Old To New</DropdownMenuItem>
+                    <DropdownMenuItem>Ngày, Cũ Đến Mới</DropdownMenuItem>
                   </Link>
                   <Link to={"/search?sortBy=Date Desc"}>
-                    <DropdownMenuItem>Date, New To Old</DropdownMenuItem>
+                    <DropdownMenuItem>Ngày, Mới Đến Cũ</DropdownMenuItem>
                   </Link>
                 </DropdownMenuContent>
               </DropdownMenu>
