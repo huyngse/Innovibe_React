@@ -9,6 +9,7 @@ type chatbotState = {
    isLoading: boolean,
    resultData: string,
    onSent: (input: string) => void,
+   newChat: () => void,
 }
 function generateUniqueId() {
    const timestamp = Date.now();
@@ -81,6 +82,12 @@ const useChatbotStore = create<chatbotState>((set) => ({
          }
       }, 1000);
    },
+   newChat: () => {
+      set({
+         currentPrompt: undefined,
+         showResult: false
+      })
+   }
 }));
 
 export default useChatbotStore;

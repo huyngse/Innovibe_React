@@ -1,4 +1,4 @@
-import ChatLayout from "@/layouts/ChatLayout";
+import ChatLayout from "@/layouts/chat-layout";
 import NewChatPage from "@/pages/chat/new-chat-page";
 import { Route, Routes } from "react-router-dom";
 

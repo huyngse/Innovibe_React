@@ -12,6 +12,8 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { NavRecents } from "./nav-recents";
+import { useNavigate } from "react-router-dom";
+import useChatbotStore from "@/stores/useChatbotStore";
 
 const data = {
   user: {
@@ -38,6 +40,8 @@ const data = {
 export function ChatSidebar({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
+  const navigate = useNavigate();
+  const newChat = useChatbotStore((state) => state.newChat);
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -58,11 +62,16 @@ export function ChatSidebar({
         <SidebarGroup>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild className="bg-zinc-100 py-5" tooltip={"Trò chuyện mới"}>
-                <a href={"#"}>
-                  <Plus />
-                  <span>Trò chuyện mới</span>
-                </a>
+              <SidebarMenuButton
+                className="bg-zinc-100 hover:bg-zinc-200 py-5"
+                tooltip={"Trò chuyện mới"}
+                onClick={() => {
+                  navigate("/chat");
+                  newChat();
+                }}
+              >
+                <Plus />
+                <span>Trò chuyện mới</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>

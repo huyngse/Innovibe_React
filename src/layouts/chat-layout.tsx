@@ -1,4 +1,4 @@
-import { ChatSidebar } from "@/components/chat/ChatSidebar";
+import { ChatSidebar } from "@/components/chat/chat-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
