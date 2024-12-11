@@ -10,48 +10,19 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import useChatbotStore from "@/stores/useChatbotStore";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Guitar,
-  HandMetal,
-  ListMusic,
-  Music,
-  SendHorizontal,
-} from "lucide-react";
+import { SendHorizontal } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+import ChatSkeleton from "./chat-skeleton";
+import ChatSuggestion from "./chat-suggestion";
+import ChatAvatar from "./chat-avatar";
 
 const formSchema = z.object({
   inputPrompt: z
     .string()
-    .min(2, "Vui lòng nhập ít nhất 2 ký tự")
+    .min(8, "Vui lòng nhập ít nhất 8 ký tự")
     .max(1000, "Vui lòng không nhập quá 1000 ký tự"),
 });
-
-const suggestedQuestions = [
-  {
-    id: 1,
-    question: "Tôi nên bắt đầu với những hợp âm cơ bản nào?",
-    icon: Music,
-  },
-  {
-    id: 2,
-    question: "Làm thế nào để tôi có thể cải thiện sự khéo léo của ngón tay?",
-    icon: HandMetal,
-  },
-  {
-    id: 3,
-    question: "Kỹ thuật khảy đàn hiệu quả là gì?",
-    icon: Guitar,
-  },
-  {
-    id: 4,
-    question: "Tôi có thể đọc tab guitar và bản nhạc như thế nào?",
-    icon: ListMusic,
-  },
-];
 
 const NewChatPage = () => {
   const chatbotStore = useChatbotStore((state) => state);
@@ -70,73 +41,60 @@ const NewChatPage = () => {
       {chatbotStore.showResult ? (
         <div>
           <div className="flex flex-col gap-5">
-            <div className="flex justify-end">
-              <div className="bg-orange-600 text-white p-3 w-3/4 rounded-lg">
-                <ReactMarkdown>{chatbotStore.currentPrompt}</ReactMarkdown>
-              </div>
-            </div>
-
+            {chatbotStore.currentPrompt?.chats.map((chat, index: number) => {
+              const isLatestReponse =
+                index + 1 == (chatbotStore.currentPrompt?.chats.length ?? 1);
+              if (chat.type == "request") {
+                return (
+                  <div className="flex justify-end" key={index}>
+                    <div className="bg-orange-600 text-white p-3 w-3/4 rounded-lg">
+                      <ReactMarkdown>{chat.message}</ReactMarkdown>
+                    </div>
+                  </div>
+                );
+              } else {
+                return (
+                  <div key={index}>
+                    <ChatAvatar
+                      name="Trợ Lí"
+                      badge="Gemini"
+                      src="./electric-guitar.png"
+                    />
+                    <div className="flex justify-start">
+                      <div className="bg-zinc-50 p-3 rounded-lg w-full">
+                        <ReactMarkdown className={"whitespace-pre-wrap"}>
+                          {isLatestReponse
+                            ? chatbotStore.resultData
+                            : chat.message}
+                        </ReactMarkdown>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+            })}
+          </div>
+          {chatbotStore.isLoading && (
             <div>
-              <div className="flex gap-3 items-center mb-2">
-                <Avatar className="w-8 h-8">
-                  <AvatarImage src="./electric-guitar.png" alt="" />
-                  <AvatarFallback>TL</AvatarFallback>
-                </Avatar>
-                <p className="font-semibold">
-                  Trợ lí{" "}
-                  <Badge
-                    variant="default"
-                    className="ms-1 bg-orange-100 hover:bg-orange-50 text-orange-500 border-orange-500"
-                  >
-                    Gemini
-                  </Badge>
-                </p>
-              </div>
+              <ChatAvatar
+                name="Trợ Lí"
+                badge="Gemini"
+                src="./electric-guitar.png"
+              />
               <div className="flex justify-start">
                 <div className="bg-zinc-50 p-3 rounded-lg w-full">
-                  {chatbotStore.isLoading ? (
-                    <div className="flex flex-col gap-5">
-                      <Skeleton className="w-full h-[20px] rounded-full" />
-                      <Skeleton className="w-full h-[20px] rounded-full" />
-                      <Skeleton className="w-full h-[20px] rounded-full" />
-                      <Skeleton className="w-full h-[20px] rounded-full" />
-                      <Skeleton className="w-[100px] h-[20px] rounded-full" />
-                    </div>
-                  ) : (
-                    <ReactMarkdown className={"whitespace-pre-wrap"}>
-                      {chatbotStore.resultData}
-                    </ReactMarkdown>
-                  )}
+                  <ChatSkeleton />
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       ) : (
-        <div>
-          <h2 className="font-bold text-5xl mt-20">Xin chào bạn.</h2>
-          <p className="font-semibold text-5xl text-gray-400">
-            Hôm nay tôi có thể giúp gì cho bạn?
-          </p>
-          <div className="grid grid-cols-12 gap-5 my-10">
-            {suggestedQuestions.map((question, index) => {
-              return (
-                <button
-                  key={index}
-                  className="col-span-6 h-16 text-start bg-zinc-100 hover:bg-zinc-200 duration-100 rounded-lg p-3 flex items-center gap-3 text-gray-500"
-                  onClick={() => {
-                    form.setValue("inputPrompt", question.question);
-                  }}
-                >
-                  <div className="rounded-full bg-zinc-100 p-2">
-                    <question.icon className="w-4 h-4" />
-                  </div>
-                  {question.question}
-                </button>
-              );
-            })}
-          </div>
-        </div>
+        <ChatSuggestion
+          onSuggest={(value) => {
+            form.setValue("inputPrompt", value);
+          }}
+        />
       )}
       <div className="absolute bottom-0 w-full left-0 px-10 py-3 bg-white drop-shadow">
         <Form {...form}>
