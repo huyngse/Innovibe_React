@@ -1,12 +1,13 @@
 import ChatLayout from "@/layouts/chat-layout";
-import NewChatPage from "@/pages/chat/new-chat-page";
+import ChatPage from "@/pages/chat/chat-page";
 import { Route, Routes } from "react-router-dom";
 
 const ChatContainer = () => {
   return (
     <ChatLayout>
       <Routes>
-        <Route path="/" element={<NewChatPage />} />
+        <Route path="/" element={<ChatPage />} />
+        <Route path="/:chatId" element={<ChatPage />} />
       </Routes>
     </ChatLayout>
   );

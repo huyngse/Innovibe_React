@@ -10,6 +10,7 @@ type chatbotState = {
    resultData: string,
    onSent: (input: string) => void,
    newChat: () => void,
+   loadChat: (chatId: string) => boolean
 }
 function generateUniqueId() {
    const timestamp = Date.now();
@@ -112,6 +113,22 @@ const useChatbotStore = create<chatbotState>((set) => ({
          currentPrompt: undefined,
          showResult: false
       })
+   },
+   loadChat: (chatId) => {
+      let result = false;
+      set((prev) => {
+         const existingPrompt = prev.previousPrompts.find(prompt => prompt.id == chatId);
+         console.log("Load chat: ", existingPrompt);
+         if (existingPrompt != null) {
+            result = true;
+            return {
+               currentPrompt: existingPrompt,
+               showResult: true
+            }
+         }
+         return prev;
+      })
+      return result;
    }
 }));
 

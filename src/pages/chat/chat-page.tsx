@@ -16,6 +16,8 @@ import { z } from "zod";
 import ChatSkeleton from "./chat-skeleton";
 import ChatSuggestion from "./chat-suggestion";
 import ChatAvatar from "./chat-avatar";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   inputPrompt: z
@@ -24,7 +26,8 @@ const formSchema = z.object({
     .max(1000, "Vui lòng không nhập quá 1000 ký tự"),
 });
 
-const NewChatPage = () => {
+const ChatPage = () => {
+  const { chatId } = useParams();
   const chatbotStore = useChatbotStore((state) => state);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -36,6 +39,14 @@ const NewChatPage = () => {
     chatbotStore.onSent(values.inputPrompt);
     form.reset();
   }
+  useEffect(() => {
+    if (chatId == null) {
+      chatbotStore.newChat();
+    } else {
+      chatbotStore.loadChat(chatId);
+    }
+  }, [chatId]);
+
   return (
     <div className="px-10 mb-28 pb-5 flex-1 overflow-auto rounded-scrollbar">
       {chatbotStore.showResult ? (
@@ -149,4 +160,4 @@ const NewChatPage = () => {
   );
 };
 
-export default NewChatPage;
+export default ChatPage;

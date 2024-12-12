@@ -1,8 +1,4 @@
-import {
-  MoreHorizontal,
-  Trash2,
-  MessageSquare,
-} from "lucide-react";
+import { MoreHorizontal, Trash2, MessageSquare } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -20,21 +16,26 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import useChatbotStore from "@/stores/use-chatbot-store";
+import { useNavigate } from "react-router-dom";
 
 export function NavRecents() {
   const { isMobile } = useSidebar();
-  const previousPrompts = useChatbotStore(state => state.previousPrompts);
+  const previousPrompts = useChatbotStore((state) => state.previousPrompts);
+  const navigate = useNavigate();
   const items = previousPrompts.map((prompt) => ({
     id: prompt.id,
-    name: prompt.title
-  }))
+    name: prompt.title,
+  }));
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Gần đây</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
-          <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton tooltip={item.name}>
+          <SidebarMenuItem key={item.id}>
+            <SidebarMenuButton
+              tooltip={item.name}
+              onClick={() => navigate(`/chat/${item.id}`)}
+            >
               <MessageSquare />
               <span>{item.name}</span>
             </SidebarMenuButton>
