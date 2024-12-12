@@ -13,29 +13,7 @@ import {
 } from "@/components/ui/sidebar";
 import { NavRecents } from "./nav-recents";
 import { useNavigate } from "react-router-dom";
-import useChatbotStore from "@/stores/useChatbotStore";
-
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  recents: [
-    {
-      name: "Design Engineering",
-      url: "#",
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-    },
-    {
-      name: "Travel",
-      url: "#",
-    },
-  ],
-};
+import useChatbotStore from "@/stores/use-chatbot-store";
 
 export function ChatSidebar({
   ...props
@@ -76,7 +54,7 @@ export function ChatSidebar({
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
-        <NavRecents items={data.recents} />
+        <NavRecents />
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>

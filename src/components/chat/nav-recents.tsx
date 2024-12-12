@@ -1,6 +1,4 @@
 import {
-  Folder,
-  Forward,
   MoreHorizontal,
   Trash2,
   MessageSquare,
@@ -10,7 +8,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
@@ -22,34 +19,30 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import useChatbotStore from "@/stores/use-chatbot-store";
 
-export function NavRecents({
-  items,
-}: {
-  items: {
-    name: string;
-    url: string;
-  }[];
-}) {
+export function NavRecents() {
   const { isMobile } = useSidebar();
-
+  const previousPrompts = useChatbotStore(state => state.previousPrompts);
+  const items = previousPrompts.map((prompt) => ({
+    id: prompt.id,
+    name: prompt.title
+  }))
   return (
-    <SidebarGroup >
+    <SidebarGroup>
       <SidebarGroupLabel>Gần đây</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton asChild tooltip={item.name}>
-              <a href={item.url}>
-                <MessageSquare />
-                <span>{item.name}</span>
-              </a>
+            <SidebarMenuButton tooltip={item.name}>
+              <MessageSquare />
+              <span>{item.name}</span>
             </SidebarMenuButton>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuAction showOnHover>
                   <MoreHorizontal />
-                  <span className="sr-only">More</span>
+                  <span className="sr-only">Thêm</span>
                 </SidebarMenuAction>
               </DropdownMenuTrigger>
               <DropdownMenuContent
@@ -58,17 +51,8 @@ export function NavRecents({
                 align={isMobile ? "end" : "start"}
               >
                 <DropdownMenuItem>
-                  <Folder className="text-muted-foreground" />
-                  <span>View Project</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Forward className="text-muted-foreground" />
-                  <span>Share Project</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
                   <Trash2 className="text-muted-foreground" />
-                  <span>Delete Project</span>
+                  <span>Xóa trò chuyện này</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

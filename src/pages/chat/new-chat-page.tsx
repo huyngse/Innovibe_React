@@ -8,7 +8,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import useChatbotStore from "@/stores/useChatbotStore";
+import useChatbotStore from "@/stores/use-chatbot-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SendHorizontal } from "lucide-react";
 import { useForm } from "react-hook-form";

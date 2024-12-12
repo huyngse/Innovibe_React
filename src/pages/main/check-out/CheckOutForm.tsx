@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
-import useProvinceStore from "@/stores/useProvinceStore";
+import useProvinceStore from "@/stores/use-province-store";
 import {
   Select,
   SelectContent,
