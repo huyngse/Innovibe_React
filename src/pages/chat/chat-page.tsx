@@ -17,7 +17,7 @@ import ChatSkeleton from "./chat-skeleton";
 import ChatSuggestion from "./chat-suggestion";
 import ChatAvatar from "./chat-avatar";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const formSchema = z.object({
   inputPrompt: z
@@ -29,6 +29,7 @@ const formSchema = z.object({
 const ChatPage = () => {
   const { chatId } = useParams();
   const chatbotStore = useChatbotStore((state) => state);
+  const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,6 +47,12 @@ const ChatPage = () => {
       chatbotStore.loadChat(chatId);
     }
   }, [chatId]);
+
+  useEffect(() => {
+    if (endOfMessagesRef.current) {
+      endOfMessagesRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [chatbotStore.currentPrompt, chatbotStore.resultData]);
 
   return (
     <div className="px-10 mb-28 pb-5 flex-1 overflow-auto rounded-scrollbar">
@@ -69,7 +76,7 @@ const ChatPage = () => {
                     <ChatAvatar
                       name="Trợ Lí"
                       badge="Gemini"
-                      src="./electric-guitar.png"
+                      src="/electric-guitar.png"
                     />
                     <div className="flex justify-start">
                       <div className="bg-zinc-50 p-3 rounded-lg w-full">
@@ -90,7 +97,7 @@ const ChatPage = () => {
               <ChatAvatar
                 name="Trợ Lí"
                 badge="Gemini"
-                src="./electric-guitar.png"
+                src="/electric-guitar.png"
               />
               <div className="flex justify-start">
                 <div className="bg-zinc-50 p-3 rounded-lg w-full">
@@ -156,6 +163,7 @@ const ChatPage = () => {
           lại phản hồi của nó.
         </p>
       </div>
+      <div ref={endOfMessagesRef} />
     </div>
   );
 };
