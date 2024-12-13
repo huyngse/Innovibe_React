@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 export function NavRecents() {
   const { isMobile } = useSidebar();
   const previousPrompts = useChatbotStore((state) => state.previousPrompts);
+  const deleteChat = useChatbotStore((state) => state.deleteChat);
   const navigate = useNavigate();
   const items = previousPrompts.map((prompt) => ({
     id: prompt.id,
@@ -51,7 +52,11 @@ export function NavRecents() {
                 side={isMobile ? "bottom" : "right"}
                 align={isMobile ? "end" : "start"}
               >
-                <DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => {
+                    deleteChat(item.id);
+                  }}
+                >
                   <Trash2 className="text-muted-foreground" />
                   <span>Xóa trò chuyện này</span>
                 </DropdownMenuItem>
