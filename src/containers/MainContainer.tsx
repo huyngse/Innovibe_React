@@ -15,6 +15,9 @@ import ChatButton from "@/components/ChatButton";
 import ProductDetailPage from "@/pages/main/product-detail/ProductDetailPage";
 import ViewCartPage from "@/pages/main/cart/ViewCartPage";
 import CheckOutPage from "@/pages/main/check-out/CheckOutPage";
+import AcousticTunerPage from "@/pages/main/tunner/acoustic-tuner-page";
+import BassTunerPage from "@/pages/main/tunner/bass-tuner-page";
+import ElectricTunerPage from "@/pages/main/tunner/electric-tuner-page";
 
 const MainContainer = () => {
   return (
@@ -33,6 +36,9 @@ const MainContainer = () => {
             <Route path="/cart" element={<ViewCartPage />} />
             <Route path="/check-out" element={<CheckOutPage />} />
             <Route path="/product/:productId" element={<ProductDetailPage />} />
+            <Route path="/acoustic-tuner" element={<AcousticTunerPage />} />
+            <Route path="/bass-tuner" element={<BassTunerPage />} />
+            <Route path="/electric-tuner" element={<ElectricTunerPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
