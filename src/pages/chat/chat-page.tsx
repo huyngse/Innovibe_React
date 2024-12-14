@@ -40,6 +40,11 @@ const ChatPage = () => {
     chatbotStore.onSent(values.inputPrompt);
     form.reset();
   }
+
+  useEffect(() => {
+    chatbotStore.loadChatFromStorage();
+  }, []);
+
   useEffect(() => {
     if (chatId == null) {
       chatbotStore.newChat();
@@ -47,7 +52,6 @@ const ChatPage = () => {
       chatbotStore.loadChat(chatId);
     }
   }, [chatId]);
-
   useEffect(() => {
     if (endOfMessagesRef.current) {
       endOfMessagesRef.current.scrollIntoView({ behavior: "smooth" });

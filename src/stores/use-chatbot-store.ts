@@ -11,7 +11,9 @@ type chatbotState = {
    onSent: (input: string) => void,
    newChat: () => void,
    loadChat: (chatId: string) => boolean,
-   deleteChat: (chatId: string) => void
+   deleteChat: (chatId: string) => void,
+   loadChatFromStorage: () => void,
+   saveChatToStorage: () => void,
 }
 function generateUniqueId() {
    const timestamp = Date.now();
@@ -106,6 +108,10 @@ const useChatbotStore = create<chatbotState>((set) => ({
                }
             }
             return prev;
+         });
+         set(prev => {
+            localStorage.setItem("previousPrompts", JSON.stringify(prev.previousPrompts));
+            return prev;
          })
       }, 1000);
    },
@@ -123,6 +129,7 @@ const useChatbotStore = create<chatbotState>((set) => ({
             result = true;
             return {
                currentPrompt: existingPrompt,
+               resultData: existingPrompt.chats[existingPrompt.chats.length - 1].message,
                showResult: true
             }
          }
@@ -145,6 +152,29 @@ const useChatbotStore = create<chatbotState>((set) => ({
             previousPrompts: prev.previousPrompts.filter((prompt) => prompt.id != chatId)
          };
       });
+      set(prev => {
+         localStorage.setItem("previousPrompts", JSON.stringify(prev.previousPrompts));
+         return prev;
+      })
+   },
+   loadChatFromStorage: () => {
+      const data = localStorage.getItem("previousPrompts");
+      if (data != null) {
+         const parsedData: Chat[] = JSON.parse(data);
+         set({
+            previousPrompts: parsedData
+         });
+      } else {
+         set({
+            previousPrompts: []
+         })
+      }
+   },
+   saveChatToStorage: () => {
+      set(prev => {
+         localStorage.setItem("previousPrompts", JSON.stringify(prev.previousPrompts));
+         return prev;
+      })
    }
 }));
 
