@@ -14,7 +14,7 @@ const AcousticTunerPage = () => {
       />
       <MaxWidthWrapper className="py-5">
         <h1 className="text-3xl font-extrabold uppercase">
-          Online Electric Guitar Tuner
+          Online Acoustic Guitar Tuner
         </h1>
         <p className="font-semibold pb-10">
           Chạm vào nốt nhạc, lên dây đàn theo đúng âm điệu.
