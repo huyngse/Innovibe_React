@@ -2,8 +2,13 @@ import Breadcrumb from "@/components/shared/Breadcrumb";
 import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
 import guitarImage from "@/assets/imgs/tuner-bass-lg.png";
 import ToolsPanel from "./tools-panel";
+import useMicrophone from "@/hooks/use-microphone";
+import Meter from "./meter";
+import { Button } from "@/components/ui/button";
 
 const BassTunerPage = () => {
+  const { volume, getMicrophoneAccess, removeMicrophoneAccess } =
+    useMicrophone();
   return (
     <div>
       <Breadcrumb
@@ -27,6 +32,19 @@ const BassTunerPage = () => {
           </div>
           <div className="col-span-6">
             <ToolsPanel />
+          </div>
+        </div>
+        <div className="flex flex-col items-center py-20">
+          <Meter value={volume} />
+          <h5 className="font-extrabold uppercase text-3xl py-5">Tuner</h5>
+          <div className="flex gap-5 py-5">
+            <Button
+              variant={"destructive"}
+              onClick={() => removeMicrophoneAccess()}
+            >
+              Stop
+            </Button>
+            <Button onClick={() => getMicrophoneAccess()}>Start</Button>
           </div>
         </div>
       </MaxWidthWrapper>

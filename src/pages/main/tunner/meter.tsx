@@ -19,7 +19,7 @@ const Meter = ({ value }: { value: number }) => {
             />
           </div>
         </div>
-        <div className="absolute text-2xl left-1/2 -translate-x-1/2 top-10 text-zinc-500">A2</div>
+        <div className="absolute text-2xl left-1/2 -translate-x-1/2 top-10 text-zinc-500">A3</div>
         <div className="text-2xl flex justify-between absolute w-[320px] left-1/2 -translate-x-1/2">
           <p>G2#</p>
           <p>A3#</p>
