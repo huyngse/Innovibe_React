@@ -2,8 +2,75 @@ import Breadcrumb from "@/components/shared/Breadcrumb";
 import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
 import guitarImage from "@/assets/imgs/tuner-electric-lg.png";
 import ToolsPanel from "./tools-panel";
+import Meter from "./meter";
+import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const ElectricTunerPage = () => {
+  const [volume, setVolume] = useState(0);
+  const audioContextRef = useRef<any>(null);
+  const analyserRef = useRef<any>(null);
+  const microphoneRef = useRef<any>(null);
+  const animationIdRef = useRef<any>(null);
+  const streamRef = useRef<any>(null);
+  const getMicrophoneAccess = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: true,
+      });
+      streamRef.current = stream; // Store the stream reference
+      audioContextRef.current = new window.AudioContext();
+      microphoneRef.current =
+        audioContextRef.current.createMediaStreamSource(stream);
+      analyserRef.current = audioContextRef.current.createAnalyser();
+
+      microphoneRef.current.connect(analyserRef.current);
+      analyserRef.current.fftSize = 2048;
+
+      const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
+
+      const getVolume = () => {
+        analyserRef.current.getByteFrequencyData(dataArray);
+        const sum = dataArray.reduce((acc, val) => acc + val, 0);
+        const average = sum / dataArray.length;
+        setVolume(average);
+        animationIdRef.current = requestAnimationFrame(getVolume);
+      };
+      getVolume();
+    } catch (err) {
+      console.error("Error accessing microphone: ", err);
+    }
+  };
+  const removeMicrophoneAccess = () => {
+    if (animationIdRef.current) {
+      cancelAnimationFrame(animationIdRef.current);
+    }
+    if (microphoneRef.current) {
+      microphoneRef.current.disconnect();
+    }
+    if (analyserRef.current) {
+      console.log(analyserRef);
+    }
+    if (audioContextRef.current) {
+      audioContextRef.current.close();
+    }
+    if (microphoneRef.current) {
+      const tracks = microphoneRef.current.mediaStream.getTracks();
+      tracks.forEach((track: any) => track.stop());
+    }
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((track: any) => {
+        track.stop();
+      });
+    }
+    setVolume(0);
+  };
+  useEffect(() => {
+    getMicrophoneAccess();
+    return () => {
+      removeMicrophoneAccess();
+    };
+  }, []);
   return (
     <div>
       <Breadcrumb
@@ -27,6 +94,18 @@ const ElectricTunerPage = () => {
           </div>
           <div className="col-span-6">
             <ToolsPanel />
+          </div>
+        </div>
+        <div className="flex flex-col items-center py-20">
+          <Meter value={volume} />
+          <div className="flex gap-5 py-5">
+            <Button
+              variant={"destructive"}
+              onClick={() => removeMicrophoneAccess()}
+            >
+              Stop
+            </Button>
+            <Button onClick={() => getMicrophoneAccess()}>Start</Button>
           </div>
         </div>
       </MaxWidthWrapper>
