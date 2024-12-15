@@ -18,7 +18,7 @@ const ElectricTunerPage = () => {
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: true,
       });
-      streamRef.current = stream; // Store the stream reference
+      streamRef.current = stream;
       audioContextRef.current = new window.AudioContext();
       microphoneRef.current =
         audioContextRef.current.createMediaStreamSource(stream);
@@ -42,26 +42,23 @@ const ElectricTunerPage = () => {
     }
   };
   const removeMicrophoneAccess = () => {
+    // Cleanup function to stop audio context and cancel animation frame
     if (animationIdRef.current) {
       cancelAnimationFrame(animationIdRef.current);
+    }
+    if (analyserRef.current) {
+      analyserRef.current == null;
     }
     if (microphoneRef.current) {
       microphoneRef.current.disconnect();
     }
-    if (analyserRef.current) {
-      console.log(analyserRef);
-    }
     if (audioContextRef.current) {
       audioContextRef.current.close();
-    }
-    if (microphoneRef.current) {
-      const tracks = microphoneRef.current.mediaStream.getTracks();
-      tracks.forEach((track: any) => track.stop());
+      audioContextRef.current = null;
     }
     if (streamRef.current) {
-      streamRef.current.getTracks().forEach((track: any) => {
-        track.stop();
-      });
+      // streamRef.current.getTracks()[0].stop();
+      streamRef.current.getTracks().forEach((track: any) => track.stop());
     }
     setVolume(0);
   };
