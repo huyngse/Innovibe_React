@@ -7,8 +7,11 @@ const Meter = ({ value }: { value: number }) => {
     <div className="pb-20">
       <div className="relative">
         <img src={tunerClockImage} />
-        <div className="absolute -bottom-16 left-1/2 -translate-x-1/2">
-          <div className="relative p-3 duration-100" style={{ rotate: `${rotation}deg` }}>
+        <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 z-50">
+          <div
+            className="relative p-3 duration-100"
+            style={{ rotate: `${rotation}deg` }}
+          >
             <img
               src={tunerHandImage}
               alt=""
@@ -16,7 +19,12 @@ const Meter = ({ value }: { value: number }) => {
             />
           </div>
         </div>
-        <div className="absolute top-24 left-1/2 -translate-x-1/2">
+        <div className="absolute text-2xl left-1/2 -translate-x-1/2 top-10 text-zinc-500">A2</div>
+        <div className="text-2xl flex justify-between absolute w-[320px] left-1/2 -translate-x-1/2">
+          <p>G2#</p>
+          <p>A3#</p>
+        </div>
+        <div className="absolute top-24 left-1/2 -translate-x-1/2 z-10">
           <h2 className="text-5xl text-zinc-500 font-semibold">
             {value.toFixed(2)}
           </h2>

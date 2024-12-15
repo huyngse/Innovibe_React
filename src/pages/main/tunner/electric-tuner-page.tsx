@@ -57,7 +57,6 @@ const ElectricTunerPage = () => {
       audioContextRef.current = null;
     }
     if (streamRef.current) {
-      // streamRef.current.getTracks()[0].stop();
       streamRef.current.getTracks().forEach((track: any) => track.stop());
     }
     setVolume(0);
@@ -95,6 +94,7 @@ const ElectricTunerPage = () => {
         </div>
         <div className="flex flex-col items-center py-20">
           <Meter value={volume} />
+          <h5 className="font-extrabold uppercase text-3xl py-5">Tuner</h5>
           <div className="flex gap-5 py-5">
             <Button
               variant={"destructive"}
