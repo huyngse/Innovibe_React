@@ -25,9 +25,51 @@ const BassTunerPage = () => {
           Chạm vào nốt nhạc, lên dây đàn theo đúng âm điệu.
         </p>
         <div className="grid grid-cols-12 gap-5">
-          <div className="col-span-6 flex justify-center">
-            <div className="w-[300px]">
-              <img src={guitarImage} alt="" className="w-full" />
+          <div className="col-span-6 relative">
+            <div className="absolute top-[88px] left-12">
+              <div className="flex flex-col gap-[46px]">
+                <div className="flex items-center">
+                  <Button
+                    className="shadow-lg rounded-full aspect-square flex justify-center items-center size-10"
+                    variant={"outline"}
+                  >
+                    <span className="text-lg font-bold text-orange-600">G</span>
+                  </Button>
+                  <div className="h-px border border-black w-[113px]" />
+                </div>
+                <div className="flex items-center">
+                  <Button
+                    className="shadow-lg rounded-full aspect-square flex justify-center items-center size-10"
+                    variant={"outline"}
+                  >
+                    <span className="text-lg font-bold text-orange-600">D</span>
+                  </Button>
+                  <div className="h-px border border-black w-[90px]" />
+                </div>
+                <div className="flex items-center">
+                  <Button
+                    className="shadow-lg rounded-full aspect-square flex justify-center items-center size-10"
+                    variant={"outline"}
+                  >
+                    <span className="text-lg font-bold text-orange-600">A</span>
+                  </Button>
+                  <div className="h-px border border-black w-[90px]" />
+                </div>
+                <div className="flex items-center">
+                  <Button
+                    className="shadow-lg rounded-full aspect-square flex justify-center items-center size-10"
+                    variant={"outline"}
+                  >
+                    <span className="text-lg font-bold text-orange-600">E</span>
+                  </Button>
+                  <div className="h-px border border-black w-[80px]" />
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-center">
+              <div className="w-[300px]">
+                <img src={guitarImage} alt="" className="w-full" />
+              </div>
             </div>
           </div>
           <div className="col-span-6">
