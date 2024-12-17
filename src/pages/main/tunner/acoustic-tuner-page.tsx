@@ -7,7 +7,7 @@ import Meter from "./meter";
 import { Button } from "@/components/ui/button";
 
 const AcousticTunerPage = () => {
-  const { volume, getMicrophoneAccess, removeMicrophoneAccess } =
+  const { frequency, getMicrophoneAccess, removeMicrophoneAccess } =
     useMicrophone();
   return (
     <div>
@@ -99,7 +99,7 @@ const AcousticTunerPage = () => {
           </div>
         </div>
         <div className="flex flex-col items-center py-20">
-          <Meter value={volume} />
+          <Meter value={frequency} />
           <h5 className="font-extrabold uppercase text-3xl py-5">Tuner</h5>
           <div className="flex gap-5 py-5">
             <Button
