@@ -18,6 +18,7 @@ import CheckOutPage from "@/pages/main/check-out/CheckOutPage";
 import AcousticTunerPage from "@/pages/main/tunner/acoustic-tuner-page";
 import BassTunerPage from "@/pages/main/tunner/bass-tuner-page";
 import ElectricTunerPage from "@/pages/main/tunner/electric-tuner-page";
+import ProfileContainer from "./profile-container";
 
 const MainContainer = () => {
   return (
@@ -28,6 +29,7 @@ const MainContainer = () => {
         <Navbar />
         <div className="flex-1">
           <Routes>
+            <Route path="/profile/*" element={<ProfileContainer />} />
             <Route path="/tuner" element={<TunnerPage />} />
             <Route path="/blog" element={<BlogsPage />} />
             <Route path="/search" element={<SearchPage />} />
