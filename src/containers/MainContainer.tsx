@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
-import Header from "../components/shared/Header";
+import Header from "../components/shared/header/Header";
 import Footer from "../components/shared/Footer";
 import NotFound from "@/components/shared/NotFound";
 import ScrollToTop from "@/components/ScrollToTop";

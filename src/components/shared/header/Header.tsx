@@ -1,12 +1,12 @@
 import LogoImg from "@/assets/imgs/logo.png";
-import MaxWidthWrapper from "./MaxWidthWrapper";
+import MaxWidthWrapper from "../MaxWidthWrapper";
 import { Link, useNavigate } from "react-router-dom";
-import { IoMdPerson } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { Input } from "../ui/input";
-import ShoppingCartButton from "./ShoppingCartButton";
+import { Input } from "../../ui/input";
+import ShoppingCartButton from "../ShoppingCartButton";
+import ProfileMenu from "./profile-menu";
 
 const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -66,9 +66,7 @@ const Header = () => {
             </Link>
           </div>
           <div className="flex gap-4">
-            <button className="flex items-center">
-              <IoMdPerson className="h-5 w-5" />
-            </button>
+            <ProfileMenu />
             <ShoppingCartButton />
           </div>
         </div>
