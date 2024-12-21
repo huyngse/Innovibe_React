@@ -38,44 +38,44 @@ const ProfileMenu = () => {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <Link to={"/profile"}>
-            <DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
               <CircleUser />
               Hồ sơ
             </DropdownMenuItem>
           </Link>
           <Link to={"/profile/transaction-history"}>
-            <DropdownMenuItem>
+            <DropdownMenuItem  className="cursor-pointer">
               <Heart />
               Danh sách yêu thích
             </DropdownMenuItem>
           </Link>
           <Link to={"/profile/transaction-history"}>
-            <DropdownMenuItem>
+            <DropdownMenuItem  className="cursor-pointer">
               <ClipboardList />
               Đơn hàng
             </DropdownMenuItem>
           </Link>
           <Link to={"/profile/order-history"}>
-            <DropdownMenuItem>
+            <DropdownMenuItem  className="cursor-pointer">
               <History />
               Lịch sử giao dịch
             </DropdownMenuItem>
           </Link>
           <Link to={"/profile/order-history"}>
-            <DropdownMenuItem>
+            <DropdownMenuItem  className="cursor-pointer">
               <Bell />
               Thông báo
             </DropdownMenuItem>
           </Link>
           <Link to={"/profile/settings"}>
-            <DropdownMenuItem>
+            <DropdownMenuItem  className="cursor-pointer">
               <Settings />
               Cài đặt
             </DropdownMenuItem>
           </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-red-500" onClick={handleLogout}>
+        <DropdownMenuItem className="text-red-500 cursor-pointer" onClick={handleLogout}>
           <DoorOpen />
           Đăng xuất
         </DropdownMenuItem>
