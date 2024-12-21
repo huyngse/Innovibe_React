@@ -1,6 +1,8 @@
 const ProfilePage = () => {
   return (
-    <div>ProfilePage</div>
+    <div>
+      
+    </div>
   )
 }
 

@@ -1,5 +1,6 @@
 import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { cn } from "@/lib/utils";
 import {
   Bell,
   CircleUser,
@@ -10,7 +11,7 @@ import {
   Settings,
 } from "lucide-react";
 import { ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 const navItems = [
   {
     title: "Hồ sơ",
@@ -46,6 +47,7 @@ const navItems = [
 
 const ProfileLayout = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   return (
     <MaxWidthWrapper className="bg-zinc-100">
       <div className="grid grid-cols-12">
@@ -65,7 +67,11 @@ const ProfileLayout = ({ children }: { children: ReactNode }) => {
               return (
                 <li key={index}>
                   <button
-                    className="flex gap-3 p-3 w-full hover:bg-zinc-200 active:bg-zinc-300"
+                    className={cn(
+                      "flex gap-3 p-3 w-full hover:bg-zinc-200 active:bg-zinc-300",
+                      location.pathname == item.href &&
+                        "text-orange-600 font-semibold bg-orange-100 hover:bg-orange-100 active:bg-orange-200"
+                    )}
                     onClick={() => {
                       navigate(item.href);
                     }}
