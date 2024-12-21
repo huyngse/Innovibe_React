@@ -50,7 +50,7 @@ const ProfileLayout = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
   return (
     <MaxWidthWrapper className="bg-zinc-100">
-      <div className="grid grid-cols-12">
+      <div className="grid grid-cols-12 gap-3">
         <div className="col-span-3 py-5">
           <div className="mb-5 flex gap-3 items-center">
             <Avatar>
