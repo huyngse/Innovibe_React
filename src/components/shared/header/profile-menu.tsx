@@ -8,9 +8,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
+  Bell,
   CircleUser,
+  ClipboardList,
   DoorOpen,
-  HandCoins,
+  Heart,
   History,
   Settings,
 } from "lucide-react";
@@ -29,7 +31,10 @@ const ProfileMenu = () => {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>Tài khoản của tôi</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          <div>Tài khoản của tôi</div>
+          <p className="text-zinc-500 text-sm font-normal">customer@gmail.com</p>
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <Link to={"/profile"}>
@@ -40,14 +45,26 @@ const ProfileMenu = () => {
           </Link>
           <Link to={"/profile/transaction-history"}>
             <DropdownMenuItem>
-              <HandCoins />
-              Lịch sử giao dịch
+              <Heart />
+              Danh sách yêu thích
+            </DropdownMenuItem>
+          </Link>
+          <Link to={"/profile/transaction-history"}>
+            <DropdownMenuItem>
+              <ClipboardList />
+              Đơn hàng
             </DropdownMenuItem>
           </Link>
           <Link to={"/profile/order-history"}>
             <DropdownMenuItem>
               <History />
-              Lịch sử đơn đặt
+              Lịch sử giao dịch
+            </DropdownMenuItem>
+          </Link>
+          <Link to={"/profile/order-history"}>
+            <DropdownMenuItem>
+              <Bell />
+              Thông báo
             </DropdownMenuItem>
           </Link>
           <Link to={"/profile/settings"}>
