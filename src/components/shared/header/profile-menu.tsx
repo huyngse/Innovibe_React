@@ -18,7 +18,38 @@ import {
 } from "lucide-react";
 import { IoMdPerson } from "react-icons/io";
 import { Link } from "react-router-dom";
-
+const navItems = [
+  {
+    title: "Hồ sơ",
+    icon: CircleUser,
+    href: "/profile",
+  },
+  {
+    title: "Danh sách ưa thích",
+    icon: Heart,
+    href: "/profile/favourite",
+  },
+  {
+    title: "Đơn hàng",
+    icon: ClipboardList,
+    href: "/profile/order",
+  },
+  {
+    title: "Lịch sử giao dịch",
+    icon: History,
+    href: "/profile/transaction-history",
+  },
+  {
+    title: "Thông báo",
+    icon: Bell,
+    href: "/profile/notification",
+  },
+  {
+    title: "Cài đặt",
+    icon: Settings,
+    href: "/profile/settings",
+  },
+];
 const ProfileMenu = () => {
   const handleLogout = () => {
     console.log("Log out");
@@ -33,49 +64,28 @@ const ProfileMenu = () => {
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>
           <div>Tài khoản của tôi</div>
-          <p className="text-zinc-500 text-sm font-normal">customer@gmail.com</p>
+          <p className="text-zinc-500 text-sm font-normal">
+            customer@gmail.com
+          </p>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <Link to={"/profile"}>
-            <DropdownMenuItem className="cursor-pointer">
-              <CircleUser />
-              Hồ sơ
-            </DropdownMenuItem>
-          </Link>
-          <Link to={"/profile/transaction-history"}>
-            <DropdownMenuItem  className="cursor-pointer">
-              <Heart />
-              Danh sách yêu thích
-            </DropdownMenuItem>
-          </Link>
-          <Link to={"/profile/transaction-history"}>
-            <DropdownMenuItem  className="cursor-pointer">
-              <ClipboardList />
-              Đơn hàng
-            </DropdownMenuItem>
-          </Link>
-          <Link to={"/profile/order-history"}>
-            <DropdownMenuItem  className="cursor-pointer">
-              <History />
-              Lịch sử giao dịch
-            </DropdownMenuItem>
-          </Link>
-          <Link to={"/profile/order-history"}>
-            <DropdownMenuItem  className="cursor-pointer">
-              <Bell />
-              Thông báo
-            </DropdownMenuItem>
-          </Link>
-          <Link to={"/profile/settings"}>
-            <DropdownMenuItem  className="cursor-pointer">
-              <Settings />
-              Cài đặt
-            </DropdownMenuItem>
-          </Link>
+          {navItems.map((item, index) => {
+            return (
+              <Link to={item.href} key={index}>
+                <DropdownMenuItem className="cursor-pointer">
+                  <item.icon />
+                  {item.title}
+                </DropdownMenuItem>
+              </Link>
+            );
+          })}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-red-500 cursor-pointer" onClick={handleLogout}>
+        <DropdownMenuItem
+          className="text-red-500 cursor-pointer"
+          onClick={handleLogout}
+        >
           <DoorOpen />
           Đăng xuất
         </DropdownMenuItem>
