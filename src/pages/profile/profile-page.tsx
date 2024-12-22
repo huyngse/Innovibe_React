@@ -11,6 +11,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { useDropzone } from "react-dropzone";
 import { Input } from "@/components/ui/input";
 const formSchema = z.object({
   email: z.string().email(),
@@ -22,6 +23,21 @@ const formSchema = z.object({
 });
 
 const ProfilePage = () => {
+  const maxFileSize = 1 * 1024 * 1024; // 1MB
+
+  const onDrop = (acceptedFiles: File[]) => {
+    console.log(acceptedFiles);
+  };
+
+  const { getRootProps, getInputProps, isDragActive, isDragReject } =
+    useDropzone({
+      onDrop,
+      accept: {
+        "image/jpeg": [".jpg", ".jpeg"],
+        "image/png": [".png"],
+      },
+      maxSize: maxFileSize,
+    });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,7 +56,7 @@ const ProfilePage = () => {
         <h1 className="text-xl font-semibold">Hồ sơ của tôi</h1>
         <p className="text-sm text-zinc-500">Quản lý thông tin hồ sơ</p>
         <hr className="my-3" />
-        <div className="grid grid-cols-12">
+        <div className="grid grid-cols-12 gap-5">
           <div className="col-span-8">
             <Form {...form}>
               <form
@@ -99,7 +115,7 @@ const ProfilePage = () => {
                       </FormControl>
                       <FormDescription>
                         Họ tên và số điện thoại sẽ được tự động điền vào đơn
-                        mua. Người dùng có thể chỉnh sửa.
+                        mua. Người dùng có thể chỉnh sửa khi mua hàng.
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -114,9 +130,29 @@ const ProfilePage = () => {
               </form>
             </Form>
           </div>
-          <div className="col-span-4">
+          <div className="col-span-4 py-5">
             <div className="flex justify-center">
-              <img src="" alt="" />
+              <img
+                src="https://github.com/shadcn.png"
+                alt=""
+                className="rounded-full size-36"
+              />
+            </div>
+            <p className="my-3 text-center font-semibold">
+              Cập nhật ảnh đại diện
+            </p>
+            <div className="border-dashed border-2 border-orange-500 text-orange-500 p-3 text-sm rounded-lg text-center cursor-pointer">
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                {isDragActive ? (
+                  <p>Thả các tập tin ở đây ...</p>
+                ) : isDragReject ? (
+                  <p style={{ color: "red" }}>File type not accepted</p>
+                ) : (
+                  <p>Kéo và thả một số tệp ở đây hoặc nhấp để chọn tệp</p>
+                )}
+              </div>
+              <p>Kích thước tập tin tối đa: 1MB</p>
             </div>
           </div>
         </div>
