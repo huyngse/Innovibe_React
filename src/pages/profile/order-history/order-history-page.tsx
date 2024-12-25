@@ -8,6 +8,9 @@ const OrderHistoryPage = () => {
           <TabsTrigger value="All" className="px-5 py-3">
             Tất cả
           </TabsTrigger>
+          <TabsTrigger value="Processing" className="px-5 py-3">
+            Chờ thanh toán
+          </TabsTrigger>
           <TabsTrigger value="Pending" className="px-5 py-3">
             Chờ thanh toán
           </TabsTrigger>
