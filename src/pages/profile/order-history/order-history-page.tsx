@@ -1,8 +1,9 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
+import { guitarOrders } from "@/mock-data/orders";
+import OrderList from "./order-list";
 const OrderHistoryPage = () => {
   return (
-    <div className="py-5">
+    <div className="py-5 overflow-auto">
       <Tabs defaultValue="All" className="w-[400px]">
         <TabsList>
           <TabsTrigger value="All" className="px-5 py-3">
@@ -28,7 +29,7 @@ const OrderHistoryPage = () => {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="All">
-          Make changes to your account here.
+          <OrderList orders={guitarOrders} />
         </TabsContent>
         <TabsContent value="Pending">Change your password here.</TabsContent>
       </Tabs>

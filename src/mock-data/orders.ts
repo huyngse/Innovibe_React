@@ -1,6 +1,7 @@
 import guitarImage1 from "@/assets/imgs/guitar_1.png";
 import guitarImage2 from "@/assets/imgs/guitar_2.png";
-export const guitarOrders = [
+import { Order } from "@/types/order";
+export const guitarOrders: Order[] = [
     {
         id: 1,
         orderId: "ORD-20240115-0001",
