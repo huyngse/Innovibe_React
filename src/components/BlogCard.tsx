@@ -1,14 +1,6 @@
 import { Link } from "react-router-dom";
 import { AspectRatio } from "./ui/aspect-ratio";
-
-function formatDate(date: Date): string {
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  return date.toLocaleDateString("vi-VN", options);
-}
+import { formatDate } from "@/utils/date";
 
 const BlogCard = ({
   blogId,

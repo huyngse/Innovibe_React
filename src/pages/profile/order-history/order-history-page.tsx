@@ -1,38 +1,58 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { guitarOrders } from "@/mock-data/orders";
-import OrderList from "./order-list";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
+
+const filterItems = [
+  {
+    value: "All",
+    label: "Tất cả",
+  },
+  {
+    value: "Pending",
+    label: "Chờ thanh toán",
+  },
+  {
+    value: "Shipped",
+    label: "Vận chuyển",
+  },
+  {
+    value: "Delivered",
+    label: "Hoàn thành",
+  },
+  {
+    value: "Cancelled",
+    label: "Đã hủy",
+  },
+  {
+    value: "Returned",
+    label: "Trả hàng/Hoàn tiền",
+  },
+];
 const OrderHistoryPage = () => {
+  const [orderStatus, setOrderStatus] = useState<string>("All");
+
   return (
-    <div className="py-5 overflow-auto">
-      <Tabs defaultValue="All" className="w-[400px]">
-        <TabsList>
-          <TabsTrigger value="All" className="px-5 py-3">
-            Tất cả
-          </TabsTrigger>
-          <TabsTrigger value="Processing" className="px-5 py-3">
-            Chờ thanh toán
-          </TabsTrigger>
-          <TabsTrigger value="Pending" className="px-5 py-3">
-            Chờ thanh toán
-          </TabsTrigger>
-          <TabsTrigger value="Shipped" className="px-5 py-3">
-            Chờ giao hàng
-          </TabsTrigger>
-          <TabsTrigger value="Delivered" className="px-5 py-3">
-            Hoàn thành
-          </TabsTrigger>
-          <TabsTrigger value="Cancelled" className="px-5 py-3">
-            Đã hủy
-          </TabsTrigger>
-          <TabsTrigger value="Returned" className="px-5 py-3">
-            Trả hàng/Hoàn tiền
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value="All">
-          <OrderList orders={guitarOrders} />
-        </TabsContent>
-        <TabsContent value="Pending">Change your password here.</TabsContent>
-      </Tabs>
+    <div className="py-5">
+      <div className="overflow-auto flex">
+        {filterItems.map((item, index: number) => {
+          return (
+            <Button
+              key={index}
+              onClick={() => {
+                setOrderStatus(item.value);
+              }}
+              className={cn(
+                "px-5 rounded-none",
+                orderStatus == item.value &&
+                  "bg-orange-500 hover:bg-orange-400 hover:text-white text-white"
+              )}
+              variant={"outline"}
+            >
+              {item.label}
+            </Button>
+          );
+        })}
+      </div>
     </div>
   );
 };
