@@ -36,6 +36,6 @@ export const guitarOrders: Order[] = [
                 quantity: 1,
             }
         ],
-        status: "Processing"
+        status: "Delivered"
     }
 ];

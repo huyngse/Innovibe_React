@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-
+import { guitarOrders } from "@/mock-data/orders";
 const filterItems = [
   {
     value: "All",
@@ -35,6 +35,9 @@ const OrderHistoryPage = () => {
     <div className="py-5">
       <div className="overflow-auto flex">
         {filterItems.map((item, index: number) => {
+          const numOfOrders = guitarOrders.filter(
+            (order) => order.status == item.value
+          ).length;
           return (
             <Button
               key={index}
@@ -49,6 +52,7 @@ const OrderHistoryPage = () => {
               variant={"outline"}
             >
               {item.label}
+              {numOfOrders > 0 && ` (${numOfOrders})`}
             </Button>
           );
         })}
