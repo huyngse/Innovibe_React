@@ -1,17 +1,20 @@
 import { Button } from "@/components/ui/button";
+import { orderStatus } from "@/constants/order-status";
 import { formatCurrencyVND } from "@/lib/currency";
 import { Order } from "@/types/order";
 import { formatDate } from "@/utils/date";
 import { Link } from "react-router-dom";
 
 const OrderCard = ({ order }: { order: Order }) => {
+  let status =
+    orderStatus.find((i) => i.value == order.status)?.label ?? order.status;
   return (
     <div className="bg-white rounded p-3">
       <div className="text-lg font-semibold">Đơn {order.orderId}</div>
       <div className="text-gray-500">
         Ngày đặt: {formatDate(new Date(order.orderDate))}
       </div>
-      <div>Trạng thái: {order.status}</div>
+      <div>Trạng thái: {status}</div>
       <div className="flex flex-col py-3">
         {order.items.map((item, i: number) => {
           return (

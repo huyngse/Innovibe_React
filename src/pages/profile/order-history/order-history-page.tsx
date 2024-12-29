@@ -3,39 +3,15 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { guitarOrders } from "@/mock-data/orders";
 import OrderList from "./order-list";
-const filterItems = [
-  {
-    value: "All",
-    label: "Tất cả",
-  },
-  {
-    value: "Pending",
-    label: "Chờ thanh toán",
-  },
-  {
-    value: "Shipped",
-    label: "Vận chuyển",
-  },
-  {
-    value: "Delivered",
-    label: "Hoàn thành",
-  },
-  {
-    value: "Cancelled",
-    label: "Đã hủy",
-  },
-  {
-    value: "Returned",
-    label: "Trả hàng/Hoàn tiền",
-  },
-];
+import { orderStatus } from "@/constants/order-status";
+
 const OrderHistoryPage = () => {
-  const [orderStatus, setOrderStatus] = useState<string>("All");
+  const [selectedStatus, setSelectedStatus] = useState<string>("All");
 
   return (
     <div className="py-5">
       <div className="overflow-auto flex">
-        {filterItems.map((item, index: number) => {
+        {orderStatus.map((item, index: number) => {
           const numOfOrders = guitarOrders.filter(
             (order) => order.status == item.value
           ).length;
@@ -43,11 +19,11 @@ const OrderHistoryPage = () => {
             <Button
               key={index}
               onClick={() => {
-                setOrderStatus(item.value);
+                setSelectedStatus(item.value);
               }}
               className={cn(
                 "px-5 rounded-none",
-                orderStatus == item.value &&
+                selectedStatus == item.value &&
                   "bg-orange-500 hover:bg-orange-400 hover:text-white text-white"
               )}
               variant={"outline"}
@@ -59,7 +35,7 @@ const OrderHistoryPage = () => {
         })}
       </div>
       <div>
-        <OrderList orders={guitarOrders}/>
+        <OrderList orders={guitarOrders} />
       </div>
     </div>
   );
