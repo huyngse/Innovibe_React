@@ -8,6 +8,7 @@ export type Order = {
         productName: string,
         status: string,
         price: number,
+        category: string,
         image: string,
         quantity: number,
 

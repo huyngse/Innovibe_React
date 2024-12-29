@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { guitarOrders } from "@/mock-data/orders";
+import OrderList from "./order-list";
 const filterItems = [
   {
     value: "All",
@@ -56,6 +57,9 @@ const OrderHistoryPage = () => {
             </Button>
           );
         })}
+      </div>
+      <div>
+        <OrderList orders={guitarOrders}/>
       </div>
     </div>
   );
