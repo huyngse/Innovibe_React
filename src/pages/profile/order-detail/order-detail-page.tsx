@@ -5,6 +5,7 @@ import OrderNotfound from "./order-not-found";
 import { formatCurrencyVND } from "@/lib/currency";
 import { formatDateTime } from "@/utils/date";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 const OrderDetailPage = () => {
   const { orderId } = useParams();
   const order = guitarOrders.find((i) => i.id.toString() == orderId);
@@ -17,6 +18,18 @@ const OrderDetailPage = () => {
     0
   );
   const total = subtotal + order.shippingFee;
+  const copyToClipboard = (value: string) => {
+    navigator.clipboard
+      .writeText(value)
+      .then(() => {
+        toast("Đã sao chép!", {
+          description: value,
+        });
+      })
+      .catch((_) => {
+        toast("Không thể sao chép!");
+      });
+  };
   return (
     <>
       <div className="my-3 p-3 rounded bg-white drop-shadow">
@@ -27,7 +40,17 @@ const OrderDetailPage = () => {
         <div className="p-3">
           <div className="flex justify-between text-lg font-semibold">
             <p>Mã đơn hàng:</p>
-            <p>{order.orderId}</p>
+            <p>
+              {order.orderId}{" "}
+              <button
+                className="ms-3 text-blue-500 bg-blue-50 px-3 rounded"
+                onClick={() => {
+                  copyToClipboard(order.orderId);
+                }}
+              >
+                Sao chép
+              </button>
+            </p>
           </div>
           <div className="flex justify-between text-gray-500">
             <p>Thời gian đặt hàng:</p>
@@ -61,8 +84,18 @@ const OrderDetailPage = () => {
         <hr />
         <div className="flex gap-3 py-3">
           <MapPin className="mt-1" />
-          <div>
-            <p className="font-semibold text-lg">Địa chỉ nhận hàng</p>
+          <div className="flex-1">
+            <div className="flex">
+              <p className="flex-1 font-semibold text-lg">Địa chỉ nhận hàng</p>
+              <button
+                className="text-blue-500 bg-blue-50 px-3 rounded font-semibold"
+                onClick={() => {
+                  copyToClipboard(`${order.customerName}; ${order.phone}; ${order.shippingAddress}`);
+                }}
+              >
+                Sao chép
+              </button>
+            </div>
             <div className="text-gray-500">
               <p>{order.customerName}</p>
               <p>{order.phone}</p>
