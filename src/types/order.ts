@@ -3,6 +3,13 @@ export type Order = {
     orderId: string,
     customerName: string,
     orderDate: string,
+    paymentDate?: string,
+    shippingDate?: string,
+    deliveryDate?: string,
+    shippingAddress: string,
+    shippingFee: number,
+    phone: string,
+    paymentMethod: string,
     items: {
         id: number,
         productName: string,
@@ -11,7 +18,6 @@ export type Order = {
         category: string,
         image: string,
         quantity: number,
-
     }[],
     status: "Shipped" | "Pending" | "Processing" | "Delivered" | "Cancelled" | "Returned"
 }

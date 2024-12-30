@@ -48,7 +48,9 @@ const OrderCard = ({ order }: { order: Order }) => {
       </div>
       <div className="flex justify-end gap-3">
         <Button variant={"outline"}>Hủy Đơn Hàng</Button>
-        <Button variant={"default"}>Xem chi tiết</Button>
+        <Link to={`/profile/order/${order.id}`}>
+          <Button variant={"default"}>Xem chi tiết</Button>
+        </Link>
       </div>
     </div>
   );
