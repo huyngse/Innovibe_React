@@ -12,7 +12,6 @@ export const guitarOrders: Order[] = [
         orderDate: "2024-01-15",
         paymentDate: "2024-01-15",
         shippingDate: "2024-01-16",
-        deliveryDate: "2024-01-16",
         paymentMethod: "Cash",
         items: [
             {
@@ -48,6 +47,7 @@ export const guitarOrders: Order[] = [
         orderDate: "2024-01-20",
         paymentDate: "2024-01-20",
         shippingDate: "2024-01-21",
+        deliveryDate: "2024-01-22",
         paymentMethod: "Cash",
         items: [
             {

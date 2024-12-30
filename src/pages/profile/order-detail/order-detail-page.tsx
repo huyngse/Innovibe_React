@@ -6,6 +6,7 @@ import { formatCurrencyVND } from "@/lib/currency";
 import { formatDateTime } from "@/utils/date";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import OrderStatus from "@/components/order-status";
 const OrderDetailPage = () => {
   const { orderId } = useParams();
   const order = guitarOrders.find((i) => i.id.toString() == orderId);
@@ -37,6 +38,8 @@ const OrderDetailPage = () => {
           Thông tin đơn hàng
         </h1>
         <hr />
+        <OrderStatus status={order.status}/>
+        <hr />
         <div className="p-3">
           <div className="flex justify-between text-lg font-semibold">
             <p>Mã đơn hàng:</p>
@@ -61,7 +64,7 @@ const OrderDetailPage = () => {
             {order.paymentDate ? (
               <p>{formatDateTime(new Date(order.paymentDate))}</p>
             ) : (
-              <p>--/--/---- --:--</p>
+              <p>--:-- --/--/----</p>
             )}
           </div>
           <div className="flex justify-between text-gray-500">
@@ -69,7 +72,7 @@ const OrderDetailPage = () => {
             {order.shippingDate ? (
               <p>{formatDateTime(new Date(order.shippingDate))}</p>
             ) : (
-              <p>--/--/---- --:--</p>
+              <p>--:-- --/--/----</p>
             )}
           </div>
           <div className="flex justify-between text-gray-500">
@@ -77,7 +80,7 @@ const OrderDetailPage = () => {
             {order.deliveryDate ? (
               <p>{formatDateTime(new Date(order.deliveryDate))}</p>
             ) : (
-              <p>--/--/---- --:--</p>
+              <p>--:-- --/--/----</p>
             )}
           </div>
         </div>
@@ -90,7 +93,9 @@ const OrderDetailPage = () => {
               <button
                 className="text-blue-500 bg-blue-50 px-3 rounded font-semibold"
                 onClick={() => {
-                  copyToClipboard(`${order.customerName}; ${order.phone}; ${order.shippingAddress}`);
+                  copyToClipboard(
+                    `${order.customerName}; ${order.phone}; ${order.shippingAddress}`
+                  );
                 }}
               >
                 Sao chép
