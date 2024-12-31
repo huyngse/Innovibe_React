@@ -11,12 +11,22 @@ export const columns: ColumnDef<Notification>[] = [
     header: "Nội dung",
     cell: ({ row }) => {
       const notification = row.original;
+      let type = notification.type;
+      if (type == "order_confirmation") {
+        type = "Xác nhận đơn hàng";
+      } else if (type == "shipping_update") {
+        type = "Cập nhật vận chuyển";
+      } else if (type == "promotion") {
+        type = "Quảng cáo";
+      } else if (type == "review_request") {
+        type = "Yêu cầu đánh giá";
+      }
       return (
         <div
           className={notification.status == "unread" ? "text-orange-600" : ""}
         >
           <p className="mb-2">{notification.message}</p>
-          <p className="text-gray-500">{notification.type}</p>
+          <p className="text-gray-500">{type}</p>
         </div>
       );
     },
