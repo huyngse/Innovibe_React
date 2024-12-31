@@ -30,6 +30,7 @@
     "@radix-ui/react-toast": "^1.2.2",
     "@radix-ui/react-tooltip": "^1.1.4",
     "@smastrom/react-rating": "^1.5.0",
+    "@tanstack/react-table": "^8.20.6",
     "@tiptap/extension-color": "^2.10.3",
     "@tiptap/extension-typography": "^2.10.3",
     "@tiptap/extension-youtube": "^2.10.3",

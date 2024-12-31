@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "type": "order_confirmation",
+    "message": "Cảm ơn bạn đã đặt hàng! Đơn hàng #12345 của bạn đã được xác nhận.",
+    "timestamp": "2024-12-30T10:00:00Z",
+    "status": "unread"
+  },
+  {
+    "id": 2,
+    "type": "shipping_update",
+    "message": "Đơn hàng #12345 của bạn đã được chuyển đi! Theo dõi gói hàng của bạn tại đây.",
+    "timestamp": "2024-12-31T14:30:00Z",
+    "status": "unread"
+  },
+  {
+    "id": 3,
+    "type": "promotion",
+    "message": "Ưu đãi có thời hạn: Giảm giá 20% cho lần mua hàng tiếp theo! Sử dụng mã SAVE20.",
+    "timestamp": "2024-12-29T09:00:00Z",
+    "status": "read"
+  },
+  {
+    "id": 4,
+    "type": "review_request",
+    "message": "Chúng tôi rất mong nhận được phản hồi của bạn! Vui lòng xem lại giao dịch mua gần đây của bạn.",
+    "timestamp": "2024-12-28T12:00:00Z",
+    "status": "read"
+  }
+]
