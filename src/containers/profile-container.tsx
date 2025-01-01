@@ -5,6 +5,7 @@ import NotificationsPage from "@/pages/profile/notifications/notifications-page"
 import OrderDetailPage from "@/pages/profile/order-detail/order-detail-page";
 import OrderHistoryPage from "@/pages/profile/order-history/order-history-page";
 import ProfilePage from "@/pages/profile/profile-page";
+import SettingsPage from "@/pages/profile/settings/settings-page";
 import { Route, Routes } from "react-router-dom";
 
 const ProfileContainer = () => {
@@ -16,6 +17,7 @@ const ProfileContainer = () => {
         <Route path="/order" element={<OrderHistoryPage />} />
         <Route path="/order/:orderId" element={<OrderDetailPage />} />
         <Route path="/favourite" element={<FavouritePage />} />
+        <Route path="/settings" element={<SettingsPage />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </ProfileLayout>
