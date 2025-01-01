@@ -1,5 +1,6 @@
 export const mockBlog = `
 <div class="container">
+    <h1>The Electric Guitar Blog</h1>
     <img src="https://images.pexels.com/photos/63695/pexels-photo-63695.jpeg?cs=srgb&dl=pexels-stephendn-63695.jpg&fm=jpg"/>
     <section id="introduction">
         <h2>Giới thiệu</h2>
@@ -13,6 +14,7 @@ export const mockBlog = `
 
     <section id="types">
         <h2>Các loại đàn guitar điện</h2>
+        <img src="https://storage.googleapis.com/stateless-blog-g4m-co-uk/2021/12/75104508-features-body-construction.jpeg"/>
         <h3>Thân đặc</h3>
         <p>Những cây đàn guitar này được làm từ một khối gỗ nguyên khối và nổi tiếng với độ vang và âm sắc. Các mẫu phổ biến bao gồm Fender Stratocaster và Gibson Les Paul.</p>
 

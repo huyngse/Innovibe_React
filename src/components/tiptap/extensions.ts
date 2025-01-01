@@ -1,6 +1,7 @@
 import { Color } from '@tiptap/extension-color';
 import ListItem from '@tiptap/extension-list-item';
 import TextStyle, { TextStyleOptions } from '@tiptap/extension-text-style';
+import Image from '@tiptap/extension-image';
 import StarterKit from '@tiptap/starter-kit';
 import Youtube from '@tiptap/extension-youtube';
 import Typography from '@tiptap/extension-typography';
@@ -28,5 +29,6 @@ export const extensions = [
             class: 'w-full aspect-video',
         },
     }),
-    Typography
+    Typography,
+    Image
 ];
