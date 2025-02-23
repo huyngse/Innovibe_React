@@ -4,9 +4,13 @@ export type Product = {
     status: string,
     price: number,
     images: ProductImage[],
+    description: string,
+    averateRating: number,
+    salesPrice?: number,
 }
 
 type ProductImage = {
     id: number,
-    imageURL: string
+    imageUrl: string,
+    isPrimary: boolean,
 }

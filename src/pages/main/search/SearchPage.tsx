@@ -164,7 +164,7 @@ const SearchPage = () => {
                     <ProductCard
                       productId={product.id}
                       productName={product.productName}
-                      image={product.images[0].imageURL}
+                      image={product.images[0].imageUrl}
                       price={product.price}
                       status={product.status}
                     />
