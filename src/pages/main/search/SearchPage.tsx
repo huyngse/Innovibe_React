@@ -16,7 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { IoIosArrowDown } from "react-icons/io";
-import { productsData } from "@/mock-data/products";
+import { products } from "@/data/product-data";
 import ProductCard from "@/components/ProductCard";
 import {
   Pagination,
@@ -137,14 +137,10 @@ const SearchPage = () => {
                     <DropdownMenuItem>Bán chạy nhất</DropdownMenuItem>
                   </Link>
                   <Link to={"/search?sortBy=Alphabetically"}>
-                    <DropdownMenuItem>
-                      Thứ tự chữ cái, A-Z
-                    </DropdownMenuItem>
+                    <DropdownMenuItem>Thứ tự chữ cái, A-Z</DropdownMenuItem>
                   </Link>
                   <Link to={"/search?sortBy=Alphabetically Desc"}>
-                    <DropdownMenuItem>
-                      Thứ tự chữ cái, Z-A
-                    </DropdownMenuItem>
+                    <DropdownMenuItem>Thứ tự chữ cái, Z-A</DropdownMenuItem>
                   </Link>
                   <Link to={"/search?sortBy=Price"}>
                     <DropdownMenuItem>Giá, thấp đến cao</DropdownMenuItem>
@@ -162,21 +158,19 @@ const SearchPage = () => {
               </DropdownMenu>
             </div>
             <div className="grid grid-cols-4 gap-5 py-5">
-              {[...productsData, ...productsData, ...productsData].map(
-                (product, index: number) => {
-                  return (
-                    <div key={`new-arrival-${index}`} className="px-3">
-                      <ProductCard
-                        productId={product.id}
-                        productName={product.productName}
-                        image={product.image}
-                        price={product.price}
-                        status={product.status}
-                      />
-                    </div>
-                  );
-                }
-              )}
+              {products.map((product, index: number) => {
+                return (
+                  <div key={`new-arrival-${index}`} className="px-3">
+                    <ProductCard
+                      productId={product.id}
+                      productName={product.productName}
+                      image={product.images[0].imageURL}
+                      price={product.price}
+                      status={product.status}
+                    />
+                  </div>
+                );
+              })}
             </div>
             <div className="py-5">
               <Pagination>

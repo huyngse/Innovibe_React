@@ -3,5 +3,10 @@ export type Product = {
     productName: string,
     status: string,
     price: number,
-    image: string,
+    images: ProductImage[],
+}
+
+type ProductImage = {
+    id: number,
+    imageURL: string
 }
