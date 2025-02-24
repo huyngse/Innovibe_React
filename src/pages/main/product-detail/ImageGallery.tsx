@@ -10,13 +10,13 @@ const ImageGallery = ({
   images: { id: number; imageUrl: string; isPrimary: boolean }[];
 }) => {
   const [imageIndex, setImageIndex] = useState(-1);
-  const primaryImage = images.find(
-    (image: any) => image.isPrimary == true
-  );
+  const primaryImage = images.find((image: any) => image.isPrimary == true);
   return (
     <>
       <div className="grid grid-cols-4 p-5">
-        <ScrollArea className="h-[500px]">
+        <ScrollArea
+          className={`h-[500px] ${images.length > 1 ? "" : "hidden"}`}
+        >
           <div className="flex flex-col gap-3 p-3">
             {images
               .filter((image) => image.isPrimary == false)

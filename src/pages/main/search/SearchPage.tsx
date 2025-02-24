@@ -161,13 +161,7 @@ const SearchPage = () => {
               {products.map((product, index: number) => {
                 return (
                   <div key={`new-arrival-${index}`} className="px-3">
-                    <ProductCard
-                      productId={product.id}
-                      productName={product.productName}
-                      image={product.images[0].imageUrl}
-                      price={product.price}
-                      status={product.status}
-                    />
+                    <ProductCard product={product} />
                   </div>
                 );
               })}

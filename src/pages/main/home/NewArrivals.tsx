@@ -1,8 +1,9 @@
-import { productsData } from "@/mock-data/products";
 import ProductCard from "@/components/ProductCard";
+import { products } from "@/data/product-data";
 import Slider from "react-slick";
 
 const NewArrivals = () => {
+  const filteredProducts = products.slice(0, 6);
   const settings = {
     dots: false,
     infinite: true,
@@ -20,16 +21,10 @@ const NewArrivals = () => {
       </h2>
       <div className="slider-container mt-5">
         <Slider {...settings} arrows={true}>
-          {productsData.map((product, index: number) => {
+          {filteredProducts.map((product, index: number) => {
             return (
               <div key={`new-arrival-${index}`} className="px-3">
-                <ProductCard
-                  productId={product.id}
-                  productName={product.productName}
-                  image={product.image}
-                  price={product.price}
-                  status={product.status}
-                />
+                <ProductCard product={product} />
               </div>
             );
           })}
