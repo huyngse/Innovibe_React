@@ -1,6 +1,6 @@
 import Breadcrumb from "@/components/shared/Breadcrumb";
 import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+// import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Rating } from "@smastrom/react-rating";
 import { formatCurrencyVND } from "@/lib/currency";
 import { Input } from "@/components/ui/input";
@@ -26,8 +26,9 @@ const ProductDetailPage = () => {
   const { productId } = useParams();
   useEffect(() => {
     const product = products.find((p) => p.id.toString() == productId);
+    console.log(product);
     setData(product);
-  }, []);
+  }, [productId]);
 
   if (data == null) return;
   return (
@@ -94,7 +95,7 @@ const ProductDetailPage = () => {
                 Chia sẻ
               </Button>
             </div>
-            <hr className="border-black my-3" />
+            {/* <hr className="border-black my-3" />
             <p>
               <span className="font-semibold ">Style: </span> Stealth Black
             </p>
@@ -105,7 +106,7 @@ const ProductDetailPage = () => {
                 <div className="w-16 h-16 rounded-lg bg-[#908B8B]"></div>
               </div>
               <ScrollBar orientation="horizontal" />
-            </ScrollArea>
+            </ScrollArea> */}
             <hr className="border-black my-3" />
           </div>
         </div>
