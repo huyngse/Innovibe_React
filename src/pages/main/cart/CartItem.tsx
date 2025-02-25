@@ -2,7 +2,6 @@ import { Input } from "@/components/ui/input";
 import { formatCurrencyVND } from "@/lib/currency";
 import useCartStore from "@/stores/use-cart-store";
 import { Product } from "@/types/product";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const CartItem = ({
@@ -12,7 +11,6 @@ const CartItem = ({
   product: Product;
   quantity: number;
 }) => {
-  const [currentQuantity, setCurrentQuantity] = useState(quantity);
   const store = useCartStore();
   const handleRemoveItem = () => {
     store.removeItem(product.id);
@@ -38,13 +36,19 @@ const CartItem = ({
           </div>
           <div className="flex flex-col gap-5 py-2 items-end col-span-3">
             <span className="font-bold text-lg">
-              {formatCurrencyVND(product.price)}
+              {formatCurrencyVND(product.price * quantity)}
             </span>
             <Input
               type="number"
-              value={currentQuantity}
+              value={quantity}
               className="w-20"
-              onChange={(e) => setCurrentQuantity(parseInt(e.target.value))}
+              onChange={(e) => {
+                if (parseInt(e.target.value) == 0) {
+                  store.removeItem(product.id);
+                } else {
+                  store.updateQuantity(product.id, parseInt(e.target.value));
+                }
+              }}
             />
           </div>
         </div>
