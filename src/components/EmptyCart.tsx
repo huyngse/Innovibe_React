@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 
 const EmptyCart = () => {
   return (
-    <div className="flex flex-col justify-center items-center py-10 gap-3">
+    <div className="flex flex-col justify-center items-center gap-3">
       <img src={emptyCartImage} alt="" width={200} />
       <h1 className="text-lg font-bold">Giỏ Hàng Trống</h1>
       <p className="text-gray-500">

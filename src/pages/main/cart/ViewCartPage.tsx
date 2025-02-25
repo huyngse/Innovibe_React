@@ -23,7 +23,11 @@ const ViewCartPage = () => {
         <div className="grid grid-cols-12 py-10 gap-10">
           <div className="col-span-8">
             <h1 className="text-4xl uppercase font-extrabold ">Giỏ hàng</h1>
-            {store.items.length == 0 && <EmptyCart />}
+            {store.items.length == 0 && (
+              <div className="py-10">
+                <EmptyCart />
+              </div>
+            )}
             <div className="flex flex-col gap-5 py-5">
               <hr className="border-black" />
               {store.items.map((item, index: number) => {

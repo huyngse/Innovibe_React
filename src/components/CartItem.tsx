@@ -2,6 +2,7 @@ import { formatCurrencyVND } from "@/lib/currency";
 import { Input } from "./ui/input";
 import { useState } from "react";
 import { Product } from "@/types/product";
+import useCartStore from "@/stores/use-cart-store";
 
 const CartItem = ({
   product,
@@ -11,6 +12,10 @@ const CartItem = ({
   quantity: number;
 }) => {
   const [currentQuantity, setCurrentQuantity] = useState(quantity);
+  const store = useCartStore();
+  const handleRemoveItem = () => {
+    store.removeItem(product.id);
+  };
   return (
     <div className="grid grid-cols-3 gap-5 pe-3">
       <img
@@ -28,7 +33,12 @@ const CartItem = ({
           ></Input>
           <span className="font-bold">{formatCurrencyVND(product.price)}</span>
         </div>
-        <button className="uppercase text-orange-600 underline">Xóa</button>
+        <button
+          onClick={handleRemoveItem}
+          className="uppercase text-orange-600 underline"
+        >
+          Xóa
+        </button>
       </div>
     </div>
   );

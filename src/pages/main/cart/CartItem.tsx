@@ -1,5 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { formatCurrencyVND } from "@/lib/currency";
+import useCartStore from "@/stores/use-cart-store";
 import { Product } from "@/types/product";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -12,6 +13,10 @@ const CartItem = ({
   quantity: number;
 }) => {
   const [currentQuantity, setCurrentQuantity] = useState(quantity);
+  const store = useCartStore();
+  const handleRemoveItem = () => {
+    store.removeItem(product.id);
+  };
   return (
     <div className="grid grid-cols-5 gap-5 p-5">
       <img
@@ -26,7 +31,9 @@ const CartItem = ({
               <h5 className="font-semibold text-xl">{product.productName}</h5>
             </Link>
             {/* <p className="text-sm text-gray-500 pb-3">Model #: {model}</p> */}
-            <p className="font-bold text-green-500 uppercase">{product.status}</p>
+            <p className="font-bold text-green-500 uppercase">
+              {product.status}
+            </p>
             <p className="text-sm text-gray-500 pb-3">Available To Ship</p>
           </div>
           <div className="flex flex-col gap-5 py-2 items-end col-span-3">
@@ -38,11 +45,16 @@ const CartItem = ({
               value={currentQuantity}
               className="w-20"
               onChange={(e) => setCurrentQuantity(parseInt(e.target.value))}
-            ></Input>
+            />
           </div>
         </div>
         <div className="flex justify-between w-full"></div>
-        <button className="uppercase text-orange-600 underline">Xóa</button>
+        <button
+          onClick={handleRemoveItem}
+          className="uppercase text-orange-600 underline"
+        >
+          Xóa
+        </button>
       </div>
     </div>
   );

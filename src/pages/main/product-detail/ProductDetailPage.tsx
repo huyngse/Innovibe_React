@@ -21,16 +21,36 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Product } from "@/types/product";
 import { products } from "@/data/product-data";
+import useCartStore from "@/stores/use-cart-store";
+import { toast } from "react-toastify";
+
 const ProductDetailPage = () => {
   const [data, setData] = useState<Product>();
+  const [quantity, setQuantity] = useState(1);
   const { productId } = useParams();
+  const store = useCartStore();
   useEffect(() => {
     const product = products.find((p) => p.id.toString() == productId);
-    console.log(product);
     setData(product);
   }, [productId]);
 
   if (data == null) return;
+  const handleAddToCart = () => {
+    store.addItem({
+      product: data,
+      quantity: quantity,
+    });
+    toast.success("Thêm giỏ hàng thành công", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
   return (
     <div>
       <Breadcrumb
@@ -64,10 +84,18 @@ const ProductDetailPage = () => {
                   type="number"
                   className="w-full h-auto py-3 self-center border-black"
                   style={{ fontSize: 18 }}
-                  defaultValue={1}
+                  value={quantity}
+                  onChange={(e) => {
+                    if (parseInt(e.target.value) >= 1) {
+                      setQuantity(parseInt(e.target.value));
+                    }
+                  }}
                 ></Input>
               </div>
-              <Button className="uppercase col-span-3 text-lg py-6 self-center">
+              <Button
+                className="uppercase col-span-3 text-lg py-6 self-center"
+                onClick={handleAddToCart}
+              >
                 Thêm vào giỏ hàng
               </Button>
             </div>

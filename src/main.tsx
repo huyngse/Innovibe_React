@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "yet-another-react-lightbox/styles.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
+import { ToastContainer } from 'react-toastify';
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")!).render(
       <App />
       <Toaster />
       <Sonner />
+      <ToastContainer />
     </BrowserRouter>
   </StrictMode>
 );
