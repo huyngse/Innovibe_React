@@ -21,10 +21,12 @@ import {
 } from "@/components/ui/select";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Label } from "@/components/ui/label";
+import { DistrictType, WardType, isWardType } from "@/types/address";
+import addresses from "@/data/vietnamAddress.json";
 const formSchema = z.object({
   email: z.string().email("Địa chỉ email không hợp lệ"),
   phone: z
@@ -42,6 +44,8 @@ const formSchema = z.object({
   billingAddress: z.string().min(1, "Địa chỉ thanh toán là bắt buộc"),
 });
 const CheckOutForm = () => {
+  const [districts, setDistricts] = useState<DistrictType[]>([]);
+  const [wards, setWards] = useState<Array<WardType | { Level: string }>>([]);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {},
@@ -54,7 +58,20 @@ const CheckOutForm = () => {
   useEffect(() => {
     provinceStore.fetchProvinces();
   }, []);
-
+  const onCityChange = (e: any) => {
+    const selectedCity = addresses.find((addr) => addr.Name == e);
+    if (selectedCity == null) return;
+    setDistricts(selectedCity.Districts);
+    form.setValue("district", "");
+    form.setValue("ward", "");
+    setWards([]);
+  };
+  const onDistrictChange = (e: any) => {
+    const selectedDistrict = districts.find((addr) => addr.Name == e);
+    if (selectedDistrict == null) return;
+    form.setValue("ward", "");
+    setWards(selectedDistrict.Wards);
+  };
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -143,7 +160,7 @@ const CheckOutForm = () => {
                     field.onChange();
                     form.resetField("district");
                     form.resetField("ward");
-                    provinceStore.fetchDistricts(parseInt(value));
+                    onCityChange(value);
                   }}
                   defaultValue={field.value}
                 >
@@ -153,10 +170,10 @@ const CheckOutForm = () => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {provinceStore.provinces.map((province, index: number) => {
+                    {addresses.map((province, index: number) => {
                       return (
-                        <SelectItem value={province.code + ""} key={index}>
-                          {province.name}
+                        <SelectItem value={province.Name} key={index}>
+                          {province.Name}
                         </SelectItem>
                       );
                     })}
@@ -176,7 +193,7 @@ const CheckOutForm = () => {
                   onValueChange={(value) => {
                     field.onChange();
                     form.resetField("ward");
-                    provinceStore.fetchWards(parseInt(value));
+                    onDistrictChange(value);
                   }}
                   defaultValue={field.value}
                 >
@@ -186,10 +203,10 @@ const CheckOutForm = () => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {provinceStore.districts.map((district, index: number) => {
+                    {districts.map((district, index: number) => {
                       return (
-                        <SelectItem value={district.code + ""} key={index}>
-                          {district.name}
+                        <SelectItem value={district.Name} key={index}>
+                          {district.Name}
                         </SelectItem>
                       );
                     })}
@@ -215,12 +232,14 @@ const CheckOutForm = () => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {provinceStore.wards.map((ward, index: number) => {
-                      return (
-                        <SelectItem value={ward.name} key={index}>
-                          {ward.name}
-                        </SelectItem>
-                      );
+                    {wards.map((ward, index: number) => {
+                      if (isWardType(ward)) {
+                        return (
+                          <SelectItem value={ward.Name} key={index}>
+                            {ward.Name}
+                          </SelectItem>
+                        );
+                      }
                     })}
                   </SelectContent>
                 </Select>
