@@ -157,7 +157,7 @@ const CheckOutForm = () => {
                 <FormLabel>Thành phố/Tỉnh</FormLabel>
                 <Select
                   onValueChange={(value) => {
-                    field.onChange();
+                    field.onChange("value");
                     form.resetField("district");
                     form.resetField("ward");
                     onCityChange(value);
@@ -191,7 +191,7 @@ const CheckOutForm = () => {
                 <FormLabel>Quận/Huyện</FormLabel>
                 <Select
                   onValueChange={(value) => {
-                    field.onChange();
+                    field.onChange(value);
                     form.resetField("ward");
                     onDistrictChange(value);
                   }}
