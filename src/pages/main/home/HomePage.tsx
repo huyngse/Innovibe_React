@@ -28,7 +28,7 @@ const HomePage = () => {
       </div>
       <TrustSignals />
       <NewArrivals />
-      <SpecialOffer />
+      {/* <SpecialOffer /> */}
       <Hero />
       <Blogs />
       <Features />

@@ -36,18 +36,18 @@ const ProductCard = ({ product }: { product: Product }) => {
       }}
     >
       <div className="text-sm">
-        <img src={product.images[0].imageUrl} alt="Product image" />
-        <Link to={`/product/${product.id}`}>
-          <p className="font-semibold my-3">{product.productName}</p>
+        <img src={product.images[0].imageURL} alt="Product image" />
+        <Link to={`/product/${product.productId}`}>
+          <p className="font-semibold my-3">{product.name}</p>
         </Link>
         <p className="text-xs font-bold text-green-500">{status}</p>
         <p className="font-bold">
-          {product.salesPrice
-            ? formatCurrencyVND(product.salesPrice)
+          {product.discount
+            ? formatCurrencyVND(product.discount)
             : formatCurrencyVND(product.price)}
         </p>
         <p className="text-xs line-through decoration-red-500 decoration-1 font-semibold">
-          {product.salesPrice && formatCurrencyVND(product.price)}
+          {product.discount && formatCurrencyVND(product.price)}
         </p>
       </div>
       <div className="text-center absolute top-40 z-10 left-1/2 w-full -translate-x-1/2">

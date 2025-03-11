@@ -41,7 +41,7 @@ export const register = async (request: RegisterRequest) => {
 
 export const getUserInfo = async () => {
     try {
-        const result = await axiosClient.get(`/api/account/get-user-info`);
+        const result = await axiosClient.get(`/api/accounts/get-user-info`);
         return { error: null, data: result.data, success: true };
     } catch (error: any) {
         return handleApiError(error);

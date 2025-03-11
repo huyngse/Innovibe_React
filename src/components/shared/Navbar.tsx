@@ -18,7 +18,6 @@ const Navbar = () => {
       title: brand.brandName,
       href: `/search?brand=${brand.id}`,
     }));
-
   return (
     <div className="bg-orange-600 transition-all duration-300">
       <MaxWidthWrapper className="flex justify-evenly gap-5 items-center">

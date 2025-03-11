@@ -13,20 +13,20 @@ const CartItem = ({
 }) => {
   const store = useCartStore();
   const handleRemoveItem = () => {
-    store.removeItem(product.id);
+    store.removeItem(product.productId);
   };
   return (
     <div className="grid grid-cols-5 gap-5 p-5">
       <img
-        src={product.images[0].imageUrl}
-        alt={product.id + "-" + product.productName}
+        src={product.images[0].imageURL}
+        alt={product.productId + "-" + product.name}
         className="col-span-1 w-full h-full object-cover"
       />
       <div className="col-span-4 items-start flex flex-col">
         <div className="grid grid-cols-12">
           <div className="col-span-9">
-            <Link to={`/product/${product.id}`}>
-              <h5 className="font-semibold text-xl">{product.productName}</h5>
+            <Link to={`/product/${product.productId}`}>
+              <h5 className="font-semibold text-xl">{product.name}</h5>
             </Link>
             {/* <p className="text-sm text-gray-500 pb-3">Model #: {model}</p> */}
             <p className="font-bold text-green-500 uppercase">
@@ -44,9 +44,12 @@ const CartItem = ({
               className="w-20"
               onChange={(e) => {
                 if (parseInt(e.target.value) == 0) {
-                  store.removeItem(product.id);
+                  store.removeItem(product.productId);
                 } else {
-                  store.updateQuantity(product.id, parseInt(e.target.value));
+                  store.updateQuantity(
+                    product.productId,
+                    parseInt(e.target.value)
+                  );
                 }
               }}
             />

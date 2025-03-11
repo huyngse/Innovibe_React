@@ -26,10 +26,10 @@ const useCartStore = create<CartState>((set) => ({
     items: loadCartFromLocalStorage(),
     total: loadCartFromLocalStorage().reduce((sum, item) => sum + item.product.price * item.quantity, 0),
     addItem: (item) => set((state) => {
-        const existingItem = state.items.find(i => i.product.id === item.product.id);
+        const existingItem = state.items.find(i => i.product.productId === item.product.productId);
         const items = existingItem
             ? state.items.map(i =>
-                i.product.id === item.product.id
+                i.product.productId === item.product.productId
                     ? { ...i, quantity: i.quantity + item.quantity }
                     : i
             )
@@ -40,7 +40,7 @@ const useCartStore = create<CartState>((set) => ({
     }),
 
     removeItem: (id) => set((state) => {
-        const items = state.items.filter(item => item.product.id !== id);
+        const items = state.items.filter(item => item.product.productId !== id);
         const total = items.reduce((sum, i) => sum + i.product.price * i.quantity, 0);
         localStorage.setItem(CART_KEY, JSON.stringify(items));
         return { items, total };
@@ -48,7 +48,7 @@ const useCartStore = create<CartState>((set) => ({
 
     updateQuantity: (id, quantity) => set((state) => {
         const items = state.items.map(item =>
-            item.product.id === id ? { ...item, quantity } : item
+            item.product.productId === id ? { ...item, quantity } : item
         );
         const total = items.reduce((sum, i) => sum + i.product.price * i.quantity, 0);
         localStorage.setItem(CART_KEY, JSON.stringify(items));

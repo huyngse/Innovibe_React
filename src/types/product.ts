@@ -1,16 +1,28 @@
 export type Product = {
-    id: number,
-    productName: string,
+    productId: number,
+    name: string,
     status: string,
     price: number,
+    quantity: number,
     images: ProductImage[],
     description: string,
-    averateRating: number,
-    salesPrice?: number,
+    discount?: number,
+    createdAt: string,
+    brand: {
+        brandId: number,
+        name: string,
+        description: string,
+    },
+    category: {
+        categoryId: number,
+        name: string,
+        description: string,
+    },
 }
 
-type ProductImage = {
-    id: number,
-    imageUrl: string,
-    isPrimary: boolean,
+export type ProductImage = {
+    imageId: number,
+    productId: number,
+    imageURL: string,
+    position: number,
 }

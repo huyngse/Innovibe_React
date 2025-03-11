@@ -12,7 +12,7 @@ interface AuthState {
     rerender: () => void;
 }
 
-const useTagStore = create<AuthState>((set) => ({
+const useAuthStore = create<AuthState>((set) => ({
     user: undefined,
     loading: false,
     error: null,
@@ -35,4 +35,4 @@ const useTagStore = create<AuthState>((set) => ({
     },
 }));
 
-export default useTagStore;
+export default useAuthStore;

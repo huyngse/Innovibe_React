@@ -7,10 +7,13 @@ import { cn } from "@/lib/utils";
 import { Input } from "../../ui/input";
 import ShoppingCartButton from "../ShoppingCartButton";
 import ProfileMenu from "./profile-menu";
+import useAuthStore from "@/stores/use-auth-store";
 
 const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const token = localStorage.getItem("accessToken");
+  const authStore = useAuthStore();
   const navigate = useNavigate();
   const handleScroll = () => {
     if (window.scrollY > 60) {
@@ -24,6 +27,11 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+  }, []);
+  useEffect(() => {
+    if (token) {
+      authStore.fetchUserInfo();
+    }
   }, []);
   return (
     <header
@@ -56,19 +64,23 @@ const Header = () => {
           </Link>
         </div>
         <div className="flex items-center gap-5">
-          <div>
-            <Link to={"/sign-up"} className="text-sm uppercase">
-              Đăng Ký
-            </Link>
-            /
-            <Link to={"/log-in"} className="text-sm uppercase">
-              Đăng Nhập
-            </Link>
-          </div>
-          <div className="flex gap-4">
-            <ProfileMenu />
-            <ShoppingCartButton />
-          </div>
+          {!token && (
+            <div>
+              <Link to={"/sign-up"} className="text-sm uppercase">
+                Đăng Ký
+              </Link>
+              /
+              <Link to={"/log-in"} className="text-sm uppercase">
+                Đăng Nhập
+              </Link>
+            </div>
+          )}
+          {token && authStore.user && (
+            <div className="flex gap-4">
+              <ProfileMenu />
+              <ShoppingCartButton />
+            </div>
+          )}
         </div>
       </MaxWidthWrapper>
     </header>

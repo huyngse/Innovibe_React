@@ -30,7 +30,7 @@ const ProductDetailPage = () => {
   const { productId } = useParams();
   const store = useCartStore();
   useEffect(() => {
-    const product = products.find((p) => p.id.toString() == productId);
+    const product = products.find((p) => p.productId.toString() == productId);
     setData(product);
   }, [productId]);
 
@@ -63,7 +63,7 @@ const ProductDetailPage = () => {
         <div className="grid grid-cols-2">
           <ImageGallery images={data.images} />
           <div className="p-5">
-            <h2 className="text-2xl font-semibold">{data.productName}</h2>
+            <h2 className="text-2xl font-semibold">{data.name}</h2>
             <div className="w-[100px] py-3">
               <Rating value={5} />
             </div>
@@ -71,12 +71,12 @@ const ProductDetailPage = () => {
               {data.status}
             </p>
             <p className="font-semibold text-lg">
-              {data.salesPrice
-                ? formatCurrencyVND(data.salesPrice)
+              {data.discount
+                ? formatCurrencyVND(data.discount)
                 : formatCurrencyVND(data.price)}
             </p>
             <p className="text-xs line-through decoration-red-500 decoration-1 font-semibold">
-              {data.salesPrice && formatCurrencyVND(data.price)}
+              {data.discount && formatCurrencyVND(data.price)}
             </p>
             <div className="grid grid-cols-5 py-3 gap-10">
               <div className="col-span-2">

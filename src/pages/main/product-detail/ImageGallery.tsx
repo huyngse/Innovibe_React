@@ -4,13 +4,10 @@ import imagePlaceholder from "@/assets/imgs/image-placeholder.webp";
 import Lightbox from "yet-another-react-lightbox";
 import { useState } from "react";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-const ImageGallery = ({
-  images,
-}: {
-  images: { id: number; imageUrl: string; isPrimary: boolean }[];
-}) => {
+import { ProductImage } from "@/types/product";
+const ImageGallery = ({ images }: { images: ProductImage[] }) => {
   const [imageIndex, setImageIndex] = useState(-1);
-  const primaryImage = images.find((image: any) => image.isPrimary == true);
+  const primaryImage = images[0];
   return (
     <>
       <div className="grid grid-cols-4 p-5">
@@ -19,7 +16,7 @@ const ImageGallery = ({
         >
           <div className="flex flex-col gap-3 p-3">
             {images
-              .filter((image) => image.isPrimary == false)
+              .filter((image) => image.position != 0)
               .map((image: any, index: number) => {
                 return (
                   <AspectRatio ratio={1 / 1} key={index}>
@@ -32,7 +29,7 @@ const ImageGallery = ({
                         setImageIndex(index + 1);
                       }}
                     >
-                      <img src={image.imageUrl} alt="" />
+                      <img src={image.imageURL} alt="" />
                     </button>
                   </AspectRatio>
                 );
@@ -46,7 +43,7 @@ const ImageGallery = ({
           }}
         >
           <img
-            src={primaryImage?.imageUrl ?? imagePlaceholder}
+            src={primaryImage?.imageURL ?? imagePlaceholder}
             alt=""
             className="w-full"
           />
@@ -58,8 +55,8 @@ const ImageGallery = ({
         index={imageIndex}
         slides={[
           primaryImage,
-          ...images.filter((image) => image.isPrimary == false),
-        ].map((image) => ({ src: image?.imageUrl ?? "" }))}
+          ...images.filter((image) => image.position != 0),
+        ].map((image) => ({ src: image?.imageURL ?? "" }))}
       />
     </>
   );
