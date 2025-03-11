@@ -19,25 +19,27 @@ import {
 import ImageGallery from "./ImageGallery";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Product } from "@/types/product";
-import { products } from "@/data/product-data";
 import useCartStore from "@/stores/use-cart-store";
 import { toast } from "react-toastify";
+import useProductStore from "@/stores/use-product-store";
+import Loader from "@/components/Loader";
 
 const ProductDetailPage = () => {
-  const [data, setData] = useState<Product>();
   const [quantity, setQuantity] = useState(1);
   const { productId } = useParams();
   const store = useCartStore();
+  const productStore = useProductStore();
   useEffect(() => {
-    const product = products.find((p) => p.productId.toString() == productId);
-    setData(product);
+    if (productId) {
+      productStore.fetchProduct(parseInt(productId));
+    }
   }, [productId]);
 
-  if (data == null) return;
+  if (productStore.loading) return <Loader />;
+  if (productStore.product == null) return;
   const handleAddToCart = () => {
     store.addItem({
-      product: data,
+      product: productStore.product!,
       quantity: quantity,
     });
     toast.success("Thêm giỏ hàng thành công", {
@@ -61,22 +63,25 @@ const ProductDetailPage = () => {
       />
       <MaxWidthWrapper>
         <div className="grid grid-cols-2">
-          <ImageGallery images={data.images} />
+          <ImageGallery images={productStore.product?.images} />
           <div className="p-5">
-            <h2 className="text-2xl font-semibold">{data.name}</h2>
+            <h2 className="text-2xl font-semibold">
+              {productStore.product?.name}
+            </h2>
             <div className="w-[100px] py-3">
               <Rating value={5} />
             </div>
             <p className="text-sm font-semibold text-green-500">
-              {data.status}
+              {productStore.product?.status}
             </p>
             <p className="font-semibold text-lg">
-              {data.discount
-                ? formatCurrencyVND(data.discount)
-                : formatCurrencyVND(data.price)}
+              {productStore.product?.discount
+                ? formatCurrencyVND(productStore.product?.discount)
+                : formatCurrencyVND(productStore.product?.price)}
             </p>
             <p className="text-xs line-through decoration-red-500 decoration-1 font-semibold">
-              {data.discount && formatCurrencyVND(data.price)}
+              {productStore.product?.discount &&
+                formatCurrencyVND(productStore.product?.price)}
             </p>
             <div className="grid grid-cols-5 py-3 gap-10">
               <div className="col-span-2">
@@ -154,7 +159,7 @@ const ProductDetailPage = () => {
                 </AccordionTrigger>
                 <AccordionContent>
                   <hr className="border-black my-2" />
-                  <TiptapView value={data.description} />
+                  <TiptapView value={productStore.product?.description} />
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
