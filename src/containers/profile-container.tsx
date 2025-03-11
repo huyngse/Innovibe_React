@@ -6,9 +6,16 @@ import OrderDetailPage from "@/pages/profile/order-detail/order-detail-page";
 import OrderHistoryPage from "@/pages/profile/order-history/order-history-page";
 import ProfilePage from "@/pages/profile/profile-page";
 import SettingsPage from "@/pages/profile/settings/settings-page";
-import { Route, Routes } from "react-router-dom";
+import useAuthStore from "@/stores/use-auth-store";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 const ProfileContainer = () => {
+  const authStore = useAuthStore();
+  const token = localStorage.getItem("accessToken");
+  const navigate = useNavigate();
+  if (!token || !authStore) {
+    navigate("/log-in");
+  }
   return (
     <ProfileLayout>
       <Routes>

@@ -1,5 +1,5 @@
+import Loader from "@/components/Loader";
 import ProductCard from "@/components/ProductCard";
-import { Skeleton } from "@/components/ui/skeleton";
 import useProductStore from "@/stores/use-product-store";
 import { Product } from "@/types/product";
 import Slider from "react-slick";
@@ -29,25 +29,19 @@ const NewArrivals = () => {
         Hàng mới về
       </h2>
       <div className="slider-container mt-5">
-        <Slider {...settings} arrows={true}>
-          {productStore.loading ? (
-            <>
-              <Skeleton className="w-full h-[200px] rounded-full" />
-              <Skeleton className="w-full h-[200px] rounded-full" />
-              <Skeleton className="w-full h-[200px] rounded-full" />
-              <Skeleton className="w-full h-[200px] rounded-full" />
-              <Skeleton className="w-full h-[200px] rounded-full" />
-            </>
-          ) : (
-            latestProducts.map((product, index: number) => {
+        {productStore.loading ? (
+          <Loader />
+        ) : (
+          <Slider {...settings} arrows={true}>
+            {latestProducts.map((product, index: number) => {
               return (
                 <div key={`new-arrival-${index}`} className="px-3">
                   <ProductCard product={product} />
                 </div>
               );
-            })
-          )}
-        </Slider>
+            })}
+          </Slider>
+        )}
       </div>
     </div>
   );

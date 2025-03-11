@@ -1,6 +1,7 @@
 import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
+import useAuthStore from "@/stores/use-auth-store";
 import {
   Bell,
   CircleUser,
@@ -46,8 +47,13 @@ const navItems = [
 ];
 
 const ProfileLayout = ({ children }: { children: ReactNode }) => {
+  const authStore = useAuthStore();
   const navigate = useNavigate();
   const location = useLocation();
+  const handleLogout = () => {
+    authStore.logout();
+    navigate("/log-in");
+  };
   return (
     <MaxWidthWrapper className="bg-zinc-100">
       <div className="grid grid-cols-12 gap-3">
@@ -55,11 +61,15 @@ const ProfileLayout = ({ children }: { children: ReactNode }) => {
           <div className="mb-5 flex gap-3 items-center">
             <Avatar>
               <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarFallback>{authStore.user?.fullName}</AvatarFallback>
             </Avatar>
             <div>
-              <div className="font-semibold text-lg">@shadcn</div>
-              <div className="text-zinc-500 text-sm">customer@gmail.com</div>
+              <div className="font-semibold text-lg">
+                {authStore.user?.fullName}
+              </div>
+              <div className="text-zinc-500 text-sm">
+                {authStore.user?.email}
+              </div>
             </div>
           </div>
           <ul className="flex flex-col">
@@ -84,7 +94,10 @@ const ProfileLayout = ({ children }: { children: ReactNode }) => {
             })}
           </ul>
           <hr className="my-3" />
-          <button className="flex gap-3 p-3 w-full hover:bg-zinc-200 active:bg-zinc-300 text-red-500">
+          <button
+            className="flex gap-3 p-3 w-full hover:bg-zinc-200 active:bg-zinc-300 text-red-500"
+            onClick={handleLogout}
+          >
             <DoorOpen />
             Đăng xuất
           </button>

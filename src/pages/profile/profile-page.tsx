@@ -13,18 +13,32 @@ import {
 } from "@/components/ui/form";
 import { useDropzone } from "react-dropzone";
 import { Input } from "@/components/ui/input";
+import useAuthStore from "@/stores/use-auth-store";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { formatDate } from "@/utils/date";
+import { CalendarIcon } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { cn } from "@/lib/utils";
+import Loader from "@/components/Loader";
+import { useEffect } from "react";
 const formSchema = z.object({
   email: z.string().email(),
   fullName: z.string().min(1, "Họ tên đầy đủ là bắt buộc"),
-  phoneNumber: z
-    .string()
-    .min(10, "Số điện thoại phải có ít nhất 10 chữ số")
-    .regex(/^\d+$/, "Số điện thoại phải là số"),
+  address: z.string({ required_error: "Vui lòng nhập địa chỉ" }),
+  birthDate: z
+    .date({ required_error: "Vui lòng nhập ngày sinh" })
+    .refine((date) => date <= new Date(), {
+      message: "Ngày sinh không hợp lệ",
+    }),
 });
 
 const ProfilePage = () => {
   const maxFileSize = 1 * 1024 * 1024; // 1MB
-
+  const authStore = useAuthStore();
   const onDrop = (acceptedFiles: File[]) => {
     console.log(acceptedFiles);
   };
@@ -41,15 +55,26 @@ const ProfilePage = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "customer@gmail.com",
-      fullName: "Nguyễn Văn A",
-      phoneNumber: "0987776666",
+      email: "",
+      fullName: "",
+      address: "",
+      birthDate: undefined,
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
   }
+  useEffect(() => {
+    if (authStore.user) {
+      form.setValue("email", authStore.user?.email);
+      form.setValue("fullName", authStore.user?.fullName);
+      form.setValue("address", authStore.user?.address);
+      form.setValue("birthDate", new Date(authStore.user?.birthDate ?? ""));
+    }
+  }, [authStore]);
+
+  if (authStore.loading) return <Loader />;
   return (
     <div className="py-5">
       <div className="bg-white p-5 drop-shadow">
@@ -100,7 +125,7 @@ const ProfilePage = () => {
                     </FormItem>
                   )}
                 />
-                <FormField
+                {/* <FormField
                   control={form.control}
                   name="phoneNumber"
                   render={({ field }) => (
@@ -117,6 +142,61 @@ const ProfilePage = () => {
                         Họ tên và số điện thoại sẽ được tự động điền vào đơn
                         mua. Người dùng có thể chỉnh sửa khi mua hàng.
                       </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                /> */}
+                <FormField
+                  control={form.control}
+                  name="address"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Địa chỉ</FormLabel>
+                      <Input
+                        placeholder="Nhập địa chỉ"
+                        className="py-6"
+                        {...field}
+                      />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="birthDate"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col my-3">
+                      <FormLabel>Ngày sinh</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant={"outline"}
+                              className={cn(
+                                "w-[240px] pl-3 text-left font-normal",
+                                !field.value && "text-muted-foreground"
+                              )}
+                            >
+                              {field.value ? (
+                                formatDate(field.value)
+                              ) : (
+                                <span>Chọn ngày sinh</span>
+                              )}
+                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            disabled={(date) =>
+                              date > new Date() || date < new Date("1900-01-01")
+                            }
+                          />
+                        </PopoverContent>
+                      </Popover>
                       <FormMessage />
                     </FormItem>
                   )}

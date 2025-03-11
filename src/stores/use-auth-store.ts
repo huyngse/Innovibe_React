@@ -8,6 +8,7 @@ interface AuthState {
     loading: boolean;
     error: string | null;
     fetchUserInfo: () => Promise<void>;
+    logout: () => void;
     renderKey: number;
     rerender: () => void;
 }
@@ -33,6 +34,10 @@ const useAuthStore = create<AuthState>((set) => ({
             set({ loading: false, error: error.message });
         }
     },
+    logout: () => {
+        localStorage.clear();
+        set({ user: undefined });
+    }
 }));
 
 export default useAuthStore;
