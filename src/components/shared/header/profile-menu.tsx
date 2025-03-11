@@ -7,6 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import useAuthStore from "@/stores/use-auth-store";
 import {
   Bell,
   CircleUser,
@@ -51,6 +52,7 @@ const navItems = [
   },
 ];
 const ProfileMenu = () => {
+  const authStore = useAuthStore();
   const handleLogout = () => {
     console.log("Log out");
   };
@@ -65,7 +67,7 @@ const ProfileMenu = () => {
         <DropdownMenuLabel>
           <div>Tài khoản của tôi</div>
           <p className="text-zinc-500 text-sm font-normal">
-            customer@gmail.com
+            {authStore.user?.email}
           </p>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />

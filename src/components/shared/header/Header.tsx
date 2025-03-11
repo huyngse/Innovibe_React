@@ -75,12 +75,10 @@ const Header = () => {
               </Link>
             </div>
           )}
-          {token && authStore.user && (
-            <div className="flex gap-4">
-              <ProfileMenu />
-              <ShoppingCartButton />
-            </div>
-          )}
+          <div className="flex gap-4">
+            {token && authStore.user && <ProfileMenu />}
+            <ShoppingCartButton />
+          </div>
         </div>
       </MaxWidthWrapper>
     </header>

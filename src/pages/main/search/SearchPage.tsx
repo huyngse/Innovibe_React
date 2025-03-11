@@ -16,7 +16,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { IoIosArrowDown } from "react-icons/io";
-import { products } from "@/data/product-data";
 import ProductCard from "@/components/ProductCard";
 import {
   Pagination,
@@ -27,8 +26,20 @@ import {
   PaginationNext,
 } from "@/components/ui/pagination";
 import RecentlyViewed from "@/components/RecentlyViewed";
+import { useEffect } from "react";
+import useProductStore from "@/stores/use-product-store";
+import Loader from "@/components/Loader";
 
 const SearchPage = () => {
+  const productStore = useProductStore();
+  useEffect(() => {
+    productStore.fetchProducts();
+  }, []);
+
+  if (productStore.loading) {
+    return <Loader />;
+  }
+  console.log(productStore.products);
   return (
     <div>
       <Breadcrumb
@@ -158,7 +169,7 @@ const SearchPage = () => {
               </DropdownMenu>
             </div>
             <div className="grid grid-cols-4 gap-5 py-5">
-              {products.map((product, index: number) => {
+              {productStore.products.map((product, index: number) => {
                 return (
                   <div key={`new-arrival-${index}`} className="px-3">
                     <ProductCard product={product} />

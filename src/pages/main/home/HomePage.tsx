@@ -4,11 +4,18 @@ import Featured1 from "@/assets/imgs/featured_1.png";
 import Featured2 from "@/assets/imgs/featured_2.png";
 import TrustSignals from "./TrustSignals";
 import NewArrivals from "./NewArrivals";
-import SpecialOffer from "./SpecialOffer";
+// import SpecialOffer from "./SpecialOffer";
 import Hero from "./Hero";
 import Blogs from "./Blogs";
 import Features from "./Features";
+import useProductStore from "@/stores/use-product-store";
+import { useEffect } from "react";
 const HomePage = () => {
+  const productStore = useProductStore();
+  useEffect(() => {
+    productStore.fetchProducts();
+  }, []);
+
   return (
     <MaxWidthWrapper>
       <div className="mt-5 mb-10">

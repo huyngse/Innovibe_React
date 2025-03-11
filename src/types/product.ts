@@ -7,7 +7,7 @@ export type Product = {
     images: ProductImage[],
     description: string,
     discount?: number,
-    createdAt: string,
+    createAt: string,
     brand: {
         brandId: number,
         name: string,

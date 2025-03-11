@@ -13,7 +13,7 @@ export const handleApiError = (error: any) => {
 export const getAllProduct = async () => {
     try {
         const { data } = await axiosClient.get(`/api/products`);
-        return { error: null, data: data.data, success: true };
+        return { error: null, data: data, success: true };
     } catch (error) {
         return handleApiError(error);
     }
@@ -22,7 +22,7 @@ export const getAllProduct = async () => {
 export const getProductById = async (id: number) => {
     try {
         const { data } = await axiosClient.get(`/api/products/${id}`);
-        return { error: null, data: data.data, success: true };
+        return { error: null, data: data, success: true };
     } catch (error) {
         return handleApiError(error);
     }

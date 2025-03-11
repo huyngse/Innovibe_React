@@ -47,7 +47,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             : formatCurrencyVND(product.price)}
         </p>
         <p className="text-xs line-through decoration-red-500 decoration-1 font-semibold">
-          {product.discount && formatCurrencyVND(product.price)}
+          {product.discount != 0 && formatCurrencyVND(product.price)}
         </p>
       </div>
       <div className="text-center absolute top-40 z-10 left-1/2 w-full -translate-x-1/2">
