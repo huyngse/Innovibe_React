@@ -38,7 +38,7 @@ const OrderDetailPage = () => {
           Thông tin đơn hàng
         </h1>
         <hr />
-        <OrderStatus status={order.status}/>
+        <OrderStatus status={order.status} />
         <hr />
         <div className="p-3">
           <div className="flex justify-between text-lg font-semibold">
@@ -113,18 +113,18 @@ const OrderDetailPage = () => {
             return (
               <div key={i} className="flex justify-between gap-3 p-3 border-y">
                 <img
-                  src={item.image}
+                  src={item.images[0].imageURL}
                   alt="product image"
                   width={75}
                   height={75}
                   className="object-cover"
                 />
                 <div className="flex-1">
-                  <Link to={`/product/${item.id}`}>
-                    <div>{item.productName}</div>
+                  <Link to={`/product/${item.productId}`}>
+                    <div>{item.name}</div>
                   </Link>
                   <div className="text-gray-500">
-                    Phân loại: {item.category}
+                    Phân loại: {item.category.name}
                   </div>
                   <div>Số lượng: {item.quantity}</div>
                   <p className="font-semibold">
