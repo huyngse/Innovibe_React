@@ -20,6 +20,7 @@ import BassTunerPage from "@/pages/main/tunner/bass-tuner-page";
 import ElectricTunerPage from "@/pages/main/tunner/electric-tuner-page";
 import ProfileContainer from "./profile-container";
 import BlogDetailPage from "@/pages/main/blog-detail/blog-detail-page";
+import PaymentPage from "@/pages/main/check-out/Payment";
 
 const MainContainer = () => {
   return (
@@ -39,6 +40,7 @@ const MainContainer = () => {
             <Route path="/second-hand" element={<ComingSoon />} />
             <Route path="/cart" element={<ViewCartPage />} />
             <Route path="/check-out" element={<CheckOutPage />} />
+            <Route path="/payment/:orderId" element={<PaymentPage />} />
             <Route path="/product/:productId" element={<ProductDetailPage />} />
             <Route path="/acoustic-tuner" element={<AcousticTunerPage />} />
             <Route path="/bass-tuner" element={<BassTunerPage />} />

@@ -56,7 +56,19 @@ const CheckOutForm = () => {
   const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {},
+    defaultValues: {
+      company: "",
+      billingAddress: "",
+      district: "",
+      email: "",
+      fullName: "",
+      paymentMethod: undefined,
+      phone: "",
+      province: undefined,
+      shippingMethod: undefined,
+      street: "",
+      ward: undefined,
+    },
   });
   const authStore = useAuthStore();
   const cartStore = useCartStore();
@@ -94,6 +106,7 @@ const CheckOutForm = () => {
         theme: "light",
       });
     } else {
+      console.log(result);
       toast.success("Tạo đơn hàng thành công", {
         position: "top-right",
         autoClose: 5000,
@@ -106,7 +119,7 @@ const CheckOutForm = () => {
       });
       setTimeout(() => {
         cartStore.clearCart();
-        navigate("/profile/order");
+        navigate(`/payment/${result.data.orderId}`);
       }, 1000);
     }
   }
@@ -394,7 +407,7 @@ const CheckOutForm = () => {
                     )}
                   >
                     <FormControl>
-                      <RadioGroupItem value="payment-1" />
+                      <RadioGroupItem value="payment-1" disabled />
                     </FormControl>
                     <FormLabel>Thanh toán khi nhận hàng (COD)</FormLabel>
                   </FormItem>
@@ -407,7 +420,7 @@ const CheckOutForm = () => {
                     <FormControl>
                       <RadioGroupItem value="payment-2" />
                     </FormControl>
-                    <FormLabel>Giao hàng trả trước (PPD)</FormLabel>
+                    <FormLabel>Thanh toán Online</FormLabel>
                   </FormItem>
                 </RadioGroup>
               </FormControl>

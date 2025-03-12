@@ -46,3 +46,12 @@ export const createOrder = async (request: CreateOrderRequest) => {
         return handleApiError(error);
     }
 }
+
+export const payOrder = async (orderId: number) => {
+    try {
+        const { data } = await axiosClient.post(`/api/payments/vnpay?orderId=${orderId}`);
+        return { error: null, data: data, success: true };
+    } catch (error) {
+        return handleApiError(error);
+    }
+}
