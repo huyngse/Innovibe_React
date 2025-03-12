@@ -18,9 +18,23 @@ import EmptyCart from "../EmptyCart";
 
 const ShoppingCartButton = () => {
   const store = useCartStore();
+  const totalItems = store.items.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
   return (
     <Sheet>
-      <SheetTrigger className="flex items-center">
+      <SheetTrigger className="flex items-center relative">
+        {store.items.length > 0 && (
+          <p
+            className="bg-red-500 text-white rounded-full size-4 -top-2 -right-2 absolute font-semibold"
+            style={{ fontSize: "10px" }}
+          >
+            {totalItems}
+          </p>
+        )}
+
         <FaShoppingCart className="h-5 w-5" />
       </SheetTrigger>
       <SheetContent className="min-w-[450px] flex flex-col">
