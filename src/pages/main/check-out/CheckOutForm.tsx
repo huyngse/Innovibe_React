@@ -32,6 +32,7 @@ import useAuthStore from "@/stores/use-auth-store";
 import useCartStore from "@/stores/use-cart-store";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { Loader } from "lucide-react";
 const formSchema = z.object({
   email: z.string().email("Địa chỉ email không hợp lệ"),
   phone: z
@@ -50,6 +51,7 @@ const formSchema = z.object({
 });
 const CheckOutForm = () => {
   const [districts, setDistricts] = useState<DistrictType[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [wards, setWards] = useState<Array<WardType | { Level: string }>>([]);
   const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -59,11 +61,13 @@ const CheckOutForm = () => {
   const authStore = useAuthStore();
   const cartStore = useCartStore();
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
     const result = await createOrder({
       accountId: authStore.user?.accountId ?? "",
       orderItems: cartStore.items.map((item) => ({
         productId: item.product.productId,
         quantity: item.quantity,
+        price: item.quantity * item.product.price,
       })),
       orderStatus: "Pending",
       shippingAddress:
@@ -77,6 +81,7 @@ const CheckOutForm = () => {
       total: cartStore.total,
       couponId: undefined,
     });
+    setIsSubmitting(false);
     if (result.error) {
       toast.error("Tạo đơn hàng thất bại", {
         position: "top-right",
@@ -100,6 +105,7 @@ const CheckOutForm = () => {
         theme: "light",
       });
       setTimeout(() => {
+        cartStore.clearCart();
         navigate("/profile/order");
       }, 1000);
     }
@@ -451,8 +457,16 @@ const CheckOutForm = () => {
             </FormItem>
           )}
         />
-        <Button className="my-5 w-full py-6" type="submit">
-          Hoàn tất đơn hàng
+        <Button
+          className="my-5 w-full py-6"
+          type="submit"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <Loader className="animate-spin" />
+          ) : (
+            "Hoàn tất đơn hàng"
+          )}
         </Button>
       </form>
     </Form>

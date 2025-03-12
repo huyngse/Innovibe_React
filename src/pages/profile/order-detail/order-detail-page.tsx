@@ -171,7 +171,7 @@ const OrderDetailPage = () => {
           <HandCoins className="mt-1" />
           <div>
             <p className="text-lg font-semibold">Phương thức thanh toán</p>
-            <p className="text-gray-500">Thanh toán khi nhận hàng</p>
+            <p className="text-gray-500">Thanh toán online</p>
           </div>
         </div>
       </div>
