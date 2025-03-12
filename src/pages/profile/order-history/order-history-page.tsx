@@ -23,7 +23,7 @@ const OrderHistoryPage = () => {
       <div className="overflow-auto flex">
         {orderStatus.map((item, index: number) => {
           const numOfOrders = orderStore.orders.filter(
-            (order) => order.status == item.value
+            (order) => order.orderStatus == item.value
           ).length;
           return (
             <Button

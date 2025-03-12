@@ -9,16 +9,16 @@ import { toast } from "sonner";
 import OrderStatus from "@/components/order-status";
 const OrderDetailPage = () => {
   const { orderId } = useParams();
-  const order = guitarOrders.find((i) => i.id.toString() == orderId);
+  const order = guitarOrders.find((i) => i.orderId.toString() == orderId);
   if (order == null) {
     return <OrderNotfound />;
   }
-  const subtotal = order.items.reduce(
+  const subtotal = order.orderItems.reduce(
     (accumlator, currentValue) =>
       accumlator + currentValue.price * currentValue.quantity,
     0
   );
-  const total = subtotal + order.shippingFee;
+  const total = subtotal + 0;
   const copyToClipboard = (value: string) => {
     navigator.clipboard
       .writeText(value)
@@ -38,17 +38,17 @@ const OrderDetailPage = () => {
           Thông tin đơn hàng
         </h1>
         <hr />
-        <OrderStatus status={order.status} />
+        <OrderStatus status={order.orderStatus} />
         <hr />
         <div className="p-3">
           <div className="flex justify-between text-lg font-semibold">
             <p>Mã đơn hàng:</p>
             <p>
-              {order.orderId}{" "}
+              {order.orderNumber}{" "}
               <button
                 className="ms-3 text-blue-500 bg-blue-50 px-3 rounded"
                 onClick={() => {
-                  copyToClipboard(order.orderId);
+                  copyToClipboard(order.orderNumber);
                 }}
               >
                 Sao chép
@@ -59,30 +59,30 @@ const OrderDetailPage = () => {
             <p>Thời gian đặt hàng:</p>
             <p>{formatDateTime(new Date(order.orderDate))}</p>
           </div>
-          <div className="flex justify-between text-gray-500">
+          {/* <div className="flex justify-between text-gray-500">
             <p>Thời gian thanh toán:</p>
             {order.paymentDate ? (
               <p>{formatDateTime(new Date(order.paymentDate))}</p>
             ) : (
               <p>--:-- --/--/----</p>
             )}
-          </div>
-          <div className="flex justify-between text-gray-500">
+          </div> */}
+          {/* <div className="flex justify-between text-gray-500">
             <p>Thời gian giao hàng cho vận chuyển:</p>
             {order.shippingDate ? (
               <p>{formatDateTime(new Date(order.shippingDate))}</p>
             ) : (
               <p>--:-- --/--/----</p>
             )}
-          </div>
-          <div className="flex justify-between text-gray-500">
+          </div> */}
+          {/* <div className="flex justify-between text-gray-500">
             <p>Thời gian hoàn thành:</p>
             {order.deliveryDate ? (
               <p>{formatDateTime(new Date(order.deliveryDate))}</p>
             ) : (
               <p>--:-- --/--/----</p>
             )}
-          </div>
+          </div> */}
         </div>
         <hr />
         <div className="flex gap-3 py-3">
@@ -94,7 +94,7 @@ const OrderDetailPage = () => {
                 className="text-blue-500 bg-blue-50 px-3 rounded font-semibold"
                 onClick={() => {
                   copyToClipboard(
-                    `${order.customerName}; ${order.phone}; ${order.shippingAddress}`
+                    `${order.accountFullName}; ${order.shippingAddress}`
                   );
                 }}
               >
@@ -102,14 +102,14 @@ const OrderDetailPage = () => {
               </button>
             </div>
             <div className="text-gray-500">
-              <p>{order.customerName}</p>
-              <p>{order.phone}</p>
+              <p>{order.accountFullName}</p>
+              {/* <p>{order.phone}</p> */}
               <p>{order.shippingAddress}</p>
             </div>
           </div>
         </div>
         <div className="flex flex-col py-3">
-          {order.items.map((item, i: number) => {
+          {order.orderItems.map((item, i: number) => {
             return (
               <div key={i} className="flex justify-between gap-3 p-3 border-y">
                 <img
@@ -142,7 +142,8 @@ const OrderDetailPage = () => {
           </div>
           <div className="flex justify-between  text-gray-500">
             <p>Phí vận chuyển:</p>
-            <p>{formatCurrencyVND(order.shippingFee)}</p>
+            {/* <p>{formatCurrencyVND(order.shippingFee)}</p> */}
+            <p>Miễn phí</p>
           </div>
           <div className="flex justify-between text-lg">
             <p>Thành tiền:</p>

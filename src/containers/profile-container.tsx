@@ -1,3 +1,4 @@
+import TechnicalIssuePage from "@/components/TechnicalIssuePage";
 import NotFound from "@/components/shared/NotFound";
 import ProfileLayout from "@/layouts/profile-layout";
 import FavouritePage from "@/pages/profile/favourite/favourite-page";
@@ -16,6 +17,7 @@ const ProfileContainer = () => {
   if (!token || !authStore) {
     navigate("/log-in");
   }
+  if (authStore.error) return <TechnicalIssuePage />;
   return (
     <ProfileLayout>
       <Routes>

@@ -28,7 +28,7 @@ const useOrderStore = create<OrderState>((set) => ({
         try {
             const response = await getOrderByUserId(userId);
             if (!response.error) {
-                set({ order: response.data, loading: false });
+                set({ orders: response.data, loading: false });
             } else {
                 set({ loading: false, error: response.error });
             }

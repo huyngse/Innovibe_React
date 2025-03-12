@@ -7,16 +7,16 @@ import { Link } from "react-router-dom";
 
 const OrderCard = ({ order }: { order: Order }) => {
   let status =
-    orderStatus.find((i) => i.value == order.status)?.label ?? order.status;
+    orderStatus.find((i) => i.value == order.orderStatus)?.label ?? order.orderStatus;
   return (
     <div className="bg-white rounded p-3">
-      <div className="text-lg font-semibold">Đơn {order.orderId}</div>
+      <div className="text-lg font-semibold">Đơn {order.orderNumber}</div>
       <div className="text-gray-500">
         Ngày đặt: {formatDate(new Date(order.orderDate))}
       </div>
       <div>Trạng thái: {status}</div>
       <div className="flex flex-col py-3">
-        {order.items.map((item, i: number) => {
+        {order.orderItems.map((item, i: number) => {
           return (
             <div key={i} className="flex justify-between gap-3 p-3 border-y">
               <img
@@ -50,7 +50,7 @@ const OrderCard = ({ order }: { order: Order }) => {
       </div>
       <div className="flex justify-end gap-3">
         <Button variant={"outline"}>Hủy Đơn Hàng</Button>
-        <Link to={`/profile/order/${order.id}`}>
+        <Link to={`/profile/order/${order.orderId}`}>
           <Button variant={"default"}>Xem chi tiết</Button>
         </Link>
       </div>
