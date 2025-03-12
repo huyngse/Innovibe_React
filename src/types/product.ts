@@ -12,16 +12,8 @@ export type Product = {
     description: string,
     discount?: number,
     createAt: string,
-    brand: {
-        brandId: number,
-        name: string,
-        description: string,
-    },
-    category: {
-        categoryId: number,
-        name: string,
-        description: string,
-    },
+    brand: Brand,
+    category: Category,
 }
 
 export type ProductImage = {
@@ -29,4 +21,20 @@ export type ProductImage = {
     productId: number,
     imageURL: string,
     position: number,
+}
+
+export type Category = {
+    categoryId: number,
+    name: string,
+    description: string,
+    createAt: string,
+    updateAt: string
+}
+
+export type Brand = {
+    brandId: number,
+    name: string,
+    description: string,
+    createAt: string,
+    updateAt: string
 }

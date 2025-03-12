@@ -6,8 +6,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import brandData from "@/mock-data/brands.json";
-import categoriesData from "@/mock-data/categories.json";
 import { Link } from "react-router-dom";
 import {
   DropdownMenu,
@@ -29,11 +27,19 @@ import RecentlyViewed from "@/components/RecentlyViewed";
 import { useEffect } from "react";
 import useProductStore from "@/stores/use-product-store";
 import Loader from "@/components/Loader";
+import useBrandStore from "@/stores/use-brand-store";
+import useCategoryStore from "@/stores/use-category-store";
+import { Skeleton } from "@/components/ui/skeleton";
+import TechnicalIssuePage from "@/components/TechnicalIssuePage";
 
 const SearchPage = () => {
   const productStore = useProductStore();
+  const brandStore = useBrandStore();
+  const categoryStore = useCategoryStore();
   useEffect(() => {
     productStore.fetchProducts();
+    brandStore.fetchBrands();
+    categoryStore.fetchCategories();
   }, []);
 
   if (productStore.loading) {
@@ -56,22 +62,28 @@ const SearchPage = () => {
                 <AccordionTrigger className="uppercase font-semibold">
                   Danh mục
                 </AccordionTrigger>
-                {categoriesData.map((category: any, index: number) => {
-                  return (
-                    <AccordionContent key={`filter-category-${index}`}>
-                      <Link to={`/search?category=${category.id}`}>
-                        {category.categoryName}
-                      </Link>
-                    </AccordionContent>
-                  );
-                })}
+                {categoryStore.loading && (
+                  <Skeleton className="h-4 w-[150px]" />
+                )}
+                {categoryStore.categories.map(
+                  (category: any, index: number) => {
+                    return (
+                      <AccordionContent key={`filter-category-${index}`}>
+                        <Link to={`/search?category=${category.id}`}>
+                          {category.categoryName}
+                        </Link>
+                      </AccordionContent>
+                    );
+                  }
+                )}
               </AccordionItem>
               <hr className="border-black" />
               <AccordionItem value="brand" className="border-none">
                 <AccordionTrigger className="uppercase font-semibold">
                   Thương hiệu
                 </AccordionTrigger>
-                {brandData.map((brand: any, index: number) => {
+                {brandStore.loading && <Skeleton className="h-4 w-[150px]" />}
+                {brandStore.brands.map((brand: any, index: number) => {
                   return (
                     <AccordionContent key={`filter-brand-${index}`}>
                       <Link to={`/search?brand=${brand.id}`}>
@@ -128,7 +140,7 @@ const SearchPage = () => {
           </div>
           <div className="col-span-9">
             <h1 className="text-3xl font-extrabold uppercase text-center py-3">
-              Search Products
+              Tìm kiếm sản phẩm
             </h1>
             <hr className="border-black mb-3" />
             <div className="flex gap-5">
@@ -168,6 +180,9 @@ const SearchPage = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
+            {!productStore.loading && productStore.error && (
+              <TechnicalIssuePage />
+            )}
             <div className="grid grid-cols-4 gap-5 py-5">
               {productStore.products.map((product, index: number) => {
                 return (
