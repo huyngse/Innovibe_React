@@ -20,20 +20,22 @@ const OrderCard = ({ order }: { order: Order }) => {
           return (
             <div key={i} className="flex justify-between gap-3 p-3 border-y">
               <img
-                src={item.image}
+                src={item.images[0].imageURL}
                 alt="product image"
                 width={75}
                 height={75}
                 className="object-cover"
               />
               <div className="flex-1">
-                <Link to={`/product/${item.id}`}>
-                  <div>{item.productName}</div>
+                <Link to={`/product/${item.productId}`}>
+                  <div>{item.name}</div>
                 </Link>
-                <div className="text-gray-500">Phân loại: {item.category}</div>
+                <div className="text-gray-500">
+                  Phân loại: {item.category.name}
+                </div>
                 <div>Số lượng: {item.quantity}</div>
                 <Link
-                  to={`/product/${item.id}`}
+                  to={`/product/${item.productId}`}
                   className="text-blue-500 underline text-sm"
                 >
                   Xem sản phẩm

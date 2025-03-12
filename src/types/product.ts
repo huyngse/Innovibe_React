@@ -1,7 +1,11 @@
 export type Product = {
     productId: number,
     name: string,
-    status: string,
+    status: | "In Stock"
+    | "Out of Stock"
+    | "Pending"
+    | "In Transit"
+    | "Discontinued",
     price: number,
     quantity: number,
     images: ProductImage[],

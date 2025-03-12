@@ -1,3 +1,5 @@
+import { Product } from "./product"
+
 export type Order = {
     id: number,
     orderId: string,
@@ -10,14 +12,6 @@ export type Order = {
     shippingFee: number,
     phone: string,
     paymentMethod: string,
-    items: {
-        id: number,
-        productName: string,
-        status: string,
-        price: number,
-        category: string,
-        image: string,
-        quantity: number,
-    }[],
+    items: Product[],
     status: "Shipped" | "Pending" | "Processing" | "Delivered" | "Cancelled" | "Returned"
 }

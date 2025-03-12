@@ -3,9 +3,33 @@ import CheckOutForm from "./CheckOutForm";
 import OrderSummary from "../cart/OrderSummary";
 import CartItem from "./CartItem";
 import useCartStore from "@/stores/use-cart-store";
+import useAuthStore from "@/stores/use-auth-store";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const CheckOutPage = () => {
   const store = useCartStore();
+  const authStore = useAuthStore();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (authStore.user == null) {
+      toast.error("Vui lòng đăng nhập để tiếp tục", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        navigate("/log-in");
+      }, 1000);
+    }
+  }, []);
+
   return (
     <MaxWidthWrapper className="py-10">
       <div className="grid grid-cols-12 gap-5">
@@ -21,7 +45,7 @@ const CheckOutPage = () => {
               <p className="text-lg font-bold">
                 Giỏ hàng của bạn{" "}
                 <span className="text-sm font-normal text-gray-500">
-                  (2 mặt hàng)
+                  ({store.items.length} mặt hàng)
                 </span>
               </p>
             </div>

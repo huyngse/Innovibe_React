@@ -27,6 +27,11 @@ import { z } from "zod";
 import { Label } from "@/components/ui/label";
 import { DistrictType, WardType, isWardType } from "@/types/address";
 import addresses from "@/data/vietnamAddress.json";
+import { createOrder } from "@/lib/api/order-api";
+import useAuthStore from "@/stores/use-auth-store";
+import useCartStore from "@/stores/use-cart-store";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const formSchema = z.object({
   email: z.string().email("Địa chỉ email không hợp lệ"),
   phone: z
@@ -46,12 +51,58 @@ const formSchema = z.object({
 const CheckOutForm = () => {
   const [districts, setDistricts] = useState<DistrictType[]>([]);
   const [wards, setWards] = useState<Array<WardType | { Level: string }>>([]);
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {},
   });
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  const authStore = useAuthStore();
+  const cartStore = useCartStore();
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const result = await createOrder({
+      accountId: authStore.user?.accountId ?? "",
+      orderItems: cartStore.items.map((item) => ({
+        productId: item.product.productId,
+        quantity: item.quantity,
+      })),
+      orderStatus: "Pending",
+      shippingAddress:
+        values.street +
+        ", " +
+        values.ward +
+        ", " +
+        values.district +
+        ", " +
+        values.province,
+      total: cartStore.total,
+      couponId: undefined,
+    });
+    if (result.error) {
+      toast.error("Tạo đơn hàng thất bại", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.success("Tạo đơn hàng thành công", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        navigate("/profile/order");
+      }, 1000);
+    }
   }
 
   const provinceStore = useProvinceStore((state) => state);
@@ -157,7 +208,7 @@ const CheckOutForm = () => {
                 <FormLabel>Thành phố/Tỉnh</FormLabel>
                 <Select
                   onValueChange={(value) => {
-                    field.onChange("value");
+                    field.onChange(value);
                     form.resetField("district");
                     form.resetField("ward");
                     onCityChange(value);

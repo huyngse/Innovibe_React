@@ -17,7 +17,6 @@ const NewArrivals = () => {
     pauseOnHover: true,
   };
   function getLatestProducts(products: Product[]) {
-    console.log(productStore.product);
     const sortedProducts = products.sort(
       (a, b) => new Date(b.createAt).getTime() - new Date(a.createAt).getTime()
     );
