@@ -1,5 +1,5 @@
 
-import { getAllCategories } from '@/lib/api/category-api';
+import { getAllBrands } from '@/lib/api/brand-api';
 import { Brand } from '@/types/product';
 import { create } from 'zustand';
 
@@ -24,7 +24,7 @@ const useBrandStore = create<BrandState>((set) => ({
     fetchBrands: async () => {
         set({ loading: true, error: null });
         try {
-            const response = await getAllCategories();
+            const response = await getAllBrands();
             if (!response.error) {
                 set({ brands: response.data, loading: false });
             } else {

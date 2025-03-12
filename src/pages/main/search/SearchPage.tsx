@@ -29,8 +29,6 @@ import useProductStore from "@/stores/use-product-store";
 import Loader from "@/components/Loader";
 import useBrandStore from "@/stores/use-brand-store";
 import useCategoryStore from "@/stores/use-category-store";
-import { Skeleton } from "@/components/ui/skeleton";
-import TechnicalIssuePage from "@/components/TechnicalIssuePage";
 
 const SearchPage = () => {
   const productStore = useProductStore();
@@ -62,32 +60,26 @@ const SearchPage = () => {
                 <AccordionTrigger className="uppercase font-semibold">
                   Danh mục
                 </AccordionTrigger>
-                {categoryStore.loading && (
-                  <Skeleton className="h-4 w-[150px]" />
-                )}
-                {categoryStore.categories.map(
-                  (category: any, index: number) => {
-                    return (
-                      <AccordionContent key={`filter-category-${index}`}>
-                        <Link to={`/search?category=${category.id}`}>
-                          {category.categoryName}
-                        </Link>
-                      </AccordionContent>
-                    );
-                  }
-                )}
+                {categoryStore.categories.map((category, index: number) => {
+                  return (
+                    <AccordionContent key={`filter-category-${index}`}>
+                      <Link to={`/search?category=${category.categoryId}`}>
+                        {category.name}
+                      </Link>
+                    </AccordionContent>
+                  );
+                })}
               </AccordionItem>
               <hr className="border-black" />
               <AccordionItem value="brand" className="border-none">
                 <AccordionTrigger className="uppercase font-semibold">
                   Thương hiệu
                 </AccordionTrigger>
-                {brandStore.loading && <Skeleton className="h-4 w-[150px]" />}
-                {brandStore.brands.map((brand: any, index: number) => {
+                {brandStore.brands.map((brand, index: number) => {
                   return (
                     <AccordionContent key={`filter-brand-${index}`}>
-                      <Link to={`/search?brand=${brand.id}`}>
-                        {brand.brandName}
+                      <Link to={`/search?brand=${brand.brandId}`}>
+                        {brand.name}
                       </Link>
                     </AccordionContent>
                   );
@@ -180,9 +172,6 @@ const SearchPage = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
-            {!productStore.loading && productStore.error && (
-              <TechnicalIssuePage />
-            )}
             <div className="grid grid-cols-4 gap-5 py-5">
               {productStore.products.map((product, index: number) => {
                 return (
