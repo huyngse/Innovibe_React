@@ -1,5 +1,4 @@
 import { HandCoins, MapPin } from "lucide-react";
-import { guitarOrders } from "@/mock-data/orders";
 import { Link, useParams } from "react-router-dom";
 import OrderNotfound from "./order-not-found";
 import { formatCurrencyVND } from "@/lib/currency";
@@ -7,17 +6,30 @@ import { formatDateTime } from "@/utils/date";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import OrderStatus from "@/components/order-status";
+import useOrderStore from "@/stores/use-order-store";
+import Loader from "@/components/Loader";
+import { useEffect } from "react";
 const OrderDetailPage = () => {
+  const orderStore = useOrderStore();
   const { orderId } = useParams();
-  const order = guitarOrders.find((i) => i.orderId.toString() == orderId);
-  if (order == null) {
+  useEffect(() => {
+    if (orderId) {
+      orderStore.fetchOrder(parseInt(orderId));
+    }
+  }, []);
+
+  if (orderId == null) {
     return <OrderNotfound />;
   }
-  const subtotal = order.orderItems.reduce(
-    (accumlator, currentValue) =>
-      accumlator + currentValue.price * currentValue.quantity,
-    0
-  );
+  if (!orderStore.loading && orderStore.order == null) {
+    return <OrderNotfound />;
+  }
+  const subtotal =
+    orderStore.order?.orderItems.reduce(
+      (accumlator, currentValue) =>
+        accumlator + currentValue.price * currentValue.quantity,
+      0
+    ) ?? 0;
   const total = subtotal + 0;
   const copyToClipboard = (value: string) => {
     navigator.clipboard
@@ -31,6 +43,8 @@ const OrderDetailPage = () => {
         toast("Không thể sao chép!");
       });
   };
+  if (orderStore.loading) return <Loader />;
+  if (orderStore.order == undefined) return;
   return (
     <>
       <div className="my-3 p-3 rounded bg-white drop-shadow">
@@ -38,17 +52,17 @@ const OrderDetailPage = () => {
           Thông tin đơn hàng
         </h1>
         <hr />
-        <OrderStatus status={order.orderStatus} />
+        <OrderStatus status={orderStore.order.orderStatus} />
         <hr />
         <div className="p-3">
           <div className="flex justify-between text-lg font-semibold">
             <p>Mã đơn hàng:</p>
             <p>
-              {order.orderNumber}{" "}
+              {orderStore.order.orderNumber}{" "}
               <button
                 className="ms-3 text-blue-500 bg-blue-50 px-3 rounded"
                 onClick={() => {
-                  copyToClipboard(order.orderNumber);
+                  copyToClipboard(orderStore.order!.orderNumber);
                 }}
               >
                 Sao chép
@@ -57,7 +71,7 @@ const OrderDetailPage = () => {
           </div>
           <div className="flex justify-between text-gray-500">
             <p>Thời gian đặt hàng:</p>
-            <p>{formatDateTime(new Date(order.orderDate))}</p>
+            <p>{formatDateTime(new Date(orderStore.order.orderDate))}</p>
           </div>
           {/* <div className="flex justify-between text-gray-500">
             <p>Thời gian thanh toán:</p>
@@ -94,7 +108,9 @@ const OrderDetailPage = () => {
                 className="text-blue-500 bg-blue-50 px-3 rounded font-semibold"
                 onClick={() => {
                   copyToClipboard(
-                    `${order.accountFullName}; ${order.shippingAddress}`
+                    `${orderStore.order!.accountFullName}; ${
+                      orderStore.order!.shippingAddress
+                    }`
                   );
                 }}
               >
@@ -102,14 +118,14 @@ const OrderDetailPage = () => {
               </button>
             </div>
             <div className="text-gray-500">
-              <p>{order.accountFullName}</p>
+              <p>{orderStore.order!.accountFullName}</p>
               {/* <p>{order.phone}</p> */}
-              <p>{order.shippingAddress}</p>
+              <p>{orderStore.order!.shippingAddress}</p>
             </div>
           </div>
         </div>
         <div className="flex flex-col py-3">
-          {order.orderItems.map((item, i: number) => {
+          {orderStore.order.orderItems.map((item, i: number) => {
             return (
               <div key={i} className="flex justify-between gap-3 p-3 border-y">
                 <img
