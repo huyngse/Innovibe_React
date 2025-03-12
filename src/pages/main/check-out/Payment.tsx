@@ -12,8 +12,25 @@ const PaymentPage = () => {
   const { orderId } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
-    fetchOrder();
+    if (orderId) {
+      orderStore.fetchOrder(parseInt(orderId));
+    }
   }, []);
+  useEffect(() => {
+    if (!orderStore.loading) {
+      if (orderStore.error) {
+        navigate("/");
+      } else {
+        if (orderStore.order) {
+          if (orderStore.order.orderStatus == "Pending") {
+            fetchPaymentUrl();
+          } else {
+            setIsPaid(true);
+          }
+        }
+      }
+    }
+  }, [orderStore]);
 
   const fetchPaymentUrl = async () => {
     if (orderId) {
@@ -26,25 +43,6 @@ const PaymentPage = () => {
         window.location.href = result.data.vnPayUrl;
       }
       setIsLoading(false);
-    } else {
-      navigate("/");
-    }
-  };
-  const fetchOrder = async () => {
-    if (orderId) {
-      await orderStore.fetchOrder(parseInt(orderId));
-      if (!orderStore.order) {
-        navigate("/");
-      } else {
-        if (orderStore.order.orderStatus == "Pending") {
-          fetchPaymentUrl();
-        } else {
-          setIsPaid(true);
-          setTimeout(() => {
-            navigate(`/profile/order/${orderId}`);
-          }, 3000);
-        }
-      }
     }
   };
 
