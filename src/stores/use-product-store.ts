@@ -11,6 +11,7 @@ interface ProductState {
     error: string | null;
     fetchProducts: () => Promise<void>;
     fetchProduct: (id: number) => Promise<void>;
+    setProduct: (products: Product[]) => void;
     renderKey: number;
     rerender: () => void;
 }
@@ -29,7 +30,8 @@ const useProductStore = create<ProductState>((set) => ({
         try {
             const response = await getAllProduct();
             if (!response.error) {
-                set({ products: response.data, loading: false });
+                const avaialbeProducts = response.data.filter((product: Product) => product.status == "In Stock");
+                set({ products: avaialbeProducts, loading: false });
             } else {
                 set({ loading: false, error: response.error });
             }
@@ -50,6 +52,9 @@ const useProductStore = create<ProductState>((set) => ({
             set({ loading: false, error: error.message });
         }
     },
+    setProduct: (products) => {
+        set({ products: products });
+    }
 }));
 
 export default useProductStore;

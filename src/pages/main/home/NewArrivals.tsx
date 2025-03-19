@@ -17,7 +17,10 @@ const NewArrivals = () => {
     pauseOnHover: true,
   };
   function getLatestProducts(products: Product[]) {
-    const sortedProducts = products.sort(
+    const availableProducts = products.filter(
+      (product) => product.status == "In Stock"
+    );
+    const sortedProducts = availableProducts.sort(
       (a, b) => new Date(b.createAt).getTime() - new Date(a.createAt).getTime()
     );
     return sortedProducts.slice(0, 6);

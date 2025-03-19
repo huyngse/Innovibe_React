@@ -43,7 +43,6 @@ const SearchPage = () => {
   if (productStore.loading) {
     return <Loader />;
   }
-  console.log(productStore.products);
   return (
     <div>
       <Breadcrumb
