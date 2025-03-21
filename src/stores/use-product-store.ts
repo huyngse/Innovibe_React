@@ -1,15 +1,19 @@
-
-import { getAllProduct, getProductById } from '@/lib/api/product-api';
-import { Product } from '@/types/product';
 import { create } from 'zustand';
-
+import { getAllProduct, getProductById, searchProducts } from '@/lib/api/product-api';
+import { Product } from '@/types/product';
 
 interface ProductState {
     products: Product[];
     product?: Product;
     loading: boolean;
     error: string | null;
-    fetchProducts: () => Promise<void>;
+    totalProducts: number;  
+    fetchProducts: (filters?: {
+        categoryName?: string;
+        brandName?: string;
+        pageNumber?: number;
+        pageSize?: number;
+    }) => Promise<void>;
     fetchProduct: (id: number) => Promise<void>;
     setProduct: (products: Product[]) => void;
     renderKey: number;
@@ -21,22 +25,53 @@ const useProductStore = create<ProductState>((set) => ({
     loading: false,
     product: undefined,
     error: null,
+    totalProducts: 0, 
     renderKey: 0,
     rerender: () => {
-        set(prev => ({ renderKey: prev.renderKey + 1 }))
+        set(prev => ({ renderKey: prev.renderKey + 1 }));
     },
-    fetchProducts: async () => {
+    fetchProducts: async (filters = {}) => {
         set({ loading: true, error: null });
         try {
-            const response = await getAllProduct();
-            if (!response.error) {
-                const avaialbeProducts = response.data.filter((product: Product) => product.status == "In Stock");
-                set({ products: avaialbeProducts, loading: false });
+            let response;
+            console.log("Filters applied:", filters);
+            
+            if (filters.categoryName || filters.brandName) {
+                response = await searchProducts(
+                    filters.brandName,
+                    filters.categoryName,
+                    filters.pageNumber,
+                    filters.pageSize
+                );
             } else {
-                set({ loading: false, error: response.error });
+                response = await getAllProduct();
+            }
+
+            if (!response.error) {
+                const fetchedProducts = response.data.items || response.data || [];
+                const availableProducts = fetchedProducts.filter(
+                    (product: Product) => product.status === "In Stock"
+                );
+                console.log("Fetched products in store:", availableProducts);
+                
+                set({ 
+                    products: availableProducts, 
+                    totalProducts: response.data.total || fetchedProducts.length,
+                    loading: false 
+                });
+            } else {
+                set({ 
+                    loading: false, 
+                    error: response.error,
+                    totalProducts: 0 
+                });
             }
         } catch (error: any) {
-            set({ loading: false, error: error.message });
+            set({ 
+                loading: false, 
+                error: error.message,
+                totalProducts: 0 
+            });
         }
     },
     fetchProduct: async (id: number) => {
@@ -54,7 +89,7 @@ const useProductStore = create<ProductState>((set) => ({
     },
     setProduct: (products) => {
         set({ products: products });
-    }
+    },
 }));
 
 export default useProductStore;
