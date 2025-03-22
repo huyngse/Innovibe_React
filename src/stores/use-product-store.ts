@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { getAllProduct, getProductById, searchProducts } from '@/lib/api/product-api';
 import { Product } from '@/types/product';
-
+// 
 interface ProductState {
     products: Product[];
     product?: Product;
