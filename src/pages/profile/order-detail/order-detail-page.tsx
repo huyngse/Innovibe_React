@@ -15,6 +15,7 @@ const OrderDetailPage = () => {
   useEffect(() => {
     if (orderId) {
       orderStore.fetchOrder(parseInt(orderId));
+      orderStore.fetchPayment(parseInt(orderId));
     }
   }, []);
 

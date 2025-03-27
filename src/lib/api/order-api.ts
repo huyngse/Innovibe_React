@@ -47,9 +47,41 @@ export const createOrder = async (request: CreateOrderRequest) => {
     }
 }
 
+type PaymentResult = {
+    bin: string,
+    accountNumber: string,
+    amount: number,
+    description: string,
+    orderCode: number,
+    currency: string,
+    paymentLinkId: string,
+    status: string,
+    expiredAt: number,
+    checkoutUrl: string,
+    qrCode: string
+}
+
 export const payOrder = async (orderId: number) => {
     try {
-        const { data } = await axiosClient.post(`/api/payments/vnpay?orderId=${orderId}`);
+        const { data } = await axiosClient.post(`/api/payments/payos?orderId=${orderId}`);
+        return { error: null, data: data as PaymentResult, success: true };
+    } catch (error) {
+        return handleApiError(error);
+    }
+}
+
+export const updateOrderStatus = async (id: number, status: string) => {
+    try {
+        const { data } = await axiosClient.put(`/api/orders/${id}/status?status=${status}`);
+        return { error: null, data: data, success: true };
+    } catch (error) {
+        return handleApiError(error);
+    }
+};
+
+export const getPayment = async (orderId: number) => {
+    try {
+        const { data } = await axiosClient.get(`/api/payments/payos/info?orderId=${orderId}`);
         return { error: null, data: data, success: true };
     } catch (error) {
         return handleApiError(error);

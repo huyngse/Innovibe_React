@@ -10,8 +10,18 @@ import Blogs from "./Blogs";
 import Features from "./Features";
 import useProductStore from "@/stores/use-product-store";
 import { useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+// ?code=00&id=197320e3cad34a4a8faab1f934c3e073&cancel=true&status=CANCELLED&orderCode=44
 const HomePage = () => {
   const productStore = useProductStore();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  useEffect(() => {
+    const orderCode = searchParams.get("orderCode");
+    if (orderCode != null) {
+      navigate(`/profile/order/${orderCode}`);
+    }
+  }, [searchParams]);
   useEffect(() => {
     productStore.fetchProducts();
   }, []);

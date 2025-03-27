@@ -39,8 +39,12 @@ const PaymentPage = () => {
       const result = await payOrder(parseInt(orderId));
       if (result.error) {
         setError("Thanh toán thất bại. Vui lòng thử lại");
+      } else if (result.data?.status == "EXPIRED") {
+        setError("Thanh toán hết hạn. Vui lòng tạo hóa đơn mới");
       } else {
-        window.location.href = result.data.vnPayUrl;
+        if (result.data) {
+          window.location.href = result.data.checkoutUrl;
+        }
       }
       setIsLoading(false);
     }

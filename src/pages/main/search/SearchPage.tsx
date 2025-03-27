@@ -54,18 +54,12 @@ const SearchPage = () => {
 
   const fetchFilteredProducts = useCallback(async () => {
     try {
-      console.log("Current categories:", categories);
-      console.log("Current brands:", brands);
-
       const selectedCategory = categoryId 
         ? categories.find((cat) => String(cat.categoryId) === categoryId)
         : undefined;
       const selectedBrand = brandId 
         ? brands.find((brand) => String(brand.brandId) === brandId)
         : undefined;
-
-      console.log("Selected Category:", selectedCategory);
-      console.log("Selected Brand:", selectedBrand);
 
       await fetchProducts({
         categoryName: selectedCategory?.name,
