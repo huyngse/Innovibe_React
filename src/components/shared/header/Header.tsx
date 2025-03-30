@@ -30,9 +30,15 @@ const Header = () => {
   }, []);
   useEffect(() => {
     if (token) {
-      authStore.fetchUserInfo();
+      fetchProfile();
     }
   }, []);
+  const fetchProfile = async () => {
+    const result = await authStore.fetchUserInfo();
+    if (result.error) {
+      authStore.logout();
+    }
+  }
   return (
     <header
       className={cn(

@@ -7,7 +7,7 @@ interface AuthState {
     user?: Account;
     loading: boolean;
     error: string | null;
-    fetchUserInfo: () => Promise<void>;
+    fetchUserInfo: () => Promise<any>;
     logout: () => void;
     renderKey: number;
     rerender: () => void;
@@ -30,6 +30,7 @@ const useAuthStore = create<AuthState>((set) => ({
             } else {
                 set({ loading: false, error: response.error });
             }
+            return response;
         } catch (error: any) {
             set({ loading: false, error: error.message });
         }

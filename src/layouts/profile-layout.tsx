@@ -8,7 +8,6 @@ import {
   ClipboardList,
   DoorOpen,
   Heart,
-  History,
   Settings,
 } from "lucide-react";
 import { ReactNode } from "react";
@@ -25,15 +24,15 @@ const navItems = [
     href: "/profile/favourite",
   },
   {
-    title: "Đơn hàng",
+    title: "Lịch sử đơn hàng",
     icon: ClipboardList,
     href: "/profile/order",
   },
-  {
-    title: "Lịch sử giao dịch",
-    icon: History,
-    href: "/profile/transaction-history",
-  },
+  // {
+  //   title: "Lịch sử giao dịch",
+  //   icon: History,
+  //   href: "/profile/transaction-history",
+  // },
   {
     title: "Thông báo",
     icon: Bell,

@@ -9,15 +9,34 @@ import OrderStatus from "@/components/order-status";
 import useOrderStore from "@/stores/use-order-store";
 import Loader from "@/components/Loader";
 import { useEffect } from "react";
+import { updateOrderStatus } from "@/lib/api/order-api";
 const OrderDetailPage = () => {
   const orderStore = useOrderStore();
   const { orderId } = useParams();
+
+  const checkPaymentStatus = async () => {
+    if (orderStore.order && orderStore.payment) {
+      if (orderStore.order.orderStatus == "Pending") {
+        if (orderStore.payment.status == "EXPIRED") {
+          await updateOrderStatus(orderStore.order.orderId, "Cancelled");
+        } else if (orderStore.payment.status == "PAID") {
+          await updateOrderStatus(orderStore.order.orderId, "Processing");
+        }
+        orderStore.rerender();
+      }
+    }
+  };
+
   useEffect(() => {
     if (orderId) {
       orderStore.fetchOrder(parseInt(orderId));
       orderStore.fetchPayment(parseInt(orderId));
     }
-  }, []);
+  }, [orderStore.renderKey]);
+  
+  useEffect(() => {
+    checkPaymentStatus();
+  }, [orderStore.order, orderStore.payment]);
 
   if (orderId == null) {
     return <OrderNotfound />;
@@ -46,6 +65,7 @@ const OrderDetailPage = () => {
   };
   if (orderStore.loading) return <Loader />;
   if (orderStore.order == undefined) return;
+
   return (
     <>
       <div className="my-3 p-3 rounded bg-white drop-shadow">
@@ -74,30 +94,6 @@ const OrderDetailPage = () => {
             <p>Thời gian đặt hàng:</p>
             <p>{formatDateTime(new Date(orderStore.order.orderDate))}</p>
           </div>
-          {/* <div className="flex justify-between text-gray-500">
-            <p>Thời gian thanh toán:</p>
-            {order.paymentDate ? (
-              <p>{formatDateTime(new Date(order.paymentDate))}</p>
-            ) : (
-              <p>--:-- --/--/----</p>
-            )}
-          </div> */}
-          {/* <div className="flex justify-between text-gray-500">
-            <p>Thời gian giao hàng cho vận chuyển:</p>
-            {order.shippingDate ? (
-              <p>{formatDateTime(new Date(order.shippingDate))}</p>
-            ) : (
-              <p>--:-- --/--/----</p>
-            )}
-          </div> */}
-          {/* <div className="flex justify-between text-gray-500">
-            <p>Thời gian hoàn thành:</p>
-            {order.deliveryDate ? (
-              <p>{formatDateTime(new Date(order.deliveryDate))}</p>
-            ) : (
-              <p>--:-- --/--/----</p>
-            )}
-          </div> */}
         </div>
         <hr />
         <div className="flex gap-3 py-3">
@@ -175,9 +171,34 @@ const OrderDetailPage = () => {
             <p className="text-gray-500">Thanh toán online</p>
           </div>
         </div>
+        <h3 className="text-lg font-semibold">Thông tin thanh toán</h3>
+        <div className="flex justify-between text-gray-500">
+          <p>Tổng đơn hàng:</p>
+          <p>{formatCurrencyVND(orderStore.payment?.amount ?? 0)}</p>
+        </div>
+        <div className="flex justify-between text-gray-500">
+          <p>Số tiền đã thanh toán</p>
+          <p>{formatCurrencyVND(orderStore.payment?.amountPaid ?? 0)}</p>
+        </div>
+        <div className="flex justify-between text-gray-500">
+          <p>Số tiền chưa thanh toán</p>
+          <p>{formatCurrencyVND(orderStore.payment?.amountRemaining ?? 0)}</p>
+        </div>
+        <div className="flex justify-between text-gray-500 text-lg">
+          <p>Trạng thái thanh toán:</p>
+          <p>
+            {orderStore.payment?.status == "EXPIRED"
+              ? "HẾT HẠN"
+              : orderStore.payment?.status == "PAID"
+              ? "ĐÃ THANH TOÁN"
+              : ""}
+          </p>
+        </div>
       </div>
       <div className="flex justify-end gap-3 mb-3">
-        <Button variant={"outline"}>Hủy đơn hàng</Button>
+        {orderStore.order.orderStatus != "Cancelled" && (
+          <Button variant={"outline"}>Hủy đơn hàng</Button>
+        )}
         <Button>Mua lại</Button>
       </div>
     </>
