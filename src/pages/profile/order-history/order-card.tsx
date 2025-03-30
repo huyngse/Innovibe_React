@@ -4,6 +4,7 @@ import { Order } from "@/types/order";
 import { formatDate } from "@/utils/date";
 import { Link } from "react-router-dom";
 import OrderStatus from "./order-status";
+import CancelOrderButton from "@/components/cancel-order-button";
 
 const OrderCard = ({ order }: { order: Order }) => {
   return (
@@ -13,7 +14,7 @@ const OrderCard = ({ order }: { order: Order }) => {
         Ngày đặt: {formatDate(new Date(order.orderDate))}
       </div>
       <div>
-        Trạng thái: <OrderStatus status={order.orderStatus}/>
+        Trạng thái: <OrderStatus status={order.orderStatus} />
       </div>
       <div className="flex flex-col py-3">
         {order.orderItems.map((item, i: number) => {
@@ -50,7 +51,7 @@ const OrderCard = ({ order }: { order: Order }) => {
       </div>
       <div className="flex justify-end gap-3">
         {order.orderStatus != "Cancelled" && (
-          <Button variant={"outline"}>Hủy Đơn Hàng</Button>
+          <CancelOrderButton order={order} />
         )}
         <Link to={`/profile/order/${order.orderId}`}>
           <Button variant={"default"}>Xem chi tiết</Button>

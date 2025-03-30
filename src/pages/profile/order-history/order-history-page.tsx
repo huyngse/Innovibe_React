@@ -6,6 +6,7 @@ import { orderStatus } from "@/constants/order-status";
 import useOrderStore from "@/stores/use-order-store";
 import useAuthStore from "@/stores/use-auth-store";
 import Loader from "@/components/Loader";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const OrderHistoryPage = () => {
   const [selectedStatus, setSelectedStatus] = useState<string>("All");
@@ -15,11 +16,12 @@ const OrderHistoryPage = () => {
     if (authStore.user) {
       orderStore.fetchOrdersByUserId(authStore.user.accountId);
     }
-  }, [authStore.user]);
+  }, [authStore.user, orderStore.renderKey]);
 
   if (orderStore.loading) return <Loader />;
   return (
     <div className="py-5">
+      <ScrollToTop />
       <div className="overflow-auto flex">
         {orderStatus.map((item, index: number) => {
           const numOfOrders = orderStore.orders.filter(
