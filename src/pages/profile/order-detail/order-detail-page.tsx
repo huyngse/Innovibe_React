@@ -17,7 +17,10 @@ const OrderDetailPage = () => {
   const checkPaymentStatus = async () => {
     if (orderStore.order && orderStore.payment) {
       if (orderStore.order.orderStatus == "Pending") {
-        if (orderStore.payment.status == "EXPIRED") {
+        if (
+          orderStore.payment.status == "EXPIRED" ||
+          orderStore.payment.status == "CANCELLED"
+        ) {
           await updateOrderStatus(orderStore.order.orderId, "Cancelled");
         } else if (orderStore.payment.status == "PAID") {
           await updateOrderStatus(orderStore.order.orderId, "Processing");
@@ -33,7 +36,7 @@ const OrderDetailPage = () => {
       orderStore.fetchPayment(parseInt(orderId));
     }
   }, [orderStore.renderKey]);
-  
+
   useEffect(() => {
     checkPaymentStatus();
   }, [orderStore.order, orderStore.payment]);
@@ -191,7 +194,9 @@ const OrderDetailPage = () => {
               ? "HẾT HẠN"
               : orderStore.payment?.status == "PAID"
               ? "ĐÃ THANH TOÁN"
-              : ""}
+              : orderStore.payment?.status == "CANCELLED"
+              ? "ĐÃ HỦY THANH TOÁN"
+              : "CHƯA THANH TOÁN"}
           </p>
         </div>
       </div>
