@@ -28,6 +28,8 @@ export const getOrderById = async (id: number) => {
 }
 type CreateOrderRequest = {
     accountId: string,
+    email: string,
+    phone: string,
     orderStatus: string,
     total: number,
     shippingAddress: string,

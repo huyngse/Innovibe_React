@@ -54,13 +54,15 @@ const CheckOutForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [wards, setWards] = useState<Array<WardType | { Level: string }>>([]);
   const navigate = useNavigate();
+  const authStore = useAuthStore();
+  const cartStore = useCartStore();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       company: "",
       billingAddress: "",
       district: "",
-      email: "",
+      email: authStore.user?.email ?? "",
       fullName: "",
       paymentMethod: undefined,
       phone: "",
@@ -70,8 +72,7 @@ const CheckOutForm = () => {
       ward: undefined,
     },
   });
-  const authStore = useAuthStore();
-  const cartStore = useCartStore();
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     const result = await createOrder({
@@ -81,6 +82,8 @@ const CheckOutForm = () => {
         quantity: item.quantity,
         price: item.quantity * item.product.price,
       })),
+      email: values.email,
+      phone: values.phone,
       orderStatus: "Pending",
       shippingAddress:
         values.street +

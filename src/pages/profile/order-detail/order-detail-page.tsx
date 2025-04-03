@@ -119,7 +119,8 @@ const OrderDetailPage = () => {
             </div>
             <div className="text-gray-500">
               <p>{orderStore.order!.accountFullName}</p>
-              {/* <p>{order.phone}</p> */}
+              <p>{orderStore.order.phone}</p>
+              <p>{orderStore.order.email}</p>
               <p>{orderStore.order!.shippingAddress}</p>
             </div>
           </div>
