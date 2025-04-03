@@ -83,7 +83,7 @@ export const updateOrderStatus = async (id: number, status: string) => {
 
 export const getPayment = async (orderId: number) => {
     try {
-        const { data } = await axiosClient.get(`/api/payments/payos/info?orderId=${orderId}`);
+        const { data } = await axiosClient.get(`/api/payments/payos/info/${orderId}`);
         return { error: null, data: data, success: true };
     } catch (error) {
         return handleApiError(error);
