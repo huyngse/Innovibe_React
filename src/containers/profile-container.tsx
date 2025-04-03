@@ -8,15 +8,20 @@ import OrderHistoryPage from "@/pages/profile/order-history/order-history-page";
 import ProfilePage from "@/pages/profile/profile-page";
 import SettingsPage from "@/pages/profile/settings/settings-page";
 import useAuthStore from "@/stores/use-auth-store";
+import { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 
 const ProfileContainer = () => {
   const authStore = useAuthStore();
   const token = localStorage.getItem("accessToken");
   const navigate = useNavigate();
-  if (!token || !authStore) {
-    navigate("/log-in");
-  }
+  useEffect(() => {
+    if (!token || !authStore) {
+      navigate("/log-in");
+    }
+  }, [])
+  
+
   if (authStore.error) return <TechnicalIssuePage />;
   return (
     <ProfileLayout>
