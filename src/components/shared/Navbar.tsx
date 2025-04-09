@@ -33,7 +33,7 @@ const Navbar = () => {
                     <NavigationMenuLink asChild>
                       <a
                         className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                        href="/search?category=Electric Guitars"
+                        href="/search?category=1"
                       >
                         <img
                           src={electricGuitarImage}
@@ -52,21 +52,21 @@ const Navbar = () => {
                     </NavigationMenuLink>
                   </li>
                   <ListItem
-                    href="/search?category=Acoustic Guitars"
+                    href="/search?category=9"
                     title="Acoustic Guitars"
                   >
                     Tạo ra âm thanh thông qua sự rung động của dây đàn và thân
                     đàn guitar.
                   </ListItem>
                   <ListItem
-                    href="/search?category=Bass Guitars"
+                    href="/search?category=2"
                     title="Bass Guitars"
                   >
                     Cung cấp âm thanh tần số thấp cần thiết cho nhịp điệu và sự
                     hòa âm trong âm nhạc.
                   </ListItem>
                   <ListItem
-                    href="/search?category=Accessories"
+                    href="/search?category=4"
                     title="Phụ kiện"
                   >
                     Nâng cao trải nghiệm chơi guitar của bạn

@@ -34,8 +34,6 @@ const useProductStore = create<ProductState>((set) => ({
         set({ loading: true, error: null });
         try {
             let response;
-            console.log("Filters applied:", filters);
-            
             if (filters.categoryName || filters.brandName) {
                 response = await searchProducts(
                     filters.brandName,
@@ -52,8 +50,6 @@ const useProductStore = create<ProductState>((set) => ({
                 const availableProducts = fetchedProducts.filter(
                     (product: Product) => product.status === "In Stock"
                 );
-                console.log("Fetched products in store:", availableProducts);
-                
                 set({ 
                     products: availableProducts, 
                     totalProducts: response.data.total || fetchedProducts.length,
