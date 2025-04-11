@@ -40,7 +40,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         <Link to={`/product/${product.productId}`}>
           <p className="font-semibold my-3">{product.name}</p>
         </Link>
-        <p className="text-xs font-bold text-green-500">{status}</p>
+        {/* <p className="text-xs font-bold text-green-500">{status}</p> */}
         <p className="font-bold">
           {product.discount
             ? formatCurrencyVND(product.discount)

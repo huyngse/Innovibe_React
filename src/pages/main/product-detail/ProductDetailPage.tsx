@@ -74,13 +74,14 @@ const ProductDetailPage = () => {
             <p className="text-sm font-semibold text-green-500">
               {productStore.product?.status}
             </p>
-            <p className="font-semibold text-lg">
+            <p className="font-bold">
               {productStore.product?.discount
                 ? formatCurrencyVND(productStore.product?.discount)
                 : formatCurrencyVND(productStore.product?.price)}
             </p>
             <p className="text-xs line-through decoration-red-500 decoration-1 font-semibold">
-              {productStore.product?.discount != 0 &&
+              {productStore.product?.discount != null &&
+                productStore.product?.discount != 0 &&
                 formatCurrencyVND(productStore.product?.price)}
             </p>
             <div className="grid grid-cols-5 py-3 gap-10">
